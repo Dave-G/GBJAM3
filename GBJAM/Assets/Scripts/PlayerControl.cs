@@ -5,9 +5,7 @@ public class PlayerControl : MonoBehaviour {
 
     public float moveForce;
     public float maxSpeed;
-    public float jumpForce;
 
-    private bool onGround = false;
     private Animator animator;
 
 
