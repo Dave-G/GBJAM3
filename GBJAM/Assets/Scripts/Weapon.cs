@@ -13,10 +13,14 @@ public class Weapon : MonoBehaviour {
 
 	}
 
-    void OnTriggerEnter()
+    void OnCollisionEnter(Collision collision)
     {
-        Destroy(gameObject);
-        System.Console.WriteLine("bam");
+        if (!collision.collider.gameObject.name.Contains("Player"))
+        {
+            Destroy(this.gameObject);
+            Debug.Log(collision.collider.gameObject.name);
+        }
+
     }
 
 

@@ -10,6 +10,9 @@ public class PlayerContNew : MonoBehaviour {
 
 	public bool grounded = false;
 
+    public GameObject weapon;
+    public float throwForce;
+
 	public Vector3 moveDir = Vector3.zero;
 	
 	// Use this for initialization
@@ -20,6 +23,7 @@ public class PlayerContNew : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		move ();
+        Fire();
 	}
 
 	void move(){
@@ -43,4 +47,14 @@ public class PlayerContNew : MonoBehaviour {
 		moveDir.y -= gravity * playerDt * Time.deltaTime;
 		controller.Move (moveDir * playerDt * Time.deltaTime);
 	}
+
+    public void Fire()
+    {
+        if (Input.GetButtonDown("Fire1"))
+        {
+            GameObject throwInstance = (GameObject) Instantiate(weapon, transform.position, Quaternion.Euler(new Vector3(0, 0, 0)));
+            throwInstance.rigidbody.AddForce(new Vector3(throwForce, throwForce, 0));
+        }
+    }
 }
+
