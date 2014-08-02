@@ -48,6 +48,7 @@
   <ItemGroup>
      <Compile Include="Assets\Scripts\Destroyer.cs" />
      <Compile Include="Assets\Scripts\PlayerCont.cs" />
+     <Compile Include="Assets\Scripts\PlayerContNew.cs" />
      <Compile Include="Assets\Scripts\Weapon.cs" />
      <None Include="Assets\Prefabs\placeholder.txt" />
      <None Include="Assets\Sound\placeholder.txt" />
