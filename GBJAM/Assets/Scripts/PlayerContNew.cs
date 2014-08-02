@@ -25,17 +25,20 @@ public class PlayerContNew : MonoBehaviour {
 	void move(){
 		CharacterController controller = GetComponent<CharacterController>();
 
-		if(controller.isGrounded == true ){
-			moveDir = new Vector3 (velocity*Input.GetAxis ("Horizontal"), 0F, 0F);
+		if( (controller.collisionFlags & CollisionFlags.Below) != 0){
+			moveDir.y = 0F;
 			//moveDir = velocity*transform.TransformDirection (moveDir);
-			if (Input.GetButton ("Jump")) {
+			if (Input.GetButton ("Jump") || Input.GetKey (KeyCode.UpArrow)) {
 				moveDir.y += jumpVel;
 			}
 		}
-		// add portion for in air dampening when switching directions
-		else{
-			moveDir.x = velocity*Input.GetAxis ("Horizontal");
+
+		if ((controller.collisionFlags & CollisionFlags.Above) != 0) {
+			moveDir.y *= 0F;
 		}
+
+		// add portion for in air dampening when switching directions
+		moveDir.x = velocity*Input.GetAxis ("Horizontal");
 
 		moveDir.y -= gravity * playerDt * Time.deltaTime;
 		controller.Move (moveDir * playerDt * Time.deltaTime);
