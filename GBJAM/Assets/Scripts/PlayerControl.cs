@@ -7,11 +7,13 @@ public class PlayerControl : MonoBehaviour {
     public float maxSpeed;
 
     private Animator animator;
+    public float throwForce;
+    public Rigidbody2D axe;
 
 
 	// Use this for initialization
 	void Start () {
-	
+        
 	}
 	
 	// Update is called once per frame
@@ -32,5 +34,17 @@ public class PlayerControl : MonoBehaviour {
             rigidbody2D.velocity = new Vector2(Mathf.Sign(rigidbody2D.velocity.x)*maxSpeed,rigidbody2D.velocity.y);
         }
 
+        if (Input.GetButtonDown("Fire1"))
+        {
+            Fire();
+        }
+
 	}
+
+    public void Fire()
+    {
+
+        Rigidbody2D throwInstance = Instantiate(axe, transform.position, Quaternion.Euler(new Vector3(0, 0, 0))) as Rigidbody2D;
+        throwInstance.velocity = new Vector2(throwForce / 2, throwForce / 2);
+    }
 }
