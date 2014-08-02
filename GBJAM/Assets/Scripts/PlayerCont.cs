@@ -1,12 +1,14 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class PlayerContNew : MonoBehaviour {
-	public float playerDt = 1.0F;
-	public float velocity = 15F;
-	public float gravity = 15.0F;
-	public float jumpVel = 60.0F;
-	public float inAir = 0.6F;
+public class PlayerCont : MonoBehaviour {
+	public float playerDt = 1.0f;
+	public float velocity = 15f;
+	public float gravity = 15.0f;
+	public float jumpVel = 60.0f;
+	public float inAir = 0.6f;
+
+	public KeyCode attackButton = KeyCode.Z;
 
 	public bool grounded = false;
 
@@ -14,6 +16,8 @@ public class PlayerContNew : MonoBehaviour {
     public float throwForce;
 
 	public Vector3 moveDir = Vector3.zero;
+
+	public int right = 1;
 	
 	// Use this for initialization
 	void Start () {
@@ -23,14 +27,14 @@ public class PlayerContNew : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		move ();
-        Fire();
+        fire();
 	}
 
 	void move(){
 		CharacterController controller = GetComponent<CharacterController>();
 
 		if( (controller.collisionFlags & CollisionFlags.Below) != 0){
-			moveDir.y = 0F;
+			moveDir.y = 0f;
 			//moveDir = velocity*transform.TransformDirection (moveDir);
 			if (Input.GetButton ("Jump") || Input.GetKey (KeyCode.UpArrow)) {
 				moveDir.y += jumpVel;
@@ -38,22 +42,29 @@ public class PlayerContNew : MonoBehaviour {
 		}
 
 		if ((controller.collisionFlags & CollisionFlags.Above) != 0) {
-			moveDir.y *= 0F;
+			moveDir.y *= 0f;
 		}
 
 		// add portion for in air dampening when switching directions
 		moveDir.x = velocity*Input.GetAxis ("Horizontal");
-
+		if (moveDir.x < 0) {
+			this.right = -1;
+		}
+		if(moveDir.x > 0){
+			this.right = 1;
+		}
+		this.transform.localScale = new Vector3 (this.right, 1, 1);
 		moveDir.y -= gravity * playerDt * Time.deltaTime;
 		controller.Move (moveDir * playerDt * Time.deltaTime);
 	}
 
-    public void Fire()
+    public void fire()
     {
-        if (Input.GetButtonDown("Fire1"))
+        if (Input.GetKeyDown(attackButton))
         {
             GameObject throwInstance = (GameObject) Instantiate(weapon, transform.position, Quaternion.Euler(new Vector3(0, 0, 0)));
-            throwInstance.rigidbody.AddForce(new Vector3(throwForce, throwForce, 0));
+            throwInstance.rigidbody.AddForce(new Vector3(this.right*throwForce, throwForce, 0));
+			Destroy (throwInstance,3f);
         }
     }
 }

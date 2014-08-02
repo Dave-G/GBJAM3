@@ -13,15 +13,14 @@ public class Weapon : MonoBehaviour {
 
 	}
 
-    void OnCollisionEnter(Collision collision)
+    /*void OnCollisionEnter(Collision collision)
     {
         if (!collision.collider.gameObject.name.Contains("Player"))
         {
             Destroy(this.gameObject);
-            Debug.Log(collision.collider.gameObject.name);
         }
 
-    }
+    }*/
 
 
 }
