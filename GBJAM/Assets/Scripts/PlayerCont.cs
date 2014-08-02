@@ -8,6 +8,8 @@ public class PlayerCont : MonoBehaviour {
 	public float jumpVel = 60.0f;
 	public float inAir = 0.6f;
 
+    public int health;
+
 	public KeyCode attackButton = KeyCode.Z;
 
 	public bool grounded = false;
@@ -65,6 +67,15 @@ public class PlayerCont : MonoBehaviour {
             GameObject throwInstance = (GameObject) Instantiate(weapon, transform.position, Quaternion.Euler(new Vector3(0, 0, 0)));
             throwInstance.rigidbody.AddForce(new Vector3(this.right*throwForce, throwForce, 0));
 			Destroy (throwInstance,3f);
+        }
+    }
+
+    public void takeDamage(int damage)
+    {
+        this.health -= damage;
+        if (health <= 0)
+        {
+            //player.die
         }
     }
 }

@@ -3,6 +3,8 @@ using System.Collections;
 
 public class Weapon : MonoBehaviour {
 
+    public int damage;
+
 	// Use this for initialization
 	void Start () {
         
@@ -13,14 +15,15 @@ public class Weapon : MonoBehaviour {
 
 	}
 
-    /*void OnCollisionEnter(Collision collision)
-    {
-        if (!collision.collider.gameObject.name.Contains("Player"))
+    void OnCollisionEnter(Collision collision){
+    
+        if (collision.collider.gameObject.name.Contains("Player"))
         {
+           collision.collider.gameObject.GetComponent<PlayerCont>().takeDamage(this.damage);
             Destroy(this.gameObject);
         }
 
-    }*/
+    }
 
 
 }
