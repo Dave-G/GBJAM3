@@ -2,7 +2,7 @@
 using System.Collections;
 
 public class Weapon : MonoBehaviour {
-
+	public GameObject owner;
     public int damage;
 
 	// Use this for initialization
@@ -17,13 +17,15 @@ public class Weapon : MonoBehaviour {
 
     void OnCollisionEnter(Collision collision){
     
-        if (collision.collider.gameObject.name.Contains("Player"))
+        if (!owner.name.Contains ("Player") && collision.collider.gameObject.name.Contains("Player"))
         {
            collision.collider.gameObject.GetComponent<PlayerCont>().takeDamage(this.damage);
             Destroy(this.gameObject);
         }
-
     }
+	public void setOwner ( GameObject own){
+		this.owner = own;
+	}
 
 
 }
