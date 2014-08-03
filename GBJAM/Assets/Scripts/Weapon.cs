@@ -12,7 +12,7 @@ public class Weapon : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-
+		this.transform.position = new Vector3 (this.transform.position.x,this.transform.position.y,0);
 	}
 
     void OnCollisionEnter(Collision collision){
@@ -29,6 +29,7 @@ public class Weapon : MonoBehaviour {
         }
     }
 	public void setOwner ( GameObject own){
+
 		this.owner = own;
 		this.transform.localScale = owner.transform.localScale;
 	}

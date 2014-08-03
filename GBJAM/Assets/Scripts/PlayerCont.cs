@@ -28,6 +28,7 @@ public class PlayerCont : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+		this.transform.position = new Vector3 (this.transform.position.x, this.transform.position.y, 0);
 		move ();
 		layerswap ();
         fire();
@@ -81,10 +82,10 @@ public class PlayerCont : MonoBehaviour {
     {
         if (Input.GetKeyDown(attackButton))
         {
-            GameObject throwInstance = (GameObject) Instantiate(weapon, transform.position, Quaternion.Euler(new Vector3(0, 0, 0)));
+            GameObject throwInstance = (GameObject) Instantiate(weapon, this.transform.position, Quaternion.Euler(new Vector3(0, 0, 0)));
 			throwInstance.gameObject.GetComponent<Weapon>().setOwner(this.gameObject);
             throwInstance.rigidbody.AddForce(new Vector3(this.right*throwForce, throwForce, 0));
-			Destroy (throwInstance,3f);
+			Destroy (throwInstance,10f);
         }
     }
 
@@ -96,18 +97,5 @@ public class PlayerCont : MonoBehaviour {
             //player.die
         }
     }
-
-	public int signZero(float numb){
-		if(numb < 0){
-			return -1;
-		}
-		else if(numb > 0){
-			return 1;
-		}
-		else{
-			return 0;
-		}
-
-	}
 }
 
