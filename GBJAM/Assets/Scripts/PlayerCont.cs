@@ -29,6 +29,7 @@ public class PlayerCont : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		move ();
+		layerswap ();
         fire();
 	}
 
@@ -65,6 +66,15 @@ public class PlayerCont : MonoBehaviour {
 		this.transform.localScale = new Vector3 (this.right, 1, 1);
 		moveDir.y -= gravity * playerDt * Time.deltaTime;
 		controller.Move (moveDir * playerDt * Time.deltaTime);
+	}
+
+	public void layerswap(){
+		if (this.moveDir.y > 0) {
+			Physics.IgnoreLayerCollision(9,10,true);
+		}
+		else {
+			Physics.IgnoreLayerCollision (9,10,false);
+		}
 	}
 
     public void fire()
