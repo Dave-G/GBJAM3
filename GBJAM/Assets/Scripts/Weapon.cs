@@ -17,9 +17,14 @@ public class Weapon : MonoBehaviour {
 
     void OnCollisionEnter(Collision collision){
     
-        if (!owner.name.Contains ("Player") && collision.collider.gameObject.name.Contains("Player"))
+        if (!owner.tag.Contains ("Player") && collision.collider.gameObject.tag.Contains("Player"))
         {
            collision.collider.gameObject.GetComponent<PlayerCont>().takeDamage(this.damage);
+            Destroy(this.gameObject);
+        }
+        if (!owner.tag.Contains("Enemy") && collision.collider.gameObject.tag.Contains("Enemy"))
+        {
+            collision.collider.gameObject.GetComponent<PlayerCont>().takeDamage(this.damage);
             Destroy(this.gameObject);
         }
     }
