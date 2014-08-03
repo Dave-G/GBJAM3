@@ -19,7 +19,7 @@ public class EnemyController : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		this.move ();
-
+        this.transform.localPosition = new Vector3(this.transform.localPosition.x, this.transform.localPosition.y, 0f);
 	}
 
 	void patrolPlatform (){

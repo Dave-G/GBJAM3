@@ -29,6 +29,7 @@ public class PlayerCont : MonoBehaviour {
 	void Update () {
 		move ();
 		layerswap ();
+        this.transform.localPosition = new Vector3(this.transform.localPosition.x, this.transform.localPosition.y, 0f);
         fire();
 	}
 
@@ -82,7 +83,7 @@ public class PlayerCont : MonoBehaviour {
         {
             GameObject throwInstance = (GameObject) Instantiate(weapon, transform.position, Quaternion.Euler(new Vector3(0, 0, 0)));
 			throwInstance.gameObject.GetComponent<Weapon>().setOwner(this.gameObject);
-            throwInstance.rigidbody.AddForce(new Vector3(this.right*throwForce, throwForce, 0));
+            throwInstance.rigidbody.AddForce(new Vector3(throwForce*this.right, throwForce, 0));
 			Destroy (throwInstance,3f);
         }
     }
