@@ -83,6 +83,7 @@ public class PlayerCont : MonoBehaviour {
         {
             GameObject throwInstance = (GameObject) Instantiate(weapon, transform.position, Quaternion.Euler(new Vector3(0, 0, 0)));
 			throwInstance.gameObject.GetComponent<Weapon>().setOwner(this.gameObject);
+			throwInstance.gameObject.GetComponent<Weapon>().transform.localScale = this.transform.localScale;
             throwInstance.rigidbody.AddForce(new Vector3(this.right*throwForce, throwForce, 0));
 			Destroy (throwInstance,3f);
         }
