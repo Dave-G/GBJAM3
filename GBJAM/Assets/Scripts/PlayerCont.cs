@@ -48,12 +48,19 @@ public class PlayerCont : MonoBehaviour {
 		}
 
 		// add portion for in air dampening when switching directions
-		moveDir.x = velocity*Input.GetAxis ("Horizontal");
-		if (moveDir.x < 0) {
+		float leftRight = velocity*Input.GetAxis ("Horizontal");
+		if (leftRight < 0) {
 			this.right = -1;
 		}
-		if(moveDir.x > 0){
+		if(leftRight > 0){
 			this.right = 1;
+		}
+		this.moveDir.x = 0;
+		if(Input.GetKey (KeyCode.LeftArrow) || Input.GetKey (KeyCode.A)){
+			this.moveDir.x = velocity*-1;
+		}
+		else if(Input.GetKey (KeyCode.RightArrow)||Input.GetKey (KeyCode.D)){
+			this.moveDir.x = velocity*1;
 		}
 		this.transform.localScale = new Vector3 (this.right, 1, 1);
 		moveDir.y -= gravity * playerDt * Time.deltaTime;
@@ -78,5 +85,18 @@ public class PlayerCont : MonoBehaviour {
             //player.die
         }
     }
+
+	public int signZero(float numb){
+		if(numb < 0){
+			return -1;
+		}
+		else if(numb > 0){
+			return 1;
+		}
+		else{
+			return 0;
+		}
+
+	}
 }
 
