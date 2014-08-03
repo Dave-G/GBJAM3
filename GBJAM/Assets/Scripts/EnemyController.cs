@@ -9,6 +9,8 @@ public class EnemyController : MonoBehaviour {
 	public CharacterController enemyControl;
 	public Vector3 moveDir = Vector3.zero;
 
+    public int health;
+
 	// Use this for initialization
 	void Start () {
 	
@@ -44,4 +46,13 @@ public class EnemyController : MonoBehaviour {
 		this.enemyControl.Move (moveDir * enemyDt * Time.deltaTime);
 
 	}
+
+    public void takeDamage(int damage)
+    {
+        this.health -= damage;
+        if (health <= 0)
+        {
+            //player.die
+        }
+    }
 }
