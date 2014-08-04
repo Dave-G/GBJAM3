@@ -2,14 +2,6 @@
 [Tt]emp/
 [Oo]bj/
 
-/*.csproj
-/*.unityproj
-/*.sln
-/*.suo
-/*.user
-/*.userprefs
-/*.pidb
-/*.booproj
-/*.psd
+
 
 Thumbs.db
