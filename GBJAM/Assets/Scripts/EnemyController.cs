@@ -11,6 +11,10 @@ public class EnemyController : MonoBehaviour {
 
     [HideInInspector]
     public int health;
+    [HideInInspector]
+    public bool dead;
+    [HideInInspector]
+    public Animator anim;
 
     private float canTurn;
     private float turnTime = 1f;
@@ -23,12 +27,21 @@ public class EnemyController : MonoBehaviour {
         health = 100;
         this.moveDir = new Vector3(1f, 0, 0);
         enemyControl = GetComponent<CharacterController>();
+        anim = this.GetComponent<Animator>();
+        dead = false;
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		this.move ();
-        this.transform.localPosition = new Vector3(this.transform.localPosition.x, this.transform.localPosition.y, 0f);
+        if (dead)
+        {
+            StartCoroutine(deathTimer());
+        }
+        if (!dead)
+        {
+            this.move();
+            this.transform.localPosition = new Vector3(this.transform.localPosition.x, this.transform.localPosition.y, 0f);
+        }
 	}
 
     //Only turns if time from last turn < set time
@@ -74,11 +87,11 @@ public class EnemyController : MonoBehaviour {
 
     public void takeDamage(int damage)
     {
-        Debug.Log(health);
         this.health -= damage;
         if (health <= 0)
         {
-            //player.die
+            dead = true;
+            anim.Play("tempEnemyDeath");
         }
     }
     //Return true if object is not outside platform bounds
@@ -126,5 +139,11 @@ public class EnemyController : MonoBehaviour {
         {
             moveDir.x = this.right;
         }
+    }
+
+    IEnumerator deathTimer()
+    {
+        yield return new WaitForSeconds(.6f);
+        Destroy(this.gameObject);
     }
 }

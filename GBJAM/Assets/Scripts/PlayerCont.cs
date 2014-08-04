@@ -11,6 +11,8 @@ public class PlayerCont : MonoBehaviour {
     [HideInInspector]
     public int health;
 
+    private bool dead;
+
 	public KeyCode attackButton = KeyCode.Z;
 
 	public bool grounded = false;
@@ -19,6 +21,7 @@ public class PlayerCont : MonoBehaviour {
     public float throwForce;
 
 	public Vector3 moveDir = Vector3.zero;
+    public Animator anim;
     
 
 	public int right = 1;
@@ -26,14 +29,23 @@ public class PlayerCont : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         health = 100;
+        dead = false;
+        anim = this.GetComponent<Animator>();
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		move ();
-		layerswap ();
-        this.transform.localPosition = new Vector3(this.transform.localPosition.x, this.transform.localPosition.y, 0f);
-        fire();
+        if (dead)
+        {
+            StartCoroutine(deathTimer());
+        }
+        if (!dead)
+        {
+            move();
+            layerswap();
+            this.transform.localPosition = new Vector3(this.transform.localPosition.x, this.transform.localPosition.y, 0f);
+            fire();
+        }
 	}
 
 	void move(){
@@ -98,7 +110,8 @@ public class PlayerCont : MonoBehaviour {
         Debug.Log(health);
         if (health <= 0)
         {
-            //player.die
+            dead = true;
+            anim.Play("tempPlayerDeath");
         }
     }
 
@@ -114,5 +127,11 @@ public class PlayerCont : MonoBehaviour {
 		}
 
 	}
+
+    IEnumerator deathTimer()
+    {
+        yield return new WaitForSeconds(.6f);
+        Destroy(this.gameObject);
+    }
 }
 

@@ -4,37 +4,50 @@ using System.Collections;
 public class Weapon : MonoBehaviour {
 	public GameObject owner;
     public int damage;
+    private bool grounded;
 
 	// Use this for initialization
 	void Start () {
-      //  this.transform.localPosition = new Vector3(this.transform.localPosition.x, this.transform.localPosition.y, 0f);
-	}
+        grounded = false;
+	}   
 	
 	// Update is called once per frame
 	void Update () {
 
 	}
 
+    //Need to make collision not affect movement
     void OnCollisionEnter(Collision collision){
-        if (owner.tag.Contains("Player") && collision.collider.gameObject.tag.Contains("Player"))
+
+        if (collision.collider.gameObject.layer == 9)
         {
+            grounded = true;
+        }
+
+        else if (((owner.tag == collision.collider.gameObject.tag) || this.grounded == true) && collision.collider.gameObject.layer != 9)
+        {
+            Debug.Log("doge");
             Physics.IgnoreCollision(this.collider, collision.collider);
+            return;
         }
-        if (owner.tag.Contains("Enemy") && collision.collider.gameObject.tag.Contains("Enemy"))
+
+        else
         {
-            Physics.IgnoreCollision(this.collider, collision.collider);
+            if (!owner.tag.Contains("Player") && collision.collider.gameObject.tag.Contains("Player"))
+            {
+                collision.collider.gameObject.GetComponent<PlayerCont>().takeDamage(this.damage);
+            }
+            else if (!owner.tag.Contains("Enemy") && collision.collider.gameObject.tag.Contains("Enemy"))
+            {
+                collision.collider.gameObject.GetComponent<EnemyController>().takeDamage(this.damage);
+            }
+            if (!grounded)
+            {
+                Destroy(this.gameObject);
+            }
         }
-        if (!owner.tag.Contains ("Player") && collision.collider.gameObject.tag.Contains("Player"))
-        {
-           collision.collider.gameObject.GetComponent<PlayerCont>().takeDamage(this.damage);
-            Destroy(this.gameObject);
         }
-        if (!owner.tag.Contains("Enemy") && collision.collider.gameObject.tag.Contains("Enemy"))
-        {
-            collision.collider.gameObject.GetComponent<EnemyController>().takeDamage(this.damage);
-            Destroy(this.gameObject);
-        }
-    }
+
 	public void setOwner (GameObject own){
 		this.owner = own;
 		this.transform.localScale = owner.transform.localScale;
