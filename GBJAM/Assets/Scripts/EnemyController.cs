@@ -99,7 +99,8 @@ public class EnemyController : MonoBehaviour {
     {
         CharacterController controller = obj.gameObject.GetComponent<CharacterController>();
         if ((obj.gameObject.transform.position.x >= (this.platform.collider.bounds.max.x - controller.radius))
-            || (obj.gameObject.transform.position.x <= (this.platform.collider.bounds.min.x + controller.radius)))
+            || (obj.gameObject.transform.position.x <= (this.platform.collider.bounds.min.x + controller.radius)
+                || Mathf.Abs(obj.transform.position.y - this.platform.collider.bounds.max.y) >= .5))
         {
             
             return false;
