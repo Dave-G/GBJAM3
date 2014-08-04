@@ -17,16 +17,18 @@ public class Weapon : MonoBehaviour {
 	}
 
     //Need to make collision not affect movement
-    void OnCollisionEnter(Collision collision){
+    void OnCollisionEnter(Collision collision)
+    {
 
         if (collision.collider.gameObject.layer == 9)
         {
-            grounded = true;
+            Destroy(this.rigidbody);
+            Destroy(this.collider);
+            return;
         }
 
-        else if (((owner.tag == collision.collider.gameObject.tag) || this.grounded == true) && collision.collider.gameObject.layer != 9)
+        if (owner.tag == collision.collider.gameObject.tag)
         {
-            Debug.Log("doge");
             Physics.IgnoreCollision(this.collider, collision.collider);
             return;
         }
@@ -46,7 +48,7 @@ public class Weapon : MonoBehaviour {
                 Destroy(this.gameObject);
             }
         }
-        }
+    }
 
 	public void setOwner (GameObject own){
 		this.owner = own;
