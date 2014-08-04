@@ -12,6 +12,7 @@ public class CameraFollow : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+        Screen.SetResolution(160, 144, false);
 		Vector3 camPos = new Vector3 (this.transform.position.x, this.transform.position.y, this.transform.position.z);
 		Vector3 playPos = new Vector3 (player.transform.position.x, player.transform.position.y, this.transform.position.z);
 		if(Vector3.Distance (camPos,playPos)>=.3){
