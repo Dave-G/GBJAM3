@@ -9,6 +9,7 @@ public class CameraFollow : MonoBehaviour {
 	void Start () {
         Screen.SetResolution(160, 144, false);
 	}
+    //bal
 	
 	// Update is called once per frame
 	void Update () {
