@@ -1,8 +1,8 @@
 fileFormatVersion: 2
-guid: 851033fd58ed09342b88e4580b0a3c53
+guid: 660eaeef550d7e9459e3414156160f87
 TextureImporter:
   fileIDToRecycleName:
-    21300000: heart
+    21300000: alleyBG
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0

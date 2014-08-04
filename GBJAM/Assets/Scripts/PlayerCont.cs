@@ -18,11 +18,13 @@ public class PlayerCont : MonoBehaviour {
     public float throwForce;
 
 	public Vector3 moveDir = Vector3.zero;
+    
 
 	public int right = 1;
 	
 	// Use this for initialization
 	void Start () {
+        
 	}
 	
 	// Update is called once per frame
@@ -91,6 +93,8 @@ public class PlayerCont : MonoBehaviour {
     public void takeDamage(int damage)
     {
         this.health -= damage;
+
+        Debug.Log(health);
         if (health <= 0)
         {
             //player.die

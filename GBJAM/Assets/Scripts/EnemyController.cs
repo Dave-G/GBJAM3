@@ -5,15 +5,21 @@ public class EnemyController : MonoBehaviour {
 	public GameObject platform;
 	public GameObject target;
 	public int right = 1;
-	public float enemyDt = 1f;
+	public float enemyDt;
 	public CharacterController enemyControl;
 	public Vector3 moveDir = Vector3.zero;
 
     public int health;
+    private float canTurn;
+    private float turnTime = 1f;
+
+    //Health test
+    public int damage = 5;
 
 	// Use this for initialization
 	void Start () {
-	
+        this.moveDir = new Vector3(1f, 0, 0);
+        enemyControl = GetComponent<CharacterController>();
 	}
 	
 	// Update is called once per frame
@@ -22,38 +28,100 @@ public class EnemyController : MonoBehaviour {
         this.transform.localPosition = new Vector3(this.transform.localPosition.x, this.transform.localPosition.y, 0f);
 	}
 
+    //Only turns if time from last turn < set time
 	void patrolPlatform (){
-		if (this.right == 1 && this.transform.position.x <= this.platform.collider.bounds.max.x-this.enemyControl.radius) {
-			this.moveDir = new Vector3 (1f,0,0);
-		}
-		else if (this.right == -1 && this.transform.position.x >= this.platform.collider.bounds.min.x+this.enemyControl.radius) {
-			this.moveDir = new Vector3 (-1f,0,0);
-		}
-		else {
-			this.right *= -1;
-		}
-
+        enemyDt = .5f;
+        if (!platformBounds(this.gameObject) && Time.time > canTurn)
+        {
+            moveDir *= -1;
+            this.right *= -1;
+            canTurn = Time.time + turnTime;
+        }
 	}
 
 	void move(){
-		enemyControl = GetComponent<CharacterController>();
-		if (Vector3.Distance (this.transform.position, this.target.transform.position) >= .5) {
-				this.patrolPlatform ();
+		//If player is within 1m and both objects are on the same platform (Need to fix Y value)
+		if(((Vector3.Distance (this.transform.position, this.target.transform.position) <= 1) 
+            && platformBounds(this.gameObject)) && platformBounds(target.gameObject)){
+               
+            charge();
 		}
-		else{
-			this.moveDir = Vector3.zero;
-		}
+
+        else
+        {
+            this.patrolPlatform();
+        }
+
 		this.transform.localScale =new Vector3 (this.right, 1f, 1f);
 		this.enemyControl.Move (moveDir * enemyDt * Time.deltaTime);
 
 	}
 
+    //Health test
+    void OnCollisionEnter(Collision collision)
+    {
+        if (collision.collider.gameObject.tag.Contains("Player"))
+        {
+            Debug.Log("bam");
+            moveDir.x = 0;
+            collision.collider.gameObject.GetComponent<PlayerCont>().takeDamage(this.damage);
+        }
+
+    }
+
     public void takeDamage(int damage)
     {
+        //print("bam");
         this.health -= damage;
         if (health <= 0)
         {
             //player.die
+        }
+    }
+    //Return true if object is not outside platform bounds
+    public bool platformBounds(GameObject obj)
+    {
+        CharacterController controller = obj.gameObject.GetComponent<CharacterController>();
+        if ((obj.gameObject.transform.position.x >= (this.platform.collider.bounds.max.x - controller.radius))
+            || (obj.gameObject.transform.position.x <= (this.platform.collider.bounds.min.x + controller.radius)))
+        {
+            
+            return false;
+        }
+        else
+        {
+            return true;
+        }
+    }
+
+    //Like it sounds
+    public void charge()
+    {
+        //Copies player direction
+        moveDir.x = (this.target.GetComponent<PlayerCont>().moveDir.x);
+
+        enemyDt = 1f;
+        //if the player is running towards..
+        if (this.target.transform.position.x < this.transform.position.x && moveDir.x == 1)
+        {
+            moveDir.x = -1;
+            this.right = -1;
+        }
+            //""""
+        else if (this.target.transform.position.x > this.transform.position.x && moveDir.x == -1)
+        {
+            moveDir.x = 1;
+            this.right = 1;
+        }
+            //if the player is moving away
+        else if (moveDir.x != 0)
+        {
+            this.right = this.target.GetComponent<PlayerCont>().right;
+        }
+        //if the player is not moving
+        else
+        {
+            moveDir.x = this.right;
         }
     }
 }
