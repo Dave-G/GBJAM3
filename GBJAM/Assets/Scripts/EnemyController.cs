@@ -9,15 +9,18 @@ public class EnemyController : MonoBehaviour {
 	public CharacterController enemyControl;
 	public Vector3 moveDir = Vector3.zero;
 
+    [HideInInspector]
     public int health;
+
     private float canTurn;
     private float turnTime = 1f;
 
     //Health test
-    public int damage = 5;
+    public int mydamage = 5;
 
 	// Use this for initialization
 	void Start () {
+        health = 100;
         this.moveDir = new Vector3(1f, 0, 0);
         enemyControl = GetComponent<CharacterController>();
 	}
@@ -58,20 +61,20 @@ public class EnemyController : MonoBehaviour {
 	}
 
     //Health test
-    void OnCollisionEnter(Collision collision)
+    void OnControllerColliderHit(ControllerColliderHit collision)
     {
         if (collision.collider.gameObject.tag.Contains("Player"))
         {
             Debug.Log("bam");
             moveDir.x = 0;
-            collision.collider.gameObject.GetComponent<PlayerCont>().takeDamage(this.damage);
+            collision.collider.gameObject.GetComponent<PlayerCont>().takeDamage(mydamage);
         }
 
     }
 
     public void takeDamage(int damage)
     {
-        //print("bam");
+        Debug.Log(health);
         this.health -= damage;
         if (health <= 0)
         {

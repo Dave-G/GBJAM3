@@ -8,6 +8,7 @@ public class PlayerCont : MonoBehaviour {
 	public float jumpVel = 60.0f;
 	public float inAir = 0.6f;
 
+    [HideInInspector]
     public int health;
 
 	public KeyCode attackButton = KeyCode.Z;
@@ -24,7 +25,7 @@ public class PlayerCont : MonoBehaviour {
 	
 	// Use this for initialization
 	void Start () {
-        
+        health = 100;
 	}
 	
 	// Update is called once per frame

@@ -35,7 +35,7 @@ public class Weapon : MonoBehaviour {
             Destroy(this.gameObject);
         }
     }
-	public void setOwner ( GameObject own){
+	public void setOwner (GameObject own){
 		this.owner = own;
 		this.transform.localScale = owner.transform.localScale;
 	}
