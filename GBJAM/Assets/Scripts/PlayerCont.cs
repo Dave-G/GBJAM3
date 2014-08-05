@@ -10,6 +10,8 @@ public class PlayerCont : MonoBehaviour {
 
     [HideInInspector]
     public int health;
+    [HideInInspector]
+    public int charge;
 
     private bool dead;
 
@@ -29,6 +31,7 @@ public class PlayerCont : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         health = 100;
+        charge = 10;
         dead = false;
         anim = this.GetComponent<Animator>();
 	}
@@ -134,4 +137,3 @@ public class PlayerCont : MonoBehaviour {
         Destroy(this.gameObject);
     }
 }
-

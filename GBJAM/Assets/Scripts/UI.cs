@@ -3,13 +3,36 @@ using System.Collections;
 
 public class UI : MonoBehaviour {
 
+    [HideInInspector]
+    public Animator anim;
+    [HideInInspector]
+    public int currentHealth;
+    [HideInInspector]
+    public int charge;
+
+    public GameObject player;
+
 	// Use this for initialization
 	void Start () {
-	
+        anim = GetComponent<Animator>();
 	}
 	
 	// Update is called once per frame
 	void Update () {
-	
+        getHealth();
+        getCharge();
 	}
+
+    void getHealth()
+    {
+        currentHealth = player.gameObject.GetComponent<PlayerCont>().health;
+        anim.SetInteger("Health", Mathf.Abs(currentHealth));
+    }
+
+    void getCharge()
+    {
+        charge = player.gameObject.GetComponent<PlayerCont>().charge;
+        anim.SetInteger("Charge", Mathf.Abs(charge));
+
+    }
 }
