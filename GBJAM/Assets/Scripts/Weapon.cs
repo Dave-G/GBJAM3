@@ -20,7 +20,7 @@ public class Weapon : MonoBehaviour {
     void OnCollisionEnter(Collision collision)
     {
 
-        if (collision.collider.gameObject.layer == 9)
+        if ((collision.collider.gameObject.layer == 9) || collision.collider.gameObject.layer == 13)
         {
             Destroy(this.rigidbody);
             Destroy(this.collider);
