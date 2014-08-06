@@ -9,6 +9,10 @@ public class CameraFollow : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         Screen.SetResolution(160, 144, false);
+		float resW = Screen.currentResolution.width;
+		float resH = Screen.currentResolution.height;
+		float DesiredRat = 160f / 144f;
+		Camera.main.rect = new Rect(0, 0, DesiredRat * resH / resW, 1);
 	}
 
     // Update is called once per frame
