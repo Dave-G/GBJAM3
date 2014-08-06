@@ -10,12 +10,10 @@ public class CameraFollow : MonoBehaviour {
 	void Start () {
         Screen.SetResolution(160, 144, false);
 	}
-    //bal
-	
-	// Update is called once per frame
+
+    // Update is called once per frame
 	void Update () {
-        Screen.SetResolution(160, 144, false);
-		Vector3 camPos = new Vector3 (this.transform.position.x, this.transform.position.y, this.transform.position.z);
+       	Vector3 camPos = new Vector3 (this.transform.position.x, this.transform.position.y, this.transform.position.z);
 		Vector3 playPos = new Vector3 (this.player.transform.position.x, this.player.transform.position.y, this.transform.position.z);
 		playPos.x = Mathf.Clamp (this.player.transform.position.x, this.Background.renderer.bounds.min.x+1.6f/2f,this.Background.renderer.bounds.max.x-1.6f/2f);
 		playPos.y = Mathf.Clamp (this.player.transform.position.y, this.Background.renderer.bounds.min.y+1.44f/2f,this.Background.renderer.bounds.max.y-1.44f/2f);

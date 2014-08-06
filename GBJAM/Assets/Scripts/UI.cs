@@ -16,11 +16,18 @@ public class UI : MonoBehaviour {
 	void Start () {
         anim = GetComponent<Animator>();
 	}
-	
-	// Update is called once per frame
-	void Update () {
-        getHealth();
-        getCharge();
+
+    // Update is called once per frame
+    void Update()
+    {
+        if (gameObject.name.Contains("Heart"))
+        {
+            getHealth();
+        }
+        else if (gameObject.name.Contains("Charge"))
+        {
+            getCharge();
+        }
 	}
 
     void getHealth()
