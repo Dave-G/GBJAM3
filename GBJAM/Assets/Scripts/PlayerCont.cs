@@ -49,6 +49,10 @@ public class PlayerCont : MonoBehaviour {
             this.transform.localPosition = new Vector3(this.transform.localPosition.x, this.transform.localPosition.y, 0f);
             fire();
         }
+        if (Input.GetButtonDown("Fire1") && charge != 0)
+        {
+            charge -= 1;
+        }
 	}
 
 	void move(){

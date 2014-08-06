@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 2663a9c3b30928d419c9ef5e0e7700ec
+guid: 6e168b747f3f6764f843378c24518354
 TextureImporter:
   fileIDToRecycleName:
     21300000: textBox
@@ -25,10 +25,10 @@ TextureImporter:
   textureFormat: -1
   maxTextureSize: 1024
   textureSettings:
-    filterMode: 0
-    aniso: 1
+    filterMode: -1
+    aniso: -1
     mipBias: -1
-    wrapMode: 1
+    wrapMode: -1
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50

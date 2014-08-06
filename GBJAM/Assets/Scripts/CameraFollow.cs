@@ -8,11 +8,8 @@ public class CameraFollow : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+        Application.targetFrameRate = 60;
         Screen.SetResolution(160, 144, false);
-		//float resW = Screen.currentResolution.width;
-		//float resH = Screen.currentResolution.height;
-		//float DesiredRat = 160f / 144f;
-		//Camera.main.rect = new Rect(0, 0, DesiredRat * resW / resH, 1);
 	}
 
     // Update is called once per frame
@@ -23,6 +20,7 @@ public class CameraFollow : MonoBehaviour {
 		playPos.y = Mathf.Clamp (this.player.transform.position.y, this.Background.renderer.bounds.min.y+1.44f/2f,this.Background.renderer.bounds.max.y-1.44f/2f);
 		if((Vector3.Distance (camPos,playPos)>=.3)||(player.transform.position.x != playPos.x)||(playPos.y != player.transform.position.y)){
 			this.transform.position = Vector3.Slerp (camPos, playPos, Time.deltaTime*2);
+            Debug.Log("hey");
 		}
 	}
 }
