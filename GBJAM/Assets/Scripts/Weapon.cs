@@ -14,6 +14,7 @@ public class Weapon : MonoBehaviour {
 		gravity = 10f;
 		this.owner = owner;
 		direction = Dir/Dir.magnitude;
+		this.rigidbody.transform.localScale = new Vector3 (Mathf.Sign (Dir.x),1,1);
 		this.rigidbody.velocity = direction * Vel * myDt * Time.fixedDeltaTime*done;
 	}   
 
@@ -23,6 +24,7 @@ public class Weapon : MonoBehaviour {
 	// Update is called once per frame
 	void Update (){
 		myDt = this.GetComponent<BubActivator> ().getDT ();
+		this.rigidbody.AddTorque (new Vector3(0,0,-1*Mathf.Sign (this.direction.x)*50f));
         if (done != 0) {
             move();
         }

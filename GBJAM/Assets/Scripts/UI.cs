@@ -34,7 +34,7 @@ public class UI : MonoBehaviour {
 
     void getCharge(){
 
-        currentCharge = player.gameObject.GetComponent<PlayerCont>().charge;
+        currentCharge = Mathf.CeilToInt (player.gameObject.GetComponent<PlayerCont>().charge);
         anim.SetInteger("Charge", Mathf.Abs(currentCharge));
 
     }
