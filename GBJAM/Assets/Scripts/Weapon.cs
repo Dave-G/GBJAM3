@@ -16,6 +16,7 @@ public class Weapon : MonoBehaviour {
 		direction = Dir/Dir.magnitude;
 		this.rigidbody.transform.localScale = new Vector3 (Mathf.Sign (Dir.x),1,1);
 		this.rigidbody.velocity = direction * Vel * myDt * Time.fixedDeltaTime*done;
+
 	}   
 
 	void Start (){
@@ -45,7 +46,7 @@ public class Weapon : MonoBehaviour {
         /*Keep this for when you have multiple enemies firing to prevent friendly fire
          or if player somehow runs into own weapon
          */
-        if (owner.tag == collision.collider.gameObject.tag){
+        if (owner.tag == collision.collider.gameObject.tag || collision.collider.gameObject.tag == this.tag){
             Physics.IgnoreCollision(collider, collision.collider);
             return;
         }
