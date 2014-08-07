@@ -2,7 +2,7 @@
 using System.Collections;
 
 public class PlayerCont : MonoBehaviour {
-	public float playerDt = 1.0f;
+	public float myDt = 1.0f;
 	public float velocity = 15f;
 	public float gravity = 15.0f;
 	public float jumpVel = 60.0f;
@@ -38,6 +38,7 @@ public class PlayerCont : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+		//this.myDt = this.gameObject.GetComponent<BubActivator> ().getDT ();
         if (dead)
         {
             StartCoroutine(deathTimer());
@@ -86,8 +87,8 @@ public class PlayerCont : MonoBehaviour {
 			this.moveDir.x = velocity*1;
 		}
 		this.transform.localScale = new Vector3 (this.right, 1, 1);
-		moveDir.y -= gravity * playerDt * Time.deltaTime;
-		controller.Move (moveDir * playerDt * Time.deltaTime);
+		moveDir.y -= gravity * myDt * Time.deltaTime;
+		controller.Move (moveDir * myDt * Time.fixedDeltaTime);
 	}
 
 	public void layerswap(){
@@ -104,8 +105,9 @@ public class PlayerCont : MonoBehaviour {
         if (Input.GetKeyDown(attackButton))
         {
             GameObject throwInstance = (GameObject) Instantiate(weapon, transform.position, Quaternion.Euler(new Vector3(0, 0, 0)));
-			throwInstance.gameObject.GetComponent<Weapon>().setOwner(this.gameObject);
-            throwInstance.rigidbody.AddForce(new Vector3(throwForce*this.right, throwForce, 0));
+			//throwInstance.gameObject.GetComponent<Weapon>().setOwner(this.gameObject);
+			throwInstance.gameObject.GetComponent<Weapon>().setup (throwForce+this.velocity,new Vector3(this.right,1,0),this.gameObject);
+            //throwInstance.rigidbody.AddForce(new Vector3(throwForce*this.right, throwForce, 0));
 			Destroy (throwInstance,3f);
         }
     }

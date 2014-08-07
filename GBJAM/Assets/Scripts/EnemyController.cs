@@ -5,10 +5,11 @@ public class EnemyController : MonoBehaviour {
 	public GameObject platform;
 	public GameObject target;
 	public int right = 1;
-	public float enemyDt;
+	public float myDt;
 	public CharacterController enemyControl;
 	public Vector3 moveDir = Vector3.zero;
-
+	public float velocity = 1;
+	public float baseVel = 1;
     [HideInInspector]
     public int health;
     [HideInInspector]
@@ -33,6 +34,7 @@ public class EnemyController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+		this.myDt = this.gameObject.GetComponent<BubActivator> ().getDT ();
         if (dead)
         {
             StartCoroutine(deathTimer());
@@ -46,7 +48,7 @@ public class EnemyController : MonoBehaviour {
 
     //Only turns if time from last turn < set time
 	void patrolPlatform (){
-        enemyDt = .5f;
+        this.velocity = this.baseVel*.5f;
         if (!platformBounds(this.gameObject) && Time.time > canTurn)
         {
             moveDir *= -1;
@@ -69,7 +71,7 @@ public class EnemyController : MonoBehaviour {
         }
 
 		this.transform.localScale =new Vector3 (this.right, 1f, 1f);
-		this.enemyControl.Move (moveDir * enemyDt * Time.deltaTime);
+		this.enemyControl.Move (moveDir *this.velocity* myDt * Time.fixedDeltaTime);
 
 	}
 
@@ -78,7 +80,7 @@ public class EnemyController : MonoBehaviour {
     {
         if (collision.collider.gameObject.tag.Contains("Player"))
         {
-            Debug.Log("bam");
+            //Debug.Log("bam");
             moveDir.x = 0;
             collision.collider.gameObject.GetComponent<PlayerCont>().takeDamage(mydamage);
         }
@@ -117,7 +119,7 @@ public class EnemyController : MonoBehaviour {
         //Copies player direction
         moveDir.x = (this.target.GetComponent<PlayerCont>().moveDir.x);
 
-        enemyDt = 1f;
+        velocity = baseVel;
         //if the player is running towards..
         if (this.target.transform.position.x < this.transform.position.x && moveDir.x == 1)
         {
@@ -147,4 +149,14 @@ public class EnemyController : MonoBehaviour {
         yield return new WaitForSeconds(.6f);
         Destroy(this.gameObject);
     }
+
+	public void inBub()
+	{
+		this.myDt = .5f;
+	}
+
+	public void exitBub()
+	{
+		this.myDt = 1f;
+	}
 }

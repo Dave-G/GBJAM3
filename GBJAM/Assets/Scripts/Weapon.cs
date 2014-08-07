@@ -5,15 +5,33 @@ public class Weapon : MonoBehaviour {
 	public GameObject owner;
     public int damage;
     private bool grounded;
+	public float myDt;
+	public float vel;
+	public Vector3 direction;
+	public float done = 1f;
+	public float gravity = 15f;
 
 	// Use this for initialization
-	void Start () {
-        grounded = false;
+	public void setup (float Vel, Vector3 Dir, GameObject owner) {
+		this.done = 1f;
+		this.gravity = 10f;
+		this.owner = owner;
+		this.direction = Dir/Dir.magnitude;
+		this.vel = Vel;
+		this.rigidbody.velocity = this.direction * this.vel * myDt * Time.fixedDeltaTime*this.done;
 	}   
+	void Start (){
+		Physics.IgnoreCollision (this.collider, owner.collider);
+		}
 	
 	// Update is called once per frame
 	void Update () {
+		this.myDt = this.gameObject.GetComponent<BubActivator> ().getDT ();
+		move ();
+	}
 
+	public void move(){
+		this.rigidbody.velocity -= new Vector3(0,myDt * Time.deltaTime * this.gravity * this.done,0);
 	}
 
     //Need to make collision not affect movement
@@ -22,14 +40,17 @@ public class Weapon : MonoBehaviour {
 
         if ((collision.collider.gameObject.layer == 9) || collision.collider.gameObject.layer == 13)
         {
-            Destroy(this.rigidbody);
+            //Destroy(this.rigidbody);
+			this.rigidbody.velocity *= 0;
+			this.done = 0;
+			this.rigidbody.angularVelocity = Vector3.zero;
             Destroy(this.collider);
             return;
         }
 
         if (owner.tag == collision.collider.gameObject.tag)
         {
-            Physics.IgnoreCollision(this.collider, collision.collider);
+			Debug.Log("why");
             return;
         }
 
