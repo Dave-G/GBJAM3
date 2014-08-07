@@ -1,9 +1,5 @@
 fileFormatVersion: 2
-<<<<<<< HEAD
 guid: 1886bf8d86989364ebd35821a4d18122
-=======
-guid: 5700ed8891a7f7243b4104299168641c
->>>>>>> origin/master
 TextureImporter:
   fileIDToRecycleName:
     21300000: brick

@@ -71,7 +71,7 @@ public class EnemyController : MonoBehaviour {
         }
 
 		this.transform.localScale =new Vector3 (this.right, 1f, 1f);
-		this.enemyControl.Move (moveDir *this.velocity* myDt * Time.fixedDeltaTime);
+		this.enemyControl.Move (moveDir *this.velocity* myDt * Time.deltaTime);
 
 	}
 

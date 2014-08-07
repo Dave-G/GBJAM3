@@ -3,9 +3,9 @@ using System.Collections;
 
 public class PlayerCont : MonoBehaviour {
 	public float myDt = 1.0f;
-	public float velocity = 15f;
-	public float gravity = 15.0f;
-	public float jumpVel = 60.0f;
+	public float velocity;
+	public float gravity;
+	public float jumpVel;
 	public float inAir = 0.6f;
 
     [HideInInspector]
@@ -91,7 +91,7 @@ public class PlayerCont : MonoBehaviour {
 		}
 		this.transform.localScale = new Vector3 (this.right, 1, 1);
 		moveDir.y -= gravity * myDt * Time.deltaTime;
-		controller.Move (moveDir * myDt * Time.fixedDeltaTime);
+		controller.Move (moveDir * myDt * Time.deltaTime);
 	}
 
 	public void layerswap(){
