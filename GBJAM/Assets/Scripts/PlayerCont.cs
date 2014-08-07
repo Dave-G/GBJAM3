@@ -10,11 +10,13 @@ public class PlayerCont : MonoBehaviour {
     [HideInInspector]
     public int health = 100, right = 1;
     [HideInInspector]
-    public int charge = 10; 
+    public float charge = 10; 
 
     public GameObject weapon, slowBub, bubInstance;
 	public Vector3 moveDir = Vector3.zero;
     public Animator anim;
+
+	public float lastTime = -1f;
 	
 	// Use this for initialization
 	void Start () {
@@ -45,11 +47,11 @@ public class PlayerCont : MonoBehaviour {
     void bubbleDecay() {
         //Lose charge while bubble is active
         if (bubbling && Time.time > timer + chargeDecay && charge != 0) {
-            charge -= 1;
+            charge -= 50f*Time.deltaTime;
             timer = Time.time;
         }
         //Gain charge while bubble is not active
-        else if (charge < 10 && Time.time > timer + chargeGain && !bubbling) {
+        else if (charge < 10f && Time.time > timer + chargeGain && !bubbling) {
             charge++;
             timer = Time.time;
         }
@@ -92,12 +94,23 @@ public class PlayerCont : MonoBehaviour {
 	}
 
 	public void layerswap(){
-		if (moveDir.y > 0) {
+		if (moveDir.y > 0 && !(Input.GetKeyDown (KeyCode.S))) {
 			Physics.IgnoreLayerCollision(9,10,true);
 		}
 		else {
 			Physics.IgnoreLayerCollision (9,10,false);
 		}
+		/*
+		if (Input.GetKeyDown (KeyCode.S)){
+			this.lastTime = Time.time;
+			if((Time.time - this.lastTime)<.2f){
+				Debug.Log ("didit");
+				this.lastTime = Time.time; 
+				Physics.IgnoreLayerCollision (9,10,true);
+
+			}
+		}
+		*/
 	}
 
     public void fire(){
@@ -106,14 +119,16 @@ public class PlayerCont : MonoBehaviour {
 			throwInstance.gameObject.GetComponent<Weapon>().setup (throwForce+velocity,new Vector3(right,1,0),this.gameObject);
 			Destroy (throwInstance,3f);
         }
-		if (Input.GetKeyDown (KeyCode.C)){
+		if (Input.GetKeyDown (KeyCode.C) && this.charge >= 5 ){
 			bubInstance = (GameObject) Instantiate (slowBub,transform.position, Quaternion.Euler (new Vector3(0,0,0)));
 			bubInstance.gameObject.GetComponent<SlowBubble>().setOwner(this.gameObject);
             bubbling = true;
 		}
-		if (Input.GetKeyUp (KeyCode.C)){
-			Destroy (bubInstance);
-            bubbling = false;
+		if (Input.GetKeyUp (KeyCode.C) || this.charge <= 0){
+			if (bubInstance){
+				Destroy (bubInstance);
+			}
+	        bubbling = false;
 		}
     }
 

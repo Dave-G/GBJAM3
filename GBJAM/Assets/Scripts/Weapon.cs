@@ -14,7 +14,9 @@ public class Weapon : MonoBehaviour {
 		gravity = 10f;
 		this.owner = owner;
 		direction = Dir/Dir.magnitude;
+		this.rigidbody.transform.localScale = new Vector3 (Mathf.Sign (Dir.x),1,1);
 		this.rigidbody.velocity = direction * Vel * myDt * Time.fixedDeltaTime*done;
+
 	}   
 
 	void Start (){
@@ -23,6 +25,7 @@ public class Weapon : MonoBehaviour {
 	// Update is called once per frame
 	void Update (){
 		myDt = this.GetComponent<BubActivator> ().getDT ();
+
         if (done != 0) {
             move();
         }
@@ -43,7 +46,7 @@ public class Weapon : MonoBehaviour {
         /*Keep this for when you have multiple enemies firing to prevent friendly fire
          or if player somehow runs into own weapon
          */
-        if (owner.tag == collision.collider.gameObject.tag){
+        if (owner.tag == collision.collider.gameObject.tag || collision.collider.gameObject.tag == this.tag){
             Physics.IgnoreCollision(collider, collision.collider);
             return;
         }
@@ -69,10 +72,10 @@ public class Weapon : MonoBehaviour {
             Destroy(this.gameObject);
         }
         else {
-            /*rigidbody.velocity *= 0;*/
+            rigidbody.velocity *= 0;
             done = 0;
-            Destroy(this.rigidbody);
-            /*this.rigidbody.angularVelocity = Vector3.zero;*/
+           // Destroy(this.rigidbody);
+            this.rigidbody.angularVelocity = Vector3.zero;
             Destroy(this.collider);
         }
     }

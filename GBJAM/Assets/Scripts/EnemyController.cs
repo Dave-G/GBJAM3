@@ -2,12 +2,11 @@
 using System.Collections;
 
 public class EnemyController : MonoBehaviour {
-
-	public GameObject platform, target;
+	public GameObject platform, target,weapon;
 	public CharacterController enemyControl;
     public Vector3 moveDir;
 
-	public float velocity = 1, baseVel = 1, myDt;
+	public float velocity = 1, baseVel = 1, myDt, throwForce = 300;
     private float canTurn, turnTime = 1f;
 
     [HideInInspector]
@@ -17,6 +16,7 @@ public class EnemyController : MonoBehaviour {
     [HideInInspector]
     public Animator anim;
 
+	//public bool chargin;
     //Health test
     public int mydamage = 5;
 
@@ -37,6 +37,7 @@ public class EnemyController : MonoBehaviour {
         }
         if (!dead){
             move();
+			thrower();
             this.transform.localPosition = new Vector3(this.transform.localPosition.x, this.transform.localPosition.y, 0f);
         }
 	}
@@ -52,18 +53,11 @@ public class EnemyController : MonoBehaviour {
 	}
 
 	void move(){
-		//If player is within 1m and both objects are on the same platform (Need to fix Y value)
-		if(((Vector3.Distance (this.transform.position, this.target.transform.position) <= 1) 
-            && platformBounds(this.gameObject)) && platformBounds(target.gameObject)){
-            //Tunnel vision mode
-            charge();
-		}
 
-        else{
-            //Normal movement
-            this.patrolPlatform();
-        }
-        //Change position
+    	//Normal movement
+		//this.chargin = false;
+	    this.patrolPlatform();
+	    //Change position
 		this.transform.localScale =new Vector3 (this.right, 1f, 1f);
         enemyControl.Move(moveDir * velocity * myDt * Time.deltaTime);
 	}
@@ -74,8 +68,14 @@ public class EnemyController : MonoBehaviour {
             moveDir.x = 0;
             collision.collider.gameObject.GetComponent<PlayerCont>().takeDamage(mydamage);
         }
+		if(collision.collider.gameObject.layer == 13){
+			this.moveDir *= -1;
+			this.right *= -1;
+			Debug.Log ("done");
+		}
 
     }
+	
 
     public void takeDamage(int damage){
         this.health -= damage;
@@ -135,7 +135,11 @@ public class EnemyController : MonoBehaviour {
 	public void thrower(){
 		float closeDist = 1f;
 		if (Vector3.Distance (target.transform.position,this.transform.position) <= closeDist) {
-			return;
+			if( Mathf.Sign ((target.transform.position.x-this.transform.position.x))*this.right > 0){
+				GameObject throwInstance = (GameObject) Instantiate(weapon, transform.position, Quaternion.Euler(new Vector3(0, 0, 0)));
+				throwInstance.gameObject.GetComponent<Weapon>().setup (throwForce,new Vector3(this.right*1f,.3f,0f),this.gameObject);
+				Destroy (throwInstance,3f);
+			}
 		}
 	}
 

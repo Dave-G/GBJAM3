@@ -3,7 +3,7 @@ using System.Collections;
 
 public class BubActivator : MonoBehaviour {
 	public float outDt = 1f;
-	public float inBubDt = .5f;
+	public float inBubDt = .01f;
 	public float myDt = 1f;
 	// Use this for initialization
 	void Start () {
