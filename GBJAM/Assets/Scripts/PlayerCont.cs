@@ -3,12 +3,14 @@ using System.Collections;
 
 public class PlayerCont : MonoBehaviour {
 
-    private float timer, chargeDecay = .5f, chargeGain = 1f;
+    private float timer= 0, chargeDecay = .5f, chargeGain = 1f;
 	public float velocity, gravity, jumpVel, throwForce, myDt = 1.0f;
     private bool bubbling = false, dead = false;
 
     [HideInInspector]
-    public int health = 100, charge = 10, right = 1;
+    public int health = 100, right = 1;
+    [HideInInspector]
+    public int charge = 10; 
 
     public GameObject weapon, slowBub, bubInstance;
 	public Vector3 moveDir = Vector3.zero;
@@ -17,6 +19,12 @@ public class PlayerCont : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         anim = this.GetComponent<Animator>();
+        charge = 10;
+        health = 100;
+        right = 1;
+        Debug.Log(health);
+        Debug.Log(charge);
+        Debug.Log(right);
 	}
 	
 	// Update is called once per frame

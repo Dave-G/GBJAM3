@@ -6,7 +6,7 @@ public class UI : MonoBehaviour {
     [HideInInspector]
     public Animator anim;
     [HideInInspector]
-    public int currentHealth, charge;
+    public int currentHealth, currentCharge;
 
     public GameObject player;
 
@@ -34,8 +34,8 @@ public class UI : MonoBehaviour {
 
     void getCharge(){
 
-        charge = player.gameObject.GetComponent<PlayerCont>().charge;
-        anim.SetInteger("Charge", Mathf.Abs(charge));
+        currentCharge = player.gameObject.GetComponent<PlayerCont>().charge;
+        anim.SetInteger("Charge", Mathf.Abs(currentCharge));
 
     }
 }
