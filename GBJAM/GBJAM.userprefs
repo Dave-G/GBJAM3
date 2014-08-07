@@ -1,13 +1,13 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\PlayerCont.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\EnemyController.cs">
     <Files>
-      <File FileName="Assets\Scripts\SlowBubble.cs" Line="27" Column="35" />
-      <File FileName="Assets\Scripts\CameraFollow.cs" Line="17" Column="48" />
-      <File FileName="Assets\Scripts\Weapon.cs" Line="79" Column="2" />
-      <File FileName="Assets\Scripts\EnemyController.cs" Line="74" Column="77" />
-      <File FileName="Assets\Scripts\PlayerCont.cs" Line="91" Column="56" />
-      <File FileName="Assets\Scripts\BubActivator.cs" Line="5" Column="18" />
+      <File FileName="Assets\Scripts\SlowBubble.cs" Line="45" Column="26" />
+      <File FileName="Assets\Scripts\CameraFollow.cs" Line="26" Column="1" />
+      <File FileName="Assets\Scripts\Weapon.cs" Line="48" Column="25" />
+      <File FileName="Assets\Scripts\EnemyController.cs" Line="156" Column="4" />
+      <File FileName="Assets\Scripts\PlayerCont.cs" Line="121" Column="26" />
+      <File FileName="Assets\Scripts\BubActivator.cs" Line="31" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

@@ -152,8 +152,8 @@ public class EnemyController : MonoBehaviour {
 
 	public void thrower(){
 		float closeDist = 1f;
-		if (target.transform.position <= closeDist) {
-
+		if (Vector3.Distance (target.transform.position,this.transform.position) <= closeDist) {
+			return;
 		}
 	}
 

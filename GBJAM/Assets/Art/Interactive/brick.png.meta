@@ -1,8 +1,8 @@
 fileFormatVersion: 2
-guid: 8abeff147604d104583008c05bf17ba5
+guid: 5700ed8891a7f7243b4104299168641c
 TextureImporter:
   fileIDToRecycleName:
-    21300000: textBoxBig
+    21300000: brick
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
