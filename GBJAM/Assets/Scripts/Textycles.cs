@@ -31,20 +31,16 @@ public class Textycles : MonoBehaviour {
 	
 	}
 
-    void OnTriggerEnter(Collider col) {
-        if(col.tag.Contains("textTrigger")){
-            dispText = true;
-        }
-    }
     void OnGUI()
     {
         if (dispText)
         {
             anim.SetBool("dispText", dispText);
             GUI.Label(new Rect(Screen.width / 11f, Screen.height / 1.3f, Screen.width / 1.2f, Screen.height * .15f), heybb, style);
-
-            if (Input.GetButtonDown("textClear")) {
+            Debug.Log("dsaf");
+            if (Input.GetKeyDown(textClear)) {
                 dispText = false;
+                anim.SetBool("dispText", dispText);
             }
         }
     }
