@@ -2,67 +2,45 @@
 using System.Collections;
 
 public class PlayerCont : MonoBehaviour {
-	public float myDt = 1.0f;
-    private float timer;
-    private float chargeDecay = .5f;
-    private float chargeGain = 1f;
-	public float velocity;
-	public float gravity;
-	public float jumpVel;
+
+    private float timer, chargeDecay = .5f, chargeGain = 1f;
+	public float velocity, gravity, jumpVel, throwForce, myDt = 1.0f;
+    private bool bubbling = false, dead = false;
 
     [HideInInspector]
-    public int health;
-    [HideInInspector]
-    public int charge;
-    private bool bubbling;
+    public int health = 100, charge = 10, right = 1;
 
-    private bool dead;
-
-	public KeyCode attackButton = KeyCode.Z;
-
-    public GameObject weapon;
-	public GameObject slowBub;
-    public float throwForce;
-
+    public GameObject weapon, slowBub, bubInstance;
 	public Vector3 moveDir = Vector3.zero;
     public Animator anim;
-
-	public GameObject bubInstance;
-    
-
-	public int right = 1;
 	
 	// Use this for initialization
 	void Start () {
-        health = 100;
-        charge = 10;
-        dead = false;
         anim = this.GetComponent<Animator>();
 	}
 	
 	// Update is called once per frame
 	void Update () {
 		//this.myDt = this.gameObject.GetComponent<BubActivator> ().getDT ();
-        if (dead)
-        {
+        if (dead){
             StartCoroutine(deathTimer());
         }
-        if (!dead)
-        {
+        if (!dead) {
             move();
             layerswap();
             this.transform.localPosition = new Vector3(this.transform.localPosition.x, this.transform.localPosition.y, 0f);
             fire();
+            bubbleDecay();
         }
-        bubbleDecay();
-
 	}
 
     void bubbleDecay() {
+        //Lose charge while bubble is active
         if (bubbling && Time.time > timer + chargeDecay && charge != 0) {
             charge -= 1;
             timer = Time.time;
         }
+        //Gain charge while bubble is not active
         else if (charge < 10 && Time.time > timer + chargeGain && !bubbling) {
             charge++;
             timer = Time.time;
@@ -87,25 +65,26 @@ public class PlayerCont : MonoBehaviour {
 		// add portion for in air dampening when switching directions
 		float leftRight = velocity*Input.GetAxis ("Horizontal");
 		if (leftRight < 0) {
-			this.right = -1;
+			right = -1;
 		}
 		if(leftRight > 0){
-			this.right = 1;
+			right = 1;
 		}
 		this.moveDir.x = 0;
 		if(Input.GetKey (KeyCode.LeftArrow) || Input.GetKey (KeyCode.A)){
-			this.moveDir.x = velocity*-1;
+			moveDir.x = velocity*-1;
 		}
 		else if(Input.GetKey (KeyCode.RightArrow)||Input.GetKey (KeyCode.D)){
-			this.moveDir.x = velocity*1;
+			moveDir.x = velocity*1;
 		}
-		this.transform.localScale = new Vector3 (this.right, 1, 1);
+        //Change player position
+		this.transform.localScale = new Vector3 (right, 1, 1);
 		moveDir.y -= gravity * myDt * Time.deltaTime;
 		controller.Move (moveDir * myDt * Time.deltaTime);
 	}
 
 	public void layerswap(){
-		if (this.moveDir.y > 0) {
+		if (moveDir.y > 0) {
 			Physics.IgnoreLayerCollision(9,10,true);
 		}
 		else {
@@ -113,14 +92,10 @@ public class PlayerCont : MonoBehaviour {
 		}
 	}
 
-    public void fire()
-    {
-        if (Input.GetKeyDown(attackButton))
-        {
+    public void fire(){
+        if (Input.GetKeyDown(KeyCode.Z)){
             GameObject throwInstance = (GameObject) Instantiate(weapon, transform.position, Quaternion.Euler(new Vector3(0, 0, 0)));
-			//throwInstance.gameObject.GetComponent<Weapon>().setOwner(this.gameObject);
-			throwInstance.gameObject.GetComponent<Weapon>().setup (throwForce+this.velocity,new Vector3(this.right,1,0),this.gameObject);
-            //throwInstance.rigidbody.AddForce(new Vector3(throwForce*this.right, throwForce, 0));
+			throwInstance.gameObject.GetComponent<Weapon>().setup (throwForce+velocity,new Vector3(right,1,0),this.gameObject);
 			Destroy (throwInstance,3f);
         }
 		if (Input.GetKeyDown (KeyCode.C)){
@@ -134,18 +109,16 @@ public class PlayerCont : MonoBehaviour {
 		}
     }
 
-    public void takeDamage(int damage)
-    {
-        this.health -= damage;
-        if (health <= 0)
-        {
+    public void takeDamage(int damage){
+        health -= damage;
+        if (health <= 0){
             dead = true;
             anim.Play("tempPlayerDeath");
         }
     }
 
-    IEnumerator deathTimer()
-    {
+    //Force stop update() for set duration then execute
+    IEnumerator deathTimer(){
         yield return new WaitForSeconds(.6f);
         Destroy(this.gameObject);
     }

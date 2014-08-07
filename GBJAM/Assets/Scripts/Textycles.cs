@@ -5,12 +5,12 @@ public class Textycles : MonoBehaviour {
 
     [HideInInspector]
     public bool dispText;
+    private bool dmgText;
 
     GUIStyle style;
     Animator anim;
     public Font font;
     public string heybb;
-    public KeyCode textClear = KeyCode.E;
 
 	// Use this for initialization
 	void Start () {
@@ -31,14 +31,14 @@ public class Textycles : MonoBehaviour {
 	
 	}
 
-    void OnGUI()
-    {
-        if (dispText)
-        {
+    void OnGUI(){
+        //If the player has trigger a text event
+        if (dispText){
             anim.SetBool("dispText", dispText);
             GUI.Label(new Rect(Screen.width / 11f, Screen.height / 1.3f, Screen.width / 1.2f, Screen.height * .15f), heybb, style);
-            Debug.Log("dsaf");
-            if (Input.GetKeyDown(textClear)) {
+            
+            //If player closes text box
+            if (Input.GetKeyDown(KeyCode.E)) {
                 dispText = false;
                 anim.SetBool("dispText", dispText);
             }

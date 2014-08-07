@@ -6,13 +6,9 @@ public class UI : MonoBehaviour {
     [HideInInspector]
     public Animator anim;
     [HideInInspector]
-    public int currentHealth;
-    [HideInInspector]
-    public int charge;
+    public int currentHealth, charge;
 
     public GameObject player;
-
-
 
 	// Use this for initialization
 	void Start () {
@@ -21,26 +17,23 @@ public class UI : MonoBehaviour {
 	}
 
     // Update is called once per frame
-    void Update()
-    {
-        if (gameObject.name.Contains("Heart"))
-        {
+    void Update(){
+        if (gameObject.name.Contains("Heart")){
             getHealth();
         }
-        else if (gameObject.name.Contains("Charge"))
-        {
+        else if (gameObject.name.Contains("Charge")){
             getCharge();
         }
 	}
+    
+    void getHealth(){
 
-    void getHealth()
-    {
         currentHealth = player.gameObject.GetComponent<PlayerCont>().health;
         anim.SetInteger("Health", Mathf.Abs(currentHealth));
     }
 
-    void getCharge()
-    {
+    void getCharge(){
+
         charge = player.gameObject.GetComponent<PlayerCont>().charge;
         anim.SetInteger("Charge", Mathf.Abs(charge));
 
