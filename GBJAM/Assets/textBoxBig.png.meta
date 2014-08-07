@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<< HEAD
 guid: 8abeff147604d104583008c05bf17ba5
+=======
+guid: 953e1355f56e7ba41961650c9a520a44
+>>>>>>> origin/master
 TextureImporter:
   fileIDToRecycleName:
     21300000: textBoxBig
@@ -25,7 +29,11 @@ TextureImporter:
   textureFormat: -1
   maxTextureSize: 1024
   textureSettings:
+<<<<<<< HEAD
     filterMode: -1
+=======
+    filterMode: 0
+>>>>>>> origin/master
     aniso: -1
     mipBias: -1
     wrapMode: -1

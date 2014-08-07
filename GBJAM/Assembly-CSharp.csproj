@@ -51,6 +51,7 @@
      <Compile Include="Assets\Scripts\EnemyController.cs" />
      <Compile Include="Assets\Scripts\PlayerCont.cs" />
      <Compile Include="Assets\Scripts\SlowBubble.cs" />
+     <Compile Include="Assets\Scripts\Textycles.cs" />
      <Compile Include="Assets\Scripts\UI.cs" />
      <Compile Include="Assets\Scripts\Weapon.cs" />
   </ItemGroup>
