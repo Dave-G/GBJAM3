@@ -150,13 +150,11 @@ public class EnemyController : MonoBehaviour {
         Destroy(this.gameObject);
     }
 
-	public void inBub()
-	{
-		this.myDt = .5f;
+	public void thrower(){
+		float closeDist = 1f;
+		if (target.transform.position <= closeDist) {
+
+		}
 	}
 
-	public void exitBub()
-	{
-		this.myDt = 1f;
-	}
 }

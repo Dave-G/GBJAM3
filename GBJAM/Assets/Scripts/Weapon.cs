@@ -45,6 +45,7 @@ public class Weapon : MonoBehaviour {
 			this.done = 0;
 			this.rigidbody.angularVelocity = Vector3.zero;
             Destroy(this.collider);
+			this.grounded = true;
             return;
         }
 
