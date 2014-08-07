@@ -23,6 +23,7 @@ public class Textycles : MonoBehaviour {
         style.fixedHeight = Screen.width/1.1f;
         style.fixedWidth = Screen.height/1.3f;
         style.wordWrap = true;
+        anim = this.GetComponent<Animator>();
 	}
 	
 	// Update is called once per frame
