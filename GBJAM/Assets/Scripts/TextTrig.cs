@@ -3,9 +3,12 @@ using System.Collections;
 
 public class TextTrig : MonoBehaviour {
 
+    public string message;
+    public GameObject textBox;
+
 	// Use this for initialization
 	void Start () {
-	
+        textBox = GameObject.Find("TextBox");
 	}
 	
 	// Update is called once per frame
@@ -15,8 +18,9 @@ public class TextTrig : MonoBehaviour {
 
     void OnTriggerEnter(Collider col) {
         if (col.gameObject.tag.Contains("Player")) {
-            GameObject.Find("TextBox").GetComponent<Textycles>().dispText = true;
-            Debug.Log("true");
+            textBox.GetComponent<Textycles>().dispText = true;
+            textBox.GetComponent<Textycles>().heybb = message;
+            Destroy(this.gameObject);
         }
     }
 }

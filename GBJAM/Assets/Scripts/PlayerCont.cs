@@ -3,21 +3,22 @@ using System.Collections;
 
 public class PlayerCont : MonoBehaviour {
 	public float myDt = 1.0f;
+    private float timer;
+    private float chargeDecay = .5f;
+    private float chargeGain = 1f;
 	public float velocity;
 	public float gravity;
 	public float jumpVel;
-	public float inAir = 0.6f;
 
     [HideInInspector]
     public int health;
     [HideInInspector]
     public int charge;
+    private bool bubbling;
 
     private bool dead;
 
 	public KeyCode attackButton = KeyCode.Z;
-
-	public bool grounded = false;
 
     public GameObject weapon;
 	public GameObject slowBub;
@@ -53,11 +54,20 @@ public class PlayerCont : MonoBehaviour {
             this.transform.localPosition = new Vector3(this.transform.localPosition.x, this.transform.localPosition.y, 0f);
             fire();
         }
-        if (Input.GetButtonDown("Fire1") && charge != 0)
-        {
-            charge -= 1;
-        }
+        bubbleDecay();
+
 	}
+
+    void bubbleDecay() {
+        if (bubbling && Time.time > timer + chargeDecay && charge != 0) {
+            charge -= 1;
+            timer = Time.time;
+        }
+        else if (charge < 10 && Time.time > timer + chargeGain && !bubbling) {
+            charge++;
+            timer = Time.time;
+        }
+    }
 
 	void move(){
 		CharacterController controller = GetComponent<CharacterController>();
@@ -113,39 +123,26 @@ public class PlayerCont : MonoBehaviour {
             //throwInstance.rigidbody.AddForce(new Vector3(throwForce*this.right, throwForce, 0));
 			Destroy (throwInstance,3f);
         }
-		if (Input.GetKeyDown (KeyCode.Numlock)){
+		if (Input.GetKeyDown (KeyCode.C)){
 			bubInstance = (GameObject) Instantiate (slowBub,transform.position, Quaternion.Euler (new Vector3(0,0,0)));
 			bubInstance.gameObject.GetComponent<SlowBubble>().setOwner(this.gameObject);
+            bubbling = true;
 		}
-		if (Input.GetKeyUp (KeyCode.Numlock)){
+		if (Input.GetKeyUp (KeyCode.C)){
 			Destroy (bubInstance);
+            bubbling = false;
 		}
     }
 
     public void takeDamage(int damage)
     {
         this.health -= damage;
-
-        Debug.Log(health);
         if (health <= 0)
         {
             dead = true;
             anim.Play("tempPlayerDeath");
         }
     }
-
-	public int signZero(float numb){
-		if(numb < 0){
-			return -1;
-		}
-		else if(numb > 0){
-			return 1;
-		}
-		else{
-			return 0;
-		}
-
-	}
 
     IEnumerator deathTimer()
     {
