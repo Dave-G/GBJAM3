@@ -13,7 +13,7 @@ public class SlowBubble : MonoBehaviour {
 	void Update () {
 		this.transform.position = owner.transform.position;
 	}
-
+	/*
 	void OnCollisionEnter(Collision collision){
 		if(collision.collider.gameObject != owner){
 			if (collision.collider.gameObject.GetComponent<BubActivator>()){
@@ -29,8 +29,25 @@ public class SlowBubble : MonoBehaviour {
 			}
 		}
 	}
-
-	void setOwner (GameObject own) {
+*/
+	public void setOwner (GameObject own) {
 		this.owner = own;
 	}
+
+	public void OnTriggerEnter(Collider collider){
+		if(collider.gameObject != owner){
+			if(collider.GetComponent<BubActivator>()){
+				collider.GetComponent<BubActivator>().inBub ();
+			}
+		}
+	}
+
+	public void OnTriggerExit(Collider collider){
+		if(collider.gameObject != owner){
+			if(collider.GetComponent<BubActivator>()){
+				collider.GetComponent<BubActivator>().outBub ();
+			}
+		}
+	}
+
 }

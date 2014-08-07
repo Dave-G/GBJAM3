@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<< HEAD
 guid: e024a51c61b158c4f890700e4f77f525
+=======
+guid: 7bfeb9cb74fc877458e9a081af79bd6d
+>>>>>>> origin/master
 TextureImporter:
   fileIDToRecycleName:
     21300000: playerSheet

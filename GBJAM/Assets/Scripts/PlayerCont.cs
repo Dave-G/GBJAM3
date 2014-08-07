@@ -20,10 +20,13 @@ public class PlayerCont : MonoBehaviour {
 	public bool grounded = false;
 
     public GameObject weapon;
+	public GameObject slowBub;
     public float throwForce;
 
 	public Vector3 moveDir = Vector3.zero;
     public Animator anim;
+
+	public GameObject bubInstance;
     
 
 	public int right = 1;
@@ -110,6 +113,13 @@ public class PlayerCont : MonoBehaviour {
             //throwInstance.rigidbody.AddForce(new Vector3(throwForce*this.right, throwForce, 0));
 			Destroy (throwInstance,3f);
         }
+		if (Input.GetKeyDown (KeyCode.Numlock)){
+			bubInstance = (GameObject) Instantiate (slowBub,transform.position, Quaternion.Euler (new Vector3(0,0,0)));
+			bubInstance.gameObject.GetComponent<SlowBubble>().setOwner(this.gameObject);
+		}
+		if (Input.GetKeyUp (KeyCode.Numlock)){
+			Destroy (bubInstance);
+		}
     }
 
     public void takeDamage(int damage)

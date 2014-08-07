@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<< HEAD
 guid: 0010e8308249857458f8a2eee47a9256
+=======
+guid: 6552f486cb9c5954e83cf2794b0a1a23
+>>>>>>> origin/master
 TextureImporter:
   fileIDToRecycleName:
     21300000: levelTransition
