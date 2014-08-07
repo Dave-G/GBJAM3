@@ -24,7 +24,7 @@ public class Weapon : MonoBehaviour {
 	// Update is called once per frame
 	void Update (){
 		myDt = this.GetComponent<BubActivator> ().getDT ();
-		this.rigidbody.AddTorque (new Vector3(0,0,-1*Mathf.Sign (this.direction.x)*50f));
+
         if (done != 0) {
             move();
         }
@@ -71,10 +71,10 @@ public class Weapon : MonoBehaviour {
             Destroy(this.gameObject);
         }
         else {
-            /*rigidbody.velocity *= 0;*/
+            rigidbody.velocity *= 0;
             done = 0;
-            Destroy(this.rigidbody);
-            /*this.rigidbody.angularVelocity = Vector3.zero;*/
+           // Destroy(this.rigidbody);
+            this.rigidbody.angularVelocity = Vector3.zero;
             Destroy(this.collider);
         }
     }
