@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<< HEAD
 guid: f57572a30214d6b4797a2af28548edda
+=======
+guid: 13c19fca5c6aabb4e921f1192d7d41bd
+>>>>>>> origin/master
 TextureImporter:
   fileIDToRecycleName:
     21300000: crate

@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<< HEAD
 guid: f6c84bf8b49638744823e2073b5667ed
+=======
+guid: c5900cddb1e2b0c45b4d1494b579a215
+>>>>>>> origin/master
 TextureImporter:
   fileIDToRecycleName:
     21300000: plank

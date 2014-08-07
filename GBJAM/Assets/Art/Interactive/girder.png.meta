@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<< HEAD
 guid: 91c1e9d1109c22c4b81a3f060e866379
+=======
+guid: 2170381c7a5c3f14992d07bc9e5bc098
+>>>>>>> origin/master
 TextureImporter:
   fileIDToRecycleName:
     21300000: girder
