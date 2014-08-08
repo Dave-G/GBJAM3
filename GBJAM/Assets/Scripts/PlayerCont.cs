@@ -5,7 +5,7 @@ public class PlayerCont : MonoBehaviour {
 
     private float timer = 0, chargeDecay = .5f, chargeGain = 1f;
     public float velocity, gravity, jumpVel, throwForce, myDt = 1.0f;
-    private bool bubbling = false, dead = false;
+    private bool bubbling = false, stunned = false;
 
     [HideInInspector]
     public int health = 100, right = 1;
@@ -33,10 +33,7 @@ public class PlayerCont : MonoBehaviour {
     void Update() {
         //this.myDt = this.gameObject.GetComponent<BubActivator> ().getDT ();
         animationUpdate();
-        if (dead) {
-            StartCoroutine(deathTimer(this.gameObject));
-        }
-        if (!dead) {
+        if (!stunned) {
             move();
             layerswap();
             this.transform.localPosition = new Vector3(this.transform.localPosition.x, this.transform.localPosition.y, 0f);
@@ -150,14 +147,20 @@ public class PlayerCont : MonoBehaviour {
     }
 
     public void takeDamage(int damage) {
-        health -= damage;
-        if (health <= 0) {
-            dead = true;
-            anim.Play("tempPlayerDeath");
+        Debug.Log(health);
+        if (!stunned) {
+            stunned = true;
+            if (health <= 1) {
+                anim.SetBool("Dying", true);
+            }
+            else {
+                StartCoroutine(deathTimer(this.gameObject));
+                health -= damage;
+                anim.SetTrigger("Hurt");
+            }
         }
-        else {
-            anim.SetTrigger("Hurt");
-        }
+        else
+            return;
     }
 
     //Force stop update() for set duration then execute
@@ -169,7 +172,8 @@ public class PlayerCont : MonoBehaviour {
         }
         else {
             yield return new WaitForSeconds(.5f);
-            Destroy(obj);
+            stunned = false;
+            anim.ResetTrigger("Hurt");
         }
     }
 
@@ -185,6 +189,7 @@ public class PlayerCont : MonoBehaviour {
         if (moveDir.y < -.06) {
             anim.SetBool("Grounded", false);
         }
+        anim.SetBool("Stunned", stunned);
         anim.SetBool("isAxe", false);
         anim.SetFloat("XVelocity", Mathf.Abs(this.moveDir.x));
         anim.SetFloat("YVelocity", this.moveDir.y);

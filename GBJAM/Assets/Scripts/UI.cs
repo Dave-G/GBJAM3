@@ -29,7 +29,11 @@ public class UI : MonoBehaviour {
     void getHealth(){
 
         currentHealth = player.gameObject.GetComponent<PlayerCont>().health;
-        anim.SetInteger("Health", Mathf.Abs(currentHealth));
+        if (currentHealth >= 0) {
+            anim.SetInteger("Health", Mathf.Abs(currentHealth));
+        }
+        else
+            return;
     }
 
     void getCharge(){
