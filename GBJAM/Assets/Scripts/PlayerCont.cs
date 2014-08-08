@@ -119,7 +119,7 @@ public class PlayerCont : MonoBehaviour {
     public void fire() {
         if (Input.GetKeyDown(KeyCode.Z)) {
             GameObject throwInstance = (GameObject)Instantiate(weapon, transform.position, Quaternion.Euler(new Vector3(0, 0, 0)));
-            throwInstance.gameObject.GetComponent<Weapon>().setup(throwForce + velocity, new Vector3(right, 1, 0), this.gameObject);
+            throwInstance.gameObject.GetComponent<Weapon>().setup(throwForce + velocity, new Vector3(right, 1, 0), 10, this.gameObject);
             Destroy(throwInstance, 3f);
 
             anim.SetTrigger("Attack");
