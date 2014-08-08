@@ -6,12 +6,9 @@ public class EnemyController : MonoBehaviour {
 	public CharacterController enemyControl;
     public Vector3 moveDir;
 
-	public float velocity = 1, baseVel = 1, myDt, throwForce = 1500f;
+	public float velocity = 1, baseVel = 1, myDt, throwForce = 300;
     private float canTurn, turnTime = 1f;
 
-	private float timer = 0f, throwTime = .5f;
-
-	public bool throwing = false;
     [HideInInspector]
     public int health, right = 1;
     [HideInInspector]
@@ -56,17 +53,16 @@ public class EnemyController : MonoBehaviour {
 	}
 
 	void move(){
+
     	//Normal movement
 		//this.chargin = false;
-		if(throwing == false){
-		    this.patrolPlatform();
-		    //Change position
-			this.transform.localScale =new Vector3 (this.right, 1f, 1f);
-			enemyControl.Move(moveDir * velocity * myDt * Time.deltaTime);
-		}
+	    this.patrolPlatform();
+	    //Change position
+		this.transform.localScale =new Vector3 (this.right, 1f, 1f);
+        enemyControl.Move(moveDir * velocity * myDt * Time.deltaTime);
 	}
-	
-	//Health test
+
+    //Health test
     void OnControllerColliderHit(ControllerColliderHit collision){
         if (collision.collider.gameObject.tag.Contains("Player")){
             moveDir.x = 0;
@@ -75,6 +71,7 @@ public class EnemyController : MonoBehaviour {
 		if(collision.collider.gameObject.layer == 13){
 			this.moveDir *= -1;
 			this.right *= -1;
+			Debug.Log ("done");
 		}
 
     }
@@ -137,18 +134,12 @@ public class EnemyController : MonoBehaviour {
 
 	public void thrower(){
 		float closeDist = 1f;
-		this.timer += 1f*this.myDt*Time.deltaTime;
-		if (Vector3.Distance (target.transform.position,this.transform.position) <= closeDist && Mathf.Sign ((target.transform.position.x-this.transform.position.x))*this.right > 0 ) {
-			throwing = true;
-			if(this.timer>=this.throwTime){
-				this.timer = 0f;
+		if (Vector3.Distance (target.transform.position,this.transform.position) <= closeDist) {
+			if( Mathf.Sign ((target.transform.position.x-this.transform.position.x))*this.right > 0){
 				GameObject throwInstance = (GameObject) Instantiate(weapon, transform.position, Quaternion.Euler(new Vector3(0, 0, 0)));
-				throwInstance.gameObject.GetComponent<Weapon>().setup (Random.Range (100,200),new Vector3(this.right*1f,1f,0f),this.gameObject);
+				throwInstance.gameObject.GetComponent<Weapon>().setup (throwForce,new Vector3(this.right*1f,.3f,0f),this.gameObject);
 				Destroy (throwInstance,3f);
 			}
-		}
-		else {
-			this.throwing = false;
 		}
 	}
 

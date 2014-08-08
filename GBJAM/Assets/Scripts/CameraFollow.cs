@@ -13,7 +13,7 @@ public class CameraFollow : MonoBehaviour {
 
     // Update is called once per frame
 	void Update () {
-		float playlead = player.GetComponent<PlayerCont>().velocity * player.GetComponent<PlayerCont>().moveDir.x*.6f + .1f*player.GetComponent<PlayerCont>().right;
+		float playlead = player.GetComponent<PlayerCont>().velocity * player.GetComponent<PlayerCont>().moveDir.x*.6f;
         //Creates a vector for player position
        	camPos = new Vector3 (this.transform.position.x, this.transform.position.y, this.transform.position.z);
 		playPos = new Vector3 (player.transform.position.x, player.transform.position.y, this.transform.position.z);
