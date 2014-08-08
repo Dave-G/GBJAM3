@@ -34,7 +34,7 @@ public class PlayerCont : MonoBehaviour {
         //this.myDt = this.gameObject.GetComponent<BubActivator> ().getDT ();
         animationUpdate();
         if (dead) {
-            StartCoroutine(deathTimer());
+            StartCoroutine(deathTimer(this.gameObject));
         }
         if (!dead) {
             move();
@@ -128,11 +128,14 @@ public class PlayerCont : MonoBehaviour {
         if (Input.GetKeyDown(KeyCode.C) && this.charge >= 5) {
             bubInstance = (GameObject)Instantiate(slowBub, transform.position, Quaternion.Euler(new Vector3(0, 0, 0)));
             bubInstance.gameObject.GetComponent<SlowBubble>().setOwner(this.gameObject);
+            charge -= 1;
             bubbling = true;
         }
         if (Input.GetKeyUp(KeyCode.C) || this.charge <= 0) {
             if (bubInstance) {
-                Destroy(bubInstance);
+                /*Destroy(bubInstance);*/
+                bubInstance.GetComponent<Animator>().SetBool("Byebyebye", false);
+                StartCoroutine(deathTimer(bubInstance));
             }
             bubbling = false;
         }
@@ -147,9 +150,16 @@ public class PlayerCont : MonoBehaviour {
     }
 
     //Force stop update() for set duration then execute
-    IEnumerator deathTimer() {
-        yield return new WaitForSeconds(.6f);
-        Destroy(this.gameObject);
+    IEnumerator deathTimer(GameObject obj) {
+        if (obj.name.Contains("slowBubble")) {
+            obj.GetComponent<Animator>().SetBool("Byebyebye", true);
+            yield return new WaitForSeconds(.05f);
+            Destroy(obj);
+        }
+        else {
+            yield return new WaitForSeconds(.5f);
+            Destroy(obj);
+        }
     }
 
     void OnControllerColliderHit(ControllerColliderHit collision) {
