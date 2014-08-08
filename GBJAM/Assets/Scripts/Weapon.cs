@@ -5,17 +5,19 @@ public class Weapon : MonoBehaviour {
 	public GameObject owner;
     public int damage;
     private bool grounded;
-	public float myDt, done, gravity;
+	public float myDt, done, gravity, veloc;
     public Vector3 direction, enemyPos;
 
 	// Use this for initialization
 	public void setup (float Vel, Vector3 Dir, GameObject owner) {
 		done = 1f;
+		//reduce gravity ya dingaus
 		gravity = 10f;
 		this.owner = owner;
 		direction = Dir/Dir.magnitude;
+		this.veloc = Vel;
 		this.rigidbody.transform.localScale = new Vector3 (Mathf.Sign (Dir.x),1,1);
-		this.rigidbody.velocity = direction * Vel * myDt * Time.fixedDeltaTime*done;
+		this.rigidbody.velocity = direction * Vel * this.myDt * Time.fixedDeltaTime*done;
 
 	}   
 
@@ -24,15 +26,16 @@ public class Weapon : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update (){
-		myDt = this.GetComponent<BubActivator> ().getDT ();
+		this.myDt = this.GetComponent<BubActivator> ().getDT ();
 
         if (done != 0) {
+			this.rigidbody.velocity = new Vector3 (this.direction.x * this.veloc * this.myDt * Time.fixedDeltaTime * done,this.myDt*this.rigidbody.velocity.y,0);
             move();
         }
 	}
 
 	public void move(){
-		this.rigidbody.velocity -= new Vector3(0,myDt * Time.deltaTime * gravity * done,0);
+		this.rigidbody.velocity -= new Vector3(0,this.myDt * Time.fixedDeltaTime * gravity * done,0);
 	}
 
     void OnCollisionEnter(Collision collision){
