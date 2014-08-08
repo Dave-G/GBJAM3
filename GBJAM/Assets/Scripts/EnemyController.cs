@@ -34,6 +34,7 @@ public class EnemyController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+		this.right = Mathf.RoundToInt (Mathf.Sign (this.moveDir.x));
 		myDt = this.GetComponent<BubActivator> ().getDT ();
         if (dead){
             StartCoroutine(deathTimer());
@@ -58,10 +59,11 @@ public class EnemyController : MonoBehaviour {
 	void move(){
     	//Normal movement
 		//this.chargin = false;
+		this.transform.localScale =new Vector3 (this.right, 1f, 1f);
 		if(throwing == false){
 		    this.patrolPlatform();
 		    //Change position
-			this.transform.localScale =new Vector3 (this.right, 1f, 1f);
+
 			enemyControl.Move(moveDir * velocity * myDt * Time.deltaTime);
 		}
 	}
@@ -102,7 +104,7 @@ public class EnemyController : MonoBehaviour {
             return true;
         }
     }
-
+/*
     //Like it sounds
     public void charge(){
         //Copies player direction
@@ -128,6 +130,7 @@ public class EnemyController : MonoBehaviour {
             moveDir.x = right;
         }
     }
+    */
 
     //Stops update() from functioning for set time when called
     IEnumerator deathTimer(){
@@ -146,6 +149,11 @@ public class EnemyController : MonoBehaviour {
 				throwInstance.gameObject.GetComponent<Weapon>().setup (Random.Range (100,200),new Vector3(this.right*1f,1f,0f),10f, this.gameObject);
 				Destroy (throwInstance,3f);
 			}
+			this.right = Mathf.RoundToInt(Mathf.Sign(target.transform.position.x-this.transform.position.x));
+		}
+		else if (Vector3.Distance (target.transform.position,this.transform.position) <= closeDist/2 && Mathf.Sign (target.transform.position.x - this.transform.position.x)*this.right < 0){
+			this.moveDir*=-1;
+			this.right *= -1;
 		}
 		else {
 			this.throwing = false;
