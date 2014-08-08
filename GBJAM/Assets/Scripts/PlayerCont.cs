@@ -32,6 +32,7 @@ public class PlayerCont : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		//this.myDt = this.gameObject.GetComponent<BubActivator> ().getDT ();
+        animationUpdate();
         if (dead){
             StartCoroutine(deathTimer());
         }
@@ -65,6 +66,8 @@ public class PlayerCont : MonoBehaviour {
 			//moveDir = velocity*transform.TransformDirection (moveDir);
 			if (Input.GetButton ("Jump") || Input.GetKey (KeyCode.UpArrow)) {
 				moveDir.y += jumpVel;
+                anim.SetTrigger("Jump");
+                anim.SetBool("Grounded", false);
 			}
 		}
 
@@ -118,6 +121,9 @@ public class PlayerCont : MonoBehaviour {
             GameObject throwInstance = (GameObject) Instantiate(weapon, transform.position, Quaternion.Euler(new Vector3(0, 0, 0)));
 			throwInstance.gameObject.GetComponent<Weapon>().setup (throwForce+velocity,new Vector3(right,1,0),this.gameObject);
 			Destroy (throwInstance,3f);
+
+            anim.SetTrigger("Attack");
+            anim.SetBool("isAxe", true);
         }
 		if (Input.GetKeyDown (KeyCode.C) && this.charge >= 5 ){
 			bubInstance = (GameObject) Instantiate (slowBub,transform.position, Quaternion.Euler (new Vector3(0,0,0)));
@@ -144,5 +150,22 @@ public class PlayerCont : MonoBehaviour {
     IEnumerator deathTimer(){
         yield return new WaitForSeconds(.6f);
         Destroy(this.gameObject);
+    }
+
+    void OnControllerColliderHit(ControllerColliderHit collision) {
+        if (collision.collider.gameObject.layer == 13 || collision.collider.gameObject.layer == 9
+            || collision.collider.gameObject.layer == 11) {
+            anim.SetBool("Grounded", true);
+        }
+    }
+
+    void animationUpdate() {
+        anim.ResetTrigger("Jump");
+        if (moveDir.y < -.06) {
+            anim.SetBool("Grounded", false);
+        }
+        anim.SetBool("isAxe", false);
+        anim.SetFloat("XVelocity", Mathf.Abs(this.moveDir.x));
+        anim.SetFloat("YVelocity", this.moveDir.y);
     }
 }
