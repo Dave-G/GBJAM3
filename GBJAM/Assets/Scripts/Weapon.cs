@@ -5,14 +5,14 @@ public class Weapon : MonoBehaviour {
 	public GameObject owner;
     public int damage;
     private bool grounded;
-	public float myDt, done, gravity, veloc;
+	public float myDt, done, veloc;
     public Vector3 direction, enemyPos;
+	private float gravity;
 
 	// Use this for initialization
-	public void setup (float Vel, Vector3 Dir, GameObject owner) {
+	public void setup (float Vel, Vector3 Dir,float gravity, GameObject owner) {
 		done = 1f;
-		//reduce gravity ya dingaus
-		gravity = 10f;
+		this.gravity = gravity;
 		this.owner = owner;
 		direction = Dir/Dir.magnitude;
 		this.veloc = Vel;
