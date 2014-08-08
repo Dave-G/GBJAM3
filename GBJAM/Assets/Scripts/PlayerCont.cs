@@ -127,7 +127,7 @@ public class PlayerCont : MonoBehaviour {
         }
         if (Input.GetKeyDown(KeyCode.Q)) {
             GameObject throwInstance = (GameObject)Instantiate(weapon2, transform.position, Quaternion.Euler(new Vector3(0, 0, 0)));
-            throwInstance.gameObject.GetComponent<Weapon>().setup(throwForce*1.5f + velocity, new Vector3(right, .2f, 0), this.gameObject);
+            throwInstance.gameObject.GetComponent<Weapon>().setup(throwForce*1.5f + velocity, new Vector3(right, .2f, 0), 5, this.gameObject);
             Destroy(throwInstance, 3f);
 
             anim.SetTrigger("Attack");
@@ -154,6 +154,9 @@ public class PlayerCont : MonoBehaviour {
         if (health <= 0) {
             dead = true;
             anim.Play("tempPlayerDeath");
+        }
+        else {
+            anim.SetTrigger("Hurt");
         }
     }
 
