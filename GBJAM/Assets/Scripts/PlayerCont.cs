@@ -12,7 +12,7 @@ public class PlayerCont : MonoBehaviour {
     [HideInInspector]
     public float charge = 10;
 
-    public GameObject weapon, slowBub, bubInstance;
+    public GameObject weapon, weapon2, slowBub, bubInstance;
     public Vector3 moveDir = Vector3.zero;
     public Animator anim;
 
@@ -124,6 +124,14 @@ public class PlayerCont : MonoBehaviour {
 
             anim.SetTrigger("Attack");
             anim.SetBool("isAxe", true);
+        }
+        if (Input.GetKeyDown(KeyCode.Q)) {
+            GameObject throwInstance = (GameObject)Instantiate(weapon2, transform.position, Quaternion.Euler(new Vector3(0, 0, 0)));
+            throwInstance.gameObject.GetComponent<Weapon>().setup(throwForce*1.5f + velocity, new Vector3(right, .2f, 0), this.gameObject);
+            Destroy(throwInstance, 3f);
+
+            anim.SetTrigger("Attack");
+            anim.SetBool("isDagger", true);
         }
         if (Input.GetKeyDown(KeyCode.C) && this.charge >= 5) {
             bubInstance = (GameObject)Instantiate(slowBub, transform.position, Quaternion.Euler(new Vector3(0, 0, 0)));
