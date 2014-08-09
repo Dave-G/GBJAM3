@@ -1,8 +1,8 @@
 fileFormatVersion: 2
-guid: 82da334bb2bc2534f9c4b5ac8407a1f6
+guid: f65a97d032e02b14fb82bfbac66ed84b
 TextureImporter:
   fileIDToRecycleName:
-    21300000: rock2
+    21300000: enemy2Sheet
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
