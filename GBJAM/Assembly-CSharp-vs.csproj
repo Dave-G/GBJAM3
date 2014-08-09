@@ -46,10 +46,34 @@
 	</Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\GameJoltAPI\API\Core\GJAPI.cs" />
+     <Compile Include="Assets\GameJoltAPI\API\Methods Groups\GJDataMehods.cs" />
+     <Compile Include="Assets\GameJoltAPI\API\Methods Groups\GJScoresMethods.cs" />
+     <Compile Include="Assets\GameJoltAPI\API\Methods Groups\GJSessionsMethods.cs" />
+     <Compile Include="Assets\GameJoltAPI\API\Methods Groups\GJTrophiesMethods.cs" />
+     <Compile Include="Assets\GameJoltAPI\API\Methods Groups\GJUsersMethods.cs" />
+     <Compile Include="Assets\GameJoltAPI\API\Objects\GJObject.cs" />
+     <Compile Include="Assets\GameJoltAPI\API\Objects\GJScore.cs" />
+     <Compile Include="Assets\GameJoltAPI\API\Objects\GJTable.cs" />
+     <Compile Include="Assets\GameJoltAPI\API\Objects\GJTrophy.cs" />
+     <Compile Include="Assets\GameJoltAPI\API\Objects\GJUser.cs" />
+     <Compile Include="Assets\GameJoltAPI\Helper\Core\GJAPIHelper.cs" />
+     <Compile Include="Assets\GameJoltAPI\Helper\Core\GJHNotificationsManager.cs" />
+     <Compile Include="Assets\GameJoltAPI\Helper\Core\GJHWindowsManager.cs" />
+     <Compile Include="Assets\GameJoltAPI\Helper\Methods Groups\GJHScoresMethods.cs" />
+     <Compile Include="Assets\GameJoltAPI\Helper\Methods Groups\GJHTrophiesMethods.cs" />
+     <Compile Include="Assets\GameJoltAPI\Helper\Methods Groups\GJHUsersMethods.cs" />
+     <Compile Include="Assets\GameJoltAPI\Helper\Objects\GJHNotification.cs" />
+     <Compile Include="Assets\GameJoltAPI\Helper\Objects\GJHWindow.cs" />
+     <Compile Include="Assets\GameJoltAPI\Helper\Windows\GJHLoginWindow.cs" />
+     <Compile Include="Assets\GameJoltAPI\Helper\Windows\GJHScoresWindow.cs" />
+     <Compile Include="Assets\GameJoltAPI\Helper\Windows\GJHTrophiesWindow.cs" />
+     <Compile Include="Assets\GameJoltAPI\Libraries\MD5.cs" />
      <Compile Include="Assets\Scripts\Boulderhaviour.cs" />
      <Compile Include="Assets\Scripts\BubActivator.cs" />
      <Compile Include="Assets\Scripts\CameraFollow.cs" />
      <Compile Include="Assets\Scripts\EnemyController.cs" />
+     <Compile Include="Assets\Scripts\GameJoltAPIManager.cs" />
      <Compile Include="Assets\Scripts\ParticleCont.cs" />
      <Compile Include="Assets\Scripts\ParticleController.cs" />
      <Compile Include="Assets\Scripts\PlayerCont.cs" />
@@ -61,6 +85,7 @@
      <Compile Include="Assets\Scripts\TransitLoad.cs" />
      <Compile Include="Assets\Scripts\UI.cs" />
      <Compile Include="Assets\Scripts\Weapon.cs" />
+     <None Include="Assets\GameJoltAPI\README.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

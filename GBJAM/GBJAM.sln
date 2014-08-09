@@ -3,6 +3,8 @@ Microsoft Visual Studio Solution File, Format Version 11.00
 
 Project("{C07EECA7-4E95-D3B0-AB70-EFA909044A22}") = "GBJAM", "Assembly-CSharp.csproj", "{40D6A870-9462-966E-BB91-FF6DC6D5F206}"
 EndProject
+Project("{C07EECA7-4E95-D3B0-AB70-EFA909044A22}") = "GBJAM", "Assembly-CSharp-Editor.csproj", "{5C122DB2-BEEF-2F00-CFA2-CB1B6DDF787A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -13,11 +15,15 @@ Global
 		{40D6A870-9462-966E-BB91-FF6DC6D5F206}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{40D6A870-9462-966E-BB91-FF6DC6D5F206}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{40D6A870-9462-966E-BB91-FF6DC6D5F206}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5C122DB2-BEEF-2F00-CFA2-CB1B6DDF787A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5C122DB2-BEEF-2F00-CFA2-CB1B6DDF787A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5C122DB2-BEEF-2F00-CFA2-CB1B6DDF787A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5C122DB2-BEEF-2F00-CFA2-CB1B6DDF787A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
-																																																																	GlobalSection(MonoDevelopProperties) = preSolution
+																																																																		GlobalSection(MonoDevelopProperties) = preSolution
 																																																																			GlobalSection(MonoDevelopProperties) = preSolution
 																																																GlobalSection(MonoDevelopProperties) = preSolution
 																																															GlobalSection(MonoDevelopProperties) = preSolution
