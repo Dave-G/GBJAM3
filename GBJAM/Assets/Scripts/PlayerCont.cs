@@ -222,9 +222,10 @@ public class PlayerCont : MonoBehaviour {
         anim.SetFloat("YVelocity", this.moveDir.y);
     }
 
-//     void OnTriggerEnter(Collider collision) {
-//         if (collision.name.Contains("Door")) { 
-//             Application.LoadLevel("Transition");
-//         }
-//     }
+    void OnTriggerEnter(Collider collision) {
+        if (collision.name.Contains("Heart")) {
+            health += 17;
+            Destroy(collision.gameObject);
+        }
+    }
 }

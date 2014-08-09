@@ -5,7 +5,7 @@ public class Weapon : MonoBehaviour {
 	public GameObject owner;
 	public GameObject particleBig;
 	public GameObject particleSmall;
-    private int damage;
+    public int damage;
     private bool grounded;
 	public float myDt, done, veloc;
     public Vector3 direction, enemyPos;

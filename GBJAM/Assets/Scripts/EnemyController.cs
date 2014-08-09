@@ -9,7 +9,7 @@ public class EnemyController : MonoBehaviour {
 	public float velocity = 1, baseVel = 1, myDt, throwForce = 1500f, closeDist;
     private float canTurn, turnTime = 1f;
 
-    private float timer = 0f, throwTime = .5f, timer2 = 0f;
+    private float timer = 0f, throwTime = .5f, timer2;
 
 	public bool throwing = false;
     [HideInInspector]
@@ -29,6 +29,7 @@ public class EnemyController : MonoBehaviour {
         anim = this.GetComponent<Animator>();
         dead = false;
         closeDist = .5f;
+        anim.SetBool("Moving", true);
 	}
 	
 	// Update is called once per frame
@@ -47,6 +48,7 @@ public class EnemyController : MonoBehaviour {
 	void patrolPlatform (){
         velocity = baseVel*.5f;
         if (!platformBounds(this.gameObject) && Time.time > canTurn){
+            anim.SetBool("Moving", true);
             moveDir *= -1;
             right *= -1;
             canTurn = Time.time + turnTime;
@@ -58,6 +60,7 @@ public class EnemyController : MonoBehaviour {
 		//this.chargin = false;
 		this.transform.localScale = new Vector3 (this.right, 1f, 1f);
 		if(throwing == false){
+            anim.SetBool("Moving", true);
 		    this.patrolPlatform();
 		    //Change position
 
@@ -76,7 +79,6 @@ public class EnemyController : MonoBehaviour {
 	
 
     public void takeDamage(int damage){
-        this.health -= damage;
         if (health <= 1) {
             anim.SetBool("Dying", true);
             dead = true;
@@ -140,8 +142,8 @@ public class EnemyController : MonoBehaviour {
 	public void thrower(){
 		this.timer += 1f*this.myDt*Time.deltaTime;
 		if (Vector3.Distance (target.transform.position,this.transform.position) <= closeDist && Mathf.Sign ((target.transform.position.x-this.transform.position.x))*this.right > 0 ) {
-			throwing = true;
 			if(this.timer>=this.throwTime){
+                throwing = true;
 				this.timer = 0f;
 				GameObject throwInstance = (GameObject) Instantiate(weapon, transform.position, Quaternion.Euler(new Vector3(0, 0, 0)));
 				throwInstance.gameObject.GetComponent<Weapon>().setup (Random.Range (100,200),new Vector3(this.right*1f,1f,0f),10f, this.gameObject);
