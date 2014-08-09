@@ -18,8 +18,8 @@ public class PlayerCont : MonoBehaviour {
 
 
 	private bool fallThrough;
-	public float Qcnt = 0;
-	public float lastQ = -1f;
+	public float Xcnt = 0;
+	public float lastX = -1f;
 	public float lastAtk = -1f;
     public float lastTime = -1f;
 
@@ -124,8 +124,8 @@ public class PlayerCont : MonoBehaviour {
     public void fire() {
 		if (Input.GetKeyDown(KeyCode.Z) && (Time.time - this.lastAtk)>.3f ) {
 			this.lastAtk = Time.time;
-			this.Qcnt = 0f;
-			this.lastQ = -1f;
+			this.Xcnt = 0f;
+			this.lastX = -1f;
 			GameObject throwInstance = (GameObject)Instantiate(weapon, transform.position, Quaternion.Euler(new Vector3(0, 0, 0)));
 			throwInstance.gameObject.GetComponent<Weapon>().setup(throwForce + velocity, new Vector3(right, 1, 0), 10, this.gameObject);
 			Destroy(throwInstance, 3f);
@@ -133,20 +133,20 @@ public class PlayerCont : MonoBehaviour {
 			anim.SetTrigger("Attack");
 			anim.SetBool("isAxe", true);
 		}
-		if (Input.GetKeyDown(KeyCode.Q)&&(Time.time - this.lastAtk)>.3f) {
+		if (Input.GetKeyDown(KeyCode.X)&&(Time.time - this.lastAtk)>.3f) {
 			this.lastAtk = Time.time;
-			if((Time.time-this.lastQ)<.6f){
-				this.Qcnt += 1;
+			if((Time.time-this.lastX)<.6f){
+				this.Xcnt += 1;
 			}
 			else{
-				this.Qcnt = 1;
+				this.Xcnt = 1;
 			}
-			this.lastQ = Time.time;
+			this.lastX = Time.time;
 			GameObject throwInstance = (GameObject)Instantiate(weapon2, transform.position, Quaternion.Euler(new Vector3(0, 0, 0)));
 			throwInstance.gameObject.GetComponent<Weapon>().setup(throwForce*1.5f + velocity, new Vector3(right, .2f, 0), 5, this.gameObject);
 			Destroy(throwInstance, 3f);
-			if(this.Qcnt >= 3){
-				this.Qcnt = 0;
+			if(this.Xcnt >= 3){
+				this.Xcnt = 0;
 				GameObject throwInstance2 = (GameObject)Instantiate(weapon2,transform.position+(new Vector3(0,.05f,0)),Quaternion.Euler(Vector3.zero));
 				GameObject throwInstance3 = (GameObject)Instantiate(weapon2,transform.position+(new Vector3(0,-.05f,0)),Quaternion.Euler(Vector3.zero));
 				throwInstance2.gameObject.GetComponent<Weapon>().setup (throwForce*1.5f + velocity, new Vector3(right,.1f,0),8,this.gameObject);
