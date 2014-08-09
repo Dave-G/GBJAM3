@@ -1,4 +1,4 @@
-A game in development for the Gameboy Jam 3. Details here: http://jams.gamejolt.io/gbjam3
+A game in development for the Gameboy Jam 3. Game page here: http://gamejolt.com/games/action/bad-bruno-time-thrash/31746/
 For more of our work, check out: http://glassknuckle.com
 
 Art and Design:
