@@ -3,7 +3,7 @@ using System.Collections;
 
 public class Weapon : MonoBehaviour {
 	public GameObject owner;
-    public int damage;
+    private int damage;
     private bool grounded;
 	public float myDt, done, veloc;
     public Vector3 direction, enemyPos;
