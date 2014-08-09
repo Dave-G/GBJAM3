@@ -16,8 +16,11 @@ public class PlayerCont : MonoBehaviour {
     public Vector3 moveDir = Vector3.zero;
     public Animator anim;
 
-	private bool fallThrough;
 
+	private bool fallThrough;
+	public float Qcnt = 0;
+	public float lastQ = -1f;
+	public float lastAtk = -1f;
     public float lastTime = -1f;
 
     // Use this for initialization
@@ -119,22 +122,41 @@ public class PlayerCont : MonoBehaviour {
     }
 
     public void fire() {
-        if (Input.GetKeyDown(KeyCode.Z)) {
-            GameObject throwInstance = (GameObject)Instantiate(weapon, transform.position, Quaternion.Euler(new Vector3(0, 0, 0)));
-            throwInstance.gameObject.GetComponent<Weapon>().setup(throwForce + velocity, new Vector3(right, 1, 0), 10, this.gameObject);
-            Destroy(throwInstance, 3f);
-
-            anim.SetTrigger("Attack");
-            anim.SetBool("isAxe", true);
-        }
-        if (Input.GetKeyDown(KeyCode.Q)) {
-            GameObject throwInstance = (GameObject)Instantiate(weapon2, transform.position, Quaternion.Euler(new Vector3(0, 0, 0)));
-            throwInstance.gameObject.GetComponent<Weapon>().setup(throwForce*1.5f + velocity, new Vector3(right, .2f, 0), 5, this.gameObject);
-            Destroy(throwInstance, 3f);
-
-            anim.SetTrigger("Attack");
-            anim.SetBool("isDagger", true);
-        }
+		if (Input.GetKeyDown(KeyCode.Z) && (Time.time - this.lastAtk)>.3f ) {
+			this.lastAtk = Time.time;
+			this.Qcnt = 0f;
+			this.lastQ = -1f;
+			GameObject throwInstance = (GameObject)Instantiate(weapon, transform.position, Quaternion.Euler(new Vector3(0, 0, 0)));
+			throwInstance.gameObject.GetComponent<Weapon>().setup(throwForce + velocity, new Vector3(right, 1, 0), 10, this.gameObject);
+			Destroy(throwInstance, 3f);
+			
+			anim.SetTrigger("Attack");
+			anim.SetBool("isAxe", true);
+		}
+		if (Input.GetKeyDown(KeyCode.Q)&&(Time.time - this.lastAtk)>.3f) {
+			this.lastAtk = Time.time;
+			if((Time.time-this.lastQ)<.6f){
+				this.Qcnt += 1;
+			}
+			else{
+				this.Qcnt = 1;
+			}
+			this.lastQ = Time.time;
+			GameObject throwInstance = (GameObject)Instantiate(weapon2, transform.position, Quaternion.Euler(new Vector3(0, 0, 0)));
+			throwInstance.gameObject.GetComponent<Weapon>().setup(throwForce*1.5f + velocity, new Vector3(right, .2f, 0), 5, this.gameObject);
+			Destroy(throwInstance, 3f);
+			if(this.Qcnt >= 3){
+				this.Qcnt = 0;
+				GameObject throwInstance2 = (GameObject)Instantiate(weapon2,transform.position,Quaternion.Euler(Vector3.zero));
+				GameObject throwInstance3 = (GameObject)Instantiate(weapon2,transform.position,Quaternion.Euler(Vector3.zero));
+				throwInstance2.gameObject.GetComponent<Weapon>().setup (throwForce*1.5f + velocity, new Vector3(right,(float)Random.Range (-.6f,.6f),0),5,this.gameObject);
+				Destroy(throwInstance2,3f);
+				throwInstance3.gameObject.GetComponent<Weapon>().setup (throwForce*1.5f + velocity, new Vector3(right,(float)Random.Range (-.6f,.6f),0),5,this.gameObject);
+				Destroy(throwInstance3,3f);
+			}
+			anim.SetTrigger("Attack");
+			anim.SetBool("isDagger", true);
+		}
         if (Input.GetKeyDown(KeyCode.C) && this.charge >= 5) {
             bubInstance = (GameObject)Instantiate(slowBub, transform.position, Quaternion.Euler(new Vector3(0, 0, 0)));
             bubInstance.gameObject.GetComponent<SlowBubble>().setOwner(this.gameObject);
