@@ -6,10 +6,10 @@ public class EnemyController : MonoBehaviour {
 	public CharacterController enemyControl;
     public Vector3 moveDir;
 
-	public float velocity = 1, baseVel = 1, myDt, throwForce = 1500f;
+	public float velocity = 1, baseVel = 1, myDt, throwForce = 1500f, closeDist;
     private float canTurn, turnTime = 1f;
 
-	private float timer = 0f, throwTime = .5f;
+    private float timer = 0f, throwTime = .5f, timer2 = 0f;
 
 	public bool throwing = false;
     [HideInInspector]
@@ -20,8 +20,6 @@ public class EnemyController : MonoBehaviour {
     public Animator anim;
 
 	//public bool chargin;
-    //Health test
-    public int mydamage = 5;
 
 	// Use this for initialization
 	void Start () {
@@ -30,16 +28,15 @@ public class EnemyController : MonoBehaviour {
         enemyControl = GetComponent<CharacterController>();
         anim = this.GetComponent<Animator>();
         dead = false;
+        closeDist = .5f;
 	}
 	
 	// Update is called once per frame
 	void Update () {
 		this.right = Mathf.RoundToInt (Mathf.Sign (this.moveDir.x));
 		myDt = this.GetComponent<BubActivator> ().getDT ();
-        if (dead){
-            StartCoroutine(deathTimer());
-        }
         if (!dead){
+            animationUpdate();
             move();
 			thrower();
             this.transform.localPosition = new Vector3(this.transform.localPosition.x, this.transform.localPosition.y, 0f);
@@ -59,7 +56,7 @@ public class EnemyController : MonoBehaviour {
 	void move(){
     	//Normal movement
 		//this.chargin = false;
-		this.transform.localScale =new Vector3 (this.right, 1f, 1f);
+		this.transform.localScale = new Vector3 (this.right, 1f, 1f);
 		if(throwing == false){
 		    this.patrolPlatform();
 		    //Change position
@@ -70,10 +67,6 @@ public class EnemyController : MonoBehaviour {
 	
 	//Health test
     void OnControllerColliderHit(ControllerColliderHit collision){
-        if (collision.collider.gameObject.tag.Contains("Player")){
-            moveDir.x = 0;
-            collision.collider.gameObject.GetComponent<PlayerCont>().takeDamage(mydamage);
-        }
 		if(collision.collider.gameObject.layer == 13){
 			this.moveDir *= -1;
 			this.right *= -1;
@@ -84,9 +77,15 @@ public class EnemyController : MonoBehaviour {
 
     public void takeDamage(int damage){
         this.health -= damage;
-        if (health <= 0){
+        if (health <= 1) {
+            anim.SetBool("Dying", true);
             dead = true;
-            anim.Play("tempEnemyDeath");
+            StartCoroutine(deathTimer());
+        }
+        else {
+            health -= damage;
+            anim.SetBool("Hurting", true);
+            timer2 = Time.time;
         }
     }
 
@@ -134,12 +133,11 @@ public class EnemyController : MonoBehaviour {
 
     //Stops update() from functioning for set time when called
     IEnumerator deathTimer(){
-        yield return new WaitForSeconds(.6f);
+        yield return new WaitForSeconds(.75f);
         Destroy(this.gameObject);
     }
 
 	public void thrower(){
-		float closeDist = 1f;
 		this.timer += 1f*this.myDt*Time.deltaTime;
 		if (Vector3.Distance (target.transform.position,this.transform.position) <= closeDist && Mathf.Sign ((target.transform.position.x-this.transform.position.x))*this.right > 0 ) {
 			throwing = true;
@@ -148,16 +146,30 @@ public class EnemyController : MonoBehaviour {
 				GameObject throwInstance = (GameObject) Instantiate(weapon, transform.position, Quaternion.Euler(new Vector3(0, 0, 0)));
 				throwInstance.gameObject.GetComponent<Weapon>().setup (Random.Range (100,200),new Vector3(this.right*1f,1f,0f),10f, this.gameObject);
 				Destroy (throwInstance,3f);
+                anim.SetTrigger("ThrowAxe");
 			}
 			this.right = Mathf.RoundToInt(Mathf.Sign(target.transform.position.x-this.transform.position.x));
 		}
-		else if (Vector3.Distance (target.transform.position,this.transform.position) <= closeDist/2 && Mathf.Sign (target.transform.position.x - this.transform.position.x)*this.right < 0){
-			this.moveDir*=-1;
-			this.right *= -1;
-		}
-		else {
-			this.throwing = false;
-		}
+        else if (Vector3.Distance(target.transform.position, this.transform.position) <= closeDist / 2 && Mathf.Sign(target.transform.position.x - this.transform.position.x) * this.right < 0) {
+            this.moveDir *= -1;
+            this.right *= -1;
+        }
+        else {
+            this.throwing = false;
+        }
 	}
 
+    void animationUpdate() {
+        if (throwing) {
+            anim.SetBool("Moving", false);
+        }
+        else {
+            anim.SetBool("Moving", true);
+        }
+        anim.ResetTrigger("ThrowDagger");
+        anim.ResetTrigger("ThrowAxe");
+        if (Time.time > timer2 + .5f) {
+            anim.SetBool("Hurting", false);
+        }
+    }
 }
