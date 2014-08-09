@@ -16,6 +16,8 @@ public class PlayerCont : MonoBehaviour {
     public Vector3 moveDir = Vector3.zero;
     public Animator anim;
 
+	private bool fallThrough;
+
     public float lastTime = -1f;
 
     // Use this for initialization
@@ -100,17 +102,20 @@ public class PlayerCont : MonoBehaviour {
         else {
             Physics.IgnoreLayerCollision(9, 10, false);
         }
-        /*
-        if (Input.GetKeyDown (KeyCode.S)){
+       	if(this.fallThrough == true && Time.time-this.lastTime <= .3){
+			Physics.IgnoreLayerCollision (9,10,true);
+		}
+		else {
+			this.fallThrough = false;
+		}
+        if (Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.DownArrow)){
             this.lastTime = Time.time;
             if((Time.time - this.lastTime)<.2f){
-                Debug.Log ("didit");
                 this.lastTime = Time.time; 
-                Physics.IgnoreLayerCollision (9,10,true);
+				this.fallThrough = true;
 
             }
         }
-        */
     }
 
     public void fire() {
