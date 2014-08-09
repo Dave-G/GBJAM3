@@ -6,7 +6,7 @@ public class EnemyController : MonoBehaviour {
 	public CharacterController enemyControl;
     public Vector3 moveDir;
 
-	public float velocity = 1, baseVel = 1, myDt, throwForce = 1500f, closeDist;
+	public float velocity = 1, baseVel = 1, throwForce = 1500f, closeDist;
     private float canTurn, turnTime = 1f;
 
     private float timer = 0f, throwTime = .5f, timer2;
@@ -37,7 +37,7 @@ public class EnemyController : MonoBehaviour {
 		Physics.IgnoreLayerCollision (12,12);
 		Physics.IgnoreLayerCollision (12,9);
 		this.right = Mathf.RoundToInt (Mathf.Sign (this.moveDir.x));
-		myDt = this.GetComponent<BubActivator> ().getDT ();
+		//myDt = this.GetComponent<BubActivator> ().getDT ();
         if (!dead){
             animationUpdate();
             move();
@@ -66,13 +66,13 @@ public class EnemyController : MonoBehaviour {
 		    this.patrolPlatform();
 		    //Change position
 
-			enemyControl.Move(moveDir * velocity * myDt * Time.deltaTime);
+			enemyControl.Move(moveDir * velocity * Time.deltaTime);
 		}
 	}
 	
 	//Health test
     void OnControllerColliderHit(ControllerColliderHit collision){
-		if(collision.collider.gameObject.layer == 13){
+		if(collision.collider.gameObject.layer == 13 || collision.collider.gameObject.layer == 11){
 			this.moveDir *= -1;
 			this.right *= -1;
 		}
@@ -142,7 +142,7 @@ public class EnemyController : MonoBehaviour {
     }
 
 	public void thrower(){
-		this.timer += 1f*this.myDt*Time.deltaTime;
+		this.timer += 1f*Time.deltaTime;
 		if (Vector3.Distance (target.transform.position,this.transform.position) <= closeDist && Mathf.Sign ((target.transform.position.x-this.transform.position.x))*this.right > 0 ) {
 			if(this.timer>=this.throwTime){
                 throwing = true;

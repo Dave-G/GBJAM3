@@ -16,7 +16,7 @@ public class PlayerCont : MonoBehaviour {
     public Vector3 moveDir = Vector3.zero;
     public Animator anim;
 
-
+	private float TimeOfDeath = -1f;
 	private bool fallThrough;
 	public float Xcnt = 0;
 	public float lastX = -1f;
@@ -54,6 +54,12 @@ public class PlayerCont : MonoBehaviour {
             fire();
             bubbleDecay();
         }
+		if(stunned && anim.GetBool ("Dying") && this.TimeOfDeath >= 0f){
+			if(Time.time -this.TimeOfDeath >= .5f){
+				PlayerPrefs.SetInt ("NextLevel",int.Parse (Application.loadedLevelName.Replace ("Level","")));
+				Application.LoadLevel("Transition");
+			}
+		}
     }
 
     void bubbleDecay() {
@@ -188,6 +194,8 @@ public class PlayerCont : MonoBehaviour {
             stunned = true;
             if (health <= 1) {
                 anim.SetBool("Dying", true);
+				this.TimeOfDeath = Time.time;
+				Time.timeScale = .1f;
             }
             else {
                 StartCoroutine(deathTimer(this.gameObject));

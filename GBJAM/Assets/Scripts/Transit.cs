@@ -14,9 +14,12 @@ public class Transit : MonoBehaviour {
 	}
 
     void OnTriggerEnter(Collider collider){
-		int level = int.Parse(Application.loadedLevelName.Replace("Level",""));
-		PlayerPrefs.SetInt ("LastLevel",level);
-		PlayerPrefs.SetInt ("NextLevel",level+forward*2 -1);
-        Application.LoadLevel("Transition");
+		Time.timeScale = 1f;
+		if(collider.gameObject.name.Contains ("Player")){
+			int level = int.Parse(Application.loadedLevelName.Replace("Level",""));
+			PlayerPrefs.SetInt ("LastLevel",level);
+			PlayerPrefs.SetInt ("NextLevel",level+forward*2 -1);
+	        Application.LoadLevel("Transition");
+		}
     }
 }
