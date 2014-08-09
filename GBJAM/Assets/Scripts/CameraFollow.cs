@@ -9,6 +9,7 @@ public class CameraFollow : MonoBehaviour {
 	void Start () {
         Application.targetFrameRate = 60;
         Screen.SetResolution(160, 144, false);
+		this.transform.position = player.transform.position;
 	}
 
     // Update is called once per frame

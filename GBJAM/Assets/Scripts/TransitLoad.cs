@@ -13,7 +13,8 @@ public class TransitLoad : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
         if (Time.time > timer + 3) {
-            Application.LoadLevel("Level2");
+			string level = "Level" + PlayerPrefs.GetInt ("NextLevel").ToString();
+            Application.LoadLevel(level);
         }
 	
 	}
