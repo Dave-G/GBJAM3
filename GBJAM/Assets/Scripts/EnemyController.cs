@@ -34,6 +34,8 @@ public class EnemyController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+		Physics.IgnoreLayerCollision (12,12);
+		Physics.IgnoreLayerCollision (12,9);
 		this.right = Mathf.RoundToInt (Mathf.Sign (this.moveDir.x));
 		myDt = this.GetComponent<BubActivator> ().getDT ();
         if (!dead){

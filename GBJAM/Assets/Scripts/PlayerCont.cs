@@ -25,6 +25,15 @@ public class PlayerCont : MonoBehaviour {
 
     // Use this for initialization
     void Start() {
+		int level = int.Parse (Application.loadedLevelName.Replace ("Level",""));
+		int lastLvl = PlayerPrefs.GetInt ("LastLevel");
+		if(level<lastLvl){
+			this.transform.position = GameObject.Find ("SpawnPoint2").transform.position;
+		}
+		else{
+			this.transform.position = GameObject.Find ("SpawnPoint1").transform.position;
+		}
+		Camera.main.transform.position = this.transform.position;
         anim = this.GetComponent<Animator>();
         charge = 10;
         health = 100;
