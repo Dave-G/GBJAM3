@@ -147,11 +147,11 @@ public class PlayerCont : MonoBehaviour {
 			Destroy(throwInstance, 3f);
 			if(this.Qcnt >= 3){
 				this.Qcnt = 0;
-				GameObject throwInstance2 = (GameObject)Instantiate(weapon2,transform.position,Quaternion.Euler(Vector3.zero));
-				GameObject throwInstance3 = (GameObject)Instantiate(weapon2,transform.position,Quaternion.Euler(Vector3.zero));
-				throwInstance2.gameObject.GetComponent<Weapon>().setup (throwForce*1.5f + velocity, new Vector3(right,(float)Random.Range (-.6f,.6f),0),5,this.gameObject);
+				GameObject throwInstance2 = (GameObject)Instantiate(weapon2,transform.position+(new Vector3(0,.05f,0)),Quaternion.Euler(Vector3.zero));
+				GameObject throwInstance3 = (GameObject)Instantiate(weapon2,transform.position+(new Vector3(0,-.05f,0)),Quaternion.Euler(Vector3.zero));
+				throwInstance2.gameObject.GetComponent<Weapon>().setup (throwForce*1.5f + velocity, new Vector3(right,.1f,0),8,this.gameObject);
 				Destroy(throwInstance2,3f);
-				throwInstance3.gameObject.GetComponent<Weapon>().setup (throwForce*1.5f + velocity, new Vector3(right,(float)Random.Range (-.6f,.6f),0),5,this.gameObject);
+				throwInstance3.gameObject.GetComponent<Weapon>().setup (throwForce*1.5f + velocity, new Vector3(right,.1f,0),8,this.gameObject);
 				Destroy(throwInstance3,3f);
 			}
 			anim.SetTrigger("Attack");
