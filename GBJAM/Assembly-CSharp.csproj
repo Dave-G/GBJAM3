@@ -46,6 +46,7 @@
 	</Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\Scripts\Boulderhaviour.cs" />
      <Compile Include="Assets\Scripts\BubActivator.cs" />
      <Compile Include="Assets\Scripts\CameraFollow.cs" />
      <Compile Include="Assets\Scripts\EnemyController.cs" />
@@ -55,6 +56,7 @@
      <Compile Include="Assets\Scripts\SlowBubble.cs" />
      <Compile Include="Assets\Scripts\TextTrig.cs" />
      <Compile Include="Assets\Scripts\Textycles.cs" />
+     <Compile Include="Assets\Scripts\TheBulkRoll.cs" />
      <Compile Include="Assets\Scripts\Transit.cs" />
      <Compile Include="Assets\Scripts\TransitLoad.cs" />
      <Compile Include="Assets\Scripts\UI.cs" />
