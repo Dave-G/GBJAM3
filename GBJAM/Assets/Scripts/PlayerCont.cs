@@ -199,4 +199,10 @@ public class PlayerCont : MonoBehaviour {
         anim.SetFloat("XVelocity", Mathf.Abs(this.moveDir.x));
         anim.SetFloat("YVelocity", this.moveDir.y);
     }
+
+//     void OnTriggerEnter(Collider collision) {
+//         if (collision.name.Contains("Door")) { 
+//             Application.LoadLevel("Transition");
+//         }
+//     }
 }

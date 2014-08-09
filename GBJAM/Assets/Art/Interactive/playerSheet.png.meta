@@ -63,162 +63,162 @@ TextureImporter:
     - name: playerSheet_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 145
-        width: 16
+        x: 2
+        y: 151
+        width: 12
         height: 29
       alignment: 0
-      pivot: {x: .5, y: .5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: playerSheet_1
       rect:
         serializedVersion: 2
         x: 0
-        y: 116
+        y: 123
         width: 16
-        height: 29
+        height: 25
       alignment: 0
-      pivot: {x: .5, y: .5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: playerSheet_2
       rect:
         serializedVersion: 2
-        x: 16
-        y: 116
-        width: 16
+        x: 20
+        y: 121
+        width: 11
         height: 29
       alignment: 0
-      pivot: {x: .5, y: .5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: playerSheet_3
       rect:
         serializedVersion: 2
-        x: 32
-        y: 116
-        width: 16
-        height: 29
+        x: 35
+        y: 121
+        width: 14
+        height: 28
       alignment: 0
-      pivot: {x: .5, y: .5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: playerSheet_4
       rect:
         serializedVersion: 2
-        x: 0
-        y: 87
-        width: 16
-        height: 29
+        x: 1
+        y: 92
+        width: 14
+        height: 27
       alignment: 0
-      pivot: {x: .5, y: .5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: playerSheet_5
       rect:
         serializedVersion: 2
-        x: 16
-        y: 87
+        x: 17
+        y: 92
         width: 16
-        height: 29
+        height: 28
       alignment: 0
-      pivot: {x: .5, y: .5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: playerSheet_6
       rect:
         serializedVersion: 2
-        x: 32
-        y: 87
+        x: 34
+        y: 91
         width: 16
         height: 29
       alignment: 0
-      pivot: {x: .5, y: .5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: playerSheet_7
       rect:
         serializedVersion: 2
-        x: 0
-        y: 58
-        width: 16
+        x: 3
+        y: 61
+        width: 12
         height: 29
       alignment: 0
-      pivot: {x: .5, y: .5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: playerSheet_8
       rect:
         serializedVersion: 2
-        x: 16
-        y: 58
-        width: 16
+        x: 20
+        y: 61
+        width: 11
         height: 29
       alignment: 0
-      pivot: {x: .5, y: .5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: playerSheet_9
       rect:
         serializedVersion: 2
-        x: 32
-        y: 58
-        width: 16
+        x: 37
+        y: 61
+        width: 11
         height: 29
       alignment: 0
-      pivot: {x: .5, y: .5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: playerSheet_10
       rect:
         serializedVersion: 2
-        x: 0
-        y: 29
-        width: 16
+        x: 3
+        y: 31
+        width: 12
         height: 29
       alignment: 0
-      pivot: {x: .5, y: .5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: playerSheet_11
       rect:
         serializedVersion: 2
-        x: 16
-        y: 29
-        width: 16
+        x: 19
+        y: 31
+        width: 14
         height: 29
       alignment: 0
-      pivot: {x: .5, y: .5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: playerSheet_12
       rect:
         serializedVersion: 2
-        x: 32
-        y: 29
-        width: 16
+        x: 36
+        y: 31
+        width: 13
         height: 29
       alignment: 0
-      pivot: {x: .5, y: .5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: playerSheet_13
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
-        width: 16
+        x: 2
+        y: 1
+        width: 13
         height: 29
       alignment: 0
-      pivot: {x: .5, y: .5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: playerSheet_14
       rect:
         serializedVersion: 2
-        x: 16
-        y: 0
-        width: 16
+        x: 19
+        y: 1
+        width: 13
         height: 29
       alignment: 0
-      pivot: {x: .5, y: .5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: playerSheet_15
       rect:
         serializedVersion: 2
-        x: 32
-        y: 0
-        width: 16
+        x: 36
+        y: 1
+        width: 13
         height: 29
       alignment: 0
-      pivot: {x: .5, y: .5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
   spritePackingTag: 
   userData: 

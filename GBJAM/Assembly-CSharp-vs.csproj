@@ -53,6 +53,8 @@
      <Compile Include="Assets\Scripts\SlowBubble.cs" />
      <Compile Include="Assets\Scripts\TextTrig.cs" />
      <Compile Include="Assets\Scripts\Textycles.cs" />
+     <Compile Include="Assets\Scripts\Transit.cs" />
+     <Compile Include="Assets\Scripts\TransitLoad.cs" />
      <Compile Include="Assets\Scripts\UI.cs" />
      <Compile Include="Assets\Scripts\Weapon.cs" />
   </ItemGroup>
