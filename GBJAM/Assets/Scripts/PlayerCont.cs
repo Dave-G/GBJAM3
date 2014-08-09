@@ -22,9 +22,10 @@ public class PlayerCont : MonoBehaviour {
 	public float lastX = -1f;
 	public float lastAtk = -1f;
     public float lastTime = -1f;
-
+	private CharacterController controller;
     // Use this for initialization
     void Start() {
+		controller = GetComponent<CharacterController>();
 		int level = int.Parse (Application.loadedLevelName.Replace ("Level",""));
 		int lastLvl = PlayerPrefs.GetInt ("LastLevel");
 		if(level<lastLvl){
@@ -47,6 +48,11 @@ public class PlayerCont : MonoBehaviour {
     void Update() {
         //this.myDt = this.gameObject.GetComponent<BubActivator> ().getDT ();
         animationUpdate();
+		if (stunned && !anim.GetBool ("Dying")){
+			moveDir.y -= gravity * myDt * Time.deltaTime;
+			controller.Move (new Vector3(0,moveDir.y,0)*myDt*Time.deltaTime);
+			        
+		}
         if (!stunned) {
             move();
             layerswap();
@@ -76,7 +82,6 @@ public class PlayerCont : MonoBehaviour {
     }
 
     void move() {
-        CharacterController controller = GetComponent<CharacterController>();
 
         if ((controller.collisionFlags & CollisionFlags.Below) != 0) {
             moveDir.y = 0f;
