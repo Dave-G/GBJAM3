@@ -3,6 +3,8 @@ using System.Collections;
 
 public class Weapon : MonoBehaviour {
 	public GameObject owner;
+	public GameObject particleBig;
+	public GameObject particleSmall;
     private int damage;
     private bool grounded;
 	public float myDt, done, veloc;
@@ -56,9 +58,11 @@ public class Weapon : MonoBehaviour {
 
         else{
             if (collision.collider.gameObject.tag.Contains("Player")){
+				createParticles();
                 collision.collider.gameObject.GetComponent<PlayerCont>().takeDamage(damage);
             }
             else if (collision.collider.gameObject.tag.Contains("Enemy")){
+				createParticles();
                 collision.collider.gameObject.GetComponent<EnemyController>().takeDamage(damage);
             }
 //             enemyPos = new Vector3(collision.gameObject.transform.position.x, collision.gameObject.transform.position.y, 0f);
@@ -82,5 +86,21 @@ public class Weapon : MonoBehaviour {
             Destroy(this.collider);
         }
     }
+
+	void createParticles(){
+		Vector3 dir1 = -1*this.rigidbody.velocity;
+		Vector3 dir2 = Quaternion.Euler (0,0,30)*dir1;
+		Vector3 dir3 = Quaternion.Euler (0,0,-30)*dir1;
+		GameObject Particle1 = (GameObject) Instantiate(this.particleBig, transform.position, Quaternion.Euler(new Vector3(0, 0, 0)));
+		GameObject Particle2 = (GameObject) Instantiate(this.particleSmall, transform.position, Quaternion.Euler(new Vector3(0, 0, 0)));
+		GameObject Particle3 = (GameObject) Instantiate(this.particleSmall, transform.position, Quaternion.Euler(new Vector3(0, 0, 0)));
+		Particle1.GetComponent<ParticleCont>().setup(100,dir1);
+		Particle2.GetComponent<ParticleCont>().setup(100,dir2);
+		Particle3.GetComponent<ParticleCont>().setup(100,dir3);
+		Destroy(Particle1,2f);
+		Destroy(Particle2,2f);
+		Destroy(Particle3,2f);
+	
+	}
 
 }

@@ -49,6 +49,8 @@
      <Compile Include="Assets\Scripts\BubActivator.cs" />
      <Compile Include="Assets\Scripts\CameraFollow.cs" />
      <Compile Include="Assets\Scripts\EnemyController.cs" />
+     <Compile Include="Assets\Scripts\ParticleCont.cs" />
+     <Compile Include="Assets\Scripts\ParticleController.cs" />
      <Compile Include="Assets\Scripts\PlayerCont.cs" />
      <Compile Include="Assets\Scripts\SlowBubble.cs" />
      <Compile Include="Assets\Scripts\TextTrig.cs" />
