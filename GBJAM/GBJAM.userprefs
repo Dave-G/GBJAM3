@@ -1,14 +1,15 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\ParticleController.cs">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\Weapon.cs">
     <Files>
-      <File FileName="Assets\Scripts\Weapon.cs" Line="97" Column="32" />
-      <File FileName="Assets\Scripts\EnemyController.cs" Line="146" Column="125" />
+      <File FileName="Assets\Scripts\Weapon.cs" Line="102" Column="20" />
+      <File FileName="Assets\Scripts\EnemyController.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts\PlayerCont.cs" Line="127" Column="10" />
-      <File FileName="Assets\Scripts\Transit.cs" Line="19" Column="49" />
-      <File FileName="Assets\Scripts\TransitLoad.cs" Line="15" Column="37" />
-      <File FileName="Assets\Scripts\CameraFollow.cs" Line="34" Column="1" />
+      <File FileName="Assets\Scripts\Transit.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\TransitLoad.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\CameraFollow.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts\ParticleController.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\ParticleCont.cs" Line="23" Column="3" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
