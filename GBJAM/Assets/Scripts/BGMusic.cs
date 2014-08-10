@@ -39,7 +39,7 @@ public class BGMusic : MonoBehaviour {
 			this.audio.Play ();
 			this.currentSong =2;
 		}
-		else if((Application.loadedLevelName.Contains ("3")||Application.loadedLevelName.Contains ("5")) && currentSong != 3){
+		else if((Application.loadedLevelName.Contains ("3")||Application.loadedLevelName.Contains ("5"))||Application.loadedLevelName.Contains("4") && currentSong != 3){
 			audio.clip = song3;
 			this.audio.Play ();
 			this.currentSong =3;
