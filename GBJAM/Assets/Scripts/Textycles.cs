@@ -46,7 +46,7 @@ public class Textycles : MonoBehaviour {
                 prev = Time.time;
             }
             GUI.Label(new Rect(Screen.width / 11f, Screen.height / 1.3f, Screen.width / 1.2f, 
-                Screen.height * .15f), heybb, dialogueStyle);
+                Screen.height * .17f), heybb, dialogueStyle);
 
             //If player closes text box
 			if (Input.GetKeyDown(KeyCode.Z)||Input.GetKeyDown(KeyCode.Space)) {
@@ -76,7 +76,7 @@ public class Textycles : MonoBehaviour {
     void styleSetup(ref GUIStyle style, bool yup) {
         style = new GUIStyle();
         style.font = font;
-        style.fontSize = 20;
+        style.fontSize = 32;
         style.fontStyle = FontStyle.Normal;
         if (yup) {
             style.fixedHeight = Screen.width / 1.1f;
