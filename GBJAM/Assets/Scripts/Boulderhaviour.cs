@@ -10,6 +10,7 @@ public class Boulderhaviour : MonoBehaviour {
 	private float myDt=1;
 	public int done = 1;
 	public float vel;
+	public AudioClip crumble;
 	// Use this for initialization\
 	public Vector3 direction;
 	void Start () {
@@ -35,12 +36,24 @@ public class Boulderhaviour : MonoBehaviour {
 
 	void OnCollisionEnter(Collision collision){
 		if(collision.collider.gameObject.layer == 11 || collision.collider.gameObject.layer == 9){
+			GameObject audioSource = new GameObject();
+			audioSource.AddComponent (typeof(AudioSource));
+			audioSource.transform.position = this.transform.position;
+			audioSource.audio.PlayOneShot(this.crumble,1);
+			Destroy(audioSource,.5f);
+
 			this.done = 0;
 			createPebbles();
 			Destroy(this.gameObject.collider);
 			Destroy(this.gameObject);
 		}
 		if (collision.collider.gameObject.tag.Contains("Player")){
+			GameObject audioSource = new GameObject();
+			audioSource.AddComponent (typeof(AudioSource));
+			audioSource.transform.position = this.transform.position;
+			audioSource.audio.PlayOneShot(this.crumble,1);
+			Destroy(audioSource,.5f);
+
 			createParticles();
 			collision.collider.gameObject.GetComponent<PlayerCont>().takeDamage(damage);
 			Destroy(this.gameObject.collider);
