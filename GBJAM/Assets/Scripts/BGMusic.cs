@@ -29,17 +29,17 @@ public class BGMusic : MonoBehaviour {
 	}
 
 	void songChanger(){
-		if((Application.loadedLevelName.Contains ("Splash")||Application.loadedLevelName.Contains("Title")) && currentSong != 1){
+		if((Application.loadedLevelName.Contains ("Splash") || Application.loadedLevelName.Contains("Title")) && currentSong != 1){
 			currentSong = 1;
 			audio.clip = song1;
 			this.audio.Play();
 		}
-		else if((Application.loadedLevelName.Contains ("2")||Application.loadedLevelName.Contains ("1")) && currentSong != 2){
+		else if((Application.loadedLevelName.Contains ("2") || Application.loadedLevelName.Contains ("1")) && currentSong != 2){
 			audio.clip = song2;
 			this.audio.Play ();
 			this.currentSong =2;
 		}
-		else if((Application.loadedLevelName.Contains ("3")||Application.loadedLevelName.Contains ("5"))||Application.loadedLevelName.Contains("4") && currentSong != 3){
+		else if((Application.loadedLevelName.Contains ("3") || Application.loadedLevelName.Contains ("5") || Application.loadedLevelName.Contains("4")) && currentSong != 3){
 			audio.clip = song3;
 			this.audio.Play ();
 			this.currentSong =3;

@@ -84,7 +84,9 @@ public class EnemyController : MonoBehaviour {
 
     public void takeDamage(int damage){
         if (health < 1) {
-			if(Random.Range (1,3)==3){
+			int rand = Random.Range (1,5);
+			Debug.Log (rand);
+			if(rand==3){
 				Instantiate(heart,this.transform.position,Quaternion.Euler (Vector3.zero));
 			}
             anim.SetBool("Dying", true);
