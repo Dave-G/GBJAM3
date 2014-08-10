@@ -5,7 +5,7 @@ public class CameraFollow : MonoBehaviour {
 
 	public GameObject player, Background;
     private Vector3 camPos, playPos;
-    public AudioClip fagt;
+    public AudioClip audioClip;
     private bool hasPlayed;
 
 	// Use this for initialization
@@ -22,7 +22,7 @@ public class CameraFollow : MonoBehaviour {
 	void Update () {
         if (!this.audio.isPlaying && !hasPlayed) {
             hasPlayed = true;
-            this.audio.PlayOneShot(fagt, 1);
+            this.audio.PlayOneShot(audioClip, 1);
         }
 		if (player){
 			float playlead = player.GetComponent<PlayerCont>().velocity * player.GetComponent<PlayerCont>().moveDir.x*.6f + .1f*player.GetComponent<PlayerCont>().right;

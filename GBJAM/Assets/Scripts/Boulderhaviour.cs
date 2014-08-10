@@ -22,7 +22,6 @@ public class Boulderhaviour : MonoBehaviour {
 		this.transform.position = owner.transform.position +new Vector3( Mathf.Sign (Dir.x)*owner.renderer.bounds.size.x/2f ,owner.renderer.bounds.size.y/2f,0);
 		this.vel =  Power;
 		this.rigidbody.velocity = (Dir*Power*myDt*done);
-		Debug.Log (Dir*Power*myDt*done);
 	}
 	
 	// Update is called once per frame
@@ -32,7 +31,6 @@ public class Boulderhaviour : MonoBehaviour {
 			this.rigidbody.velocity = new Vector3(this.direction.x * this.vel * this.myDt,this.myDt*this.rigidbody.velocity.y,0);
 		}
 		this.rigidbody.velocity -= new Vector3(0,this.myDt* this.gravity *Time.fixedDeltaTime,0);
-		Debug.Log (rigidbody.velocity);
 	}
 
 	void OnCollisionEnter(Collision collision){

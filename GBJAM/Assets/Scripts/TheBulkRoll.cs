@@ -27,7 +27,6 @@ public class TheBulkRoll : MonoBehaviour {
 		}
 		if(Time.time - this.LastToss > 2f){
 			if(Mathf.Abs(this.transform.position.y - target.transform.position.y)<.1 && Mathf.Abs (this.transform.position.x - target.transform.position.x)<1f){
-				Debug.Log ("rollin");
 				rollRock();
 			}
 			else{

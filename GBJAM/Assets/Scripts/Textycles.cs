@@ -58,15 +58,12 @@ public class Textycles : MonoBehaviour {
 //         
 //         GUI.Label(new Rect(lilbruiser.transform.localPosition.x, lilbruiser.transform.localPosition.y,
 //             Screen.width*.01f, Screen.height*.01f), dmg.ToString(), dmgTextStyle);
-//        Debug.Log(lilbruiser.x);
-//        Debug.Log(lilbruiser.y);
 //    }
 
     void OnGUI() {
         dialogue();
 //         if (dmgText) {
 //             damageText();
-//             Debug.Log("draw");
 //             if (Time.time > prev + delay) {
 //                 dmgText = false;
 //             }

@@ -9,7 +9,6 @@ public class ParticleCont : MonoBehaviour {
 	public void setup (float Vel, Vector3 Dir) {
 		this.direction = Dir/Dir.magnitude;
 		this.veloc = Vel;
-		Debug.Log ((this.veloc*this.direction).magnitude);
 		this.rigidbody.AddForce (this.veloc*this.direction);
 	}  
 	// Use this for initialization
