@@ -7,6 +7,7 @@ public class TheBulkRoll : MonoBehaviour {
 	public GameObject brock;
 	public GameObject rubs;
     Animator anim;
+    public AudioClip ow;
 	public float LastToss = -1;
 	public float throwGrav = 5f;
 	public int health = 10;
@@ -17,6 +18,7 @@ public class TheBulkRoll : MonoBehaviour {
 	void Start(){
 		this.posInit = this.gameObject.transform.position;
         anim = this.GetComponent<Animator>();
+        this.audio.pitch = 1;
 	}
 	// Update is called once per frame
 	void Update () {
@@ -37,6 +39,8 @@ public class TheBulkRoll : MonoBehaviour {
 			}
 		}
 		if (health < 1){
+            this.audio.pitch = .5f;
+            this.audio.PlayOneShot(ow, 1);
             dead = true;
 			StartCoroutine(deathTimer());
 		}
@@ -71,6 +75,7 @@ public class TheBulkRoll : MonoBehaviour {
 	public void takeDamage(int damage){
 		this.health -= damage;
         anim.SetBool("Hurt", true);
+        this.audio.PlayOneShot(ow, 1);
         StartCoroutine(deathTimer());
 
 	}
@@ -105,7 +110,7 @@ public class TheBulkRoll : MonoBehaviour {
 
 	IEnumerator deathTimer(){
         if (dead) {
-            yield return new WaitForSeconds(.75f);
+            yield return new WaitForSeconds(1f);
             Destroy(this.gameObject);
         }
         else {
