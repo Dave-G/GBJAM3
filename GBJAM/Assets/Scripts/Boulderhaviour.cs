@@ -19,7 +19,7 @@ public class Boulderhaviour : MonoBehaviour {
 	public void setup(Vector3 Dir, float Power,float gravity, GameObject owner){
 		this.direction = Dir;
 		this.gravity = gravity;
-		this.transform.position = owner.transform.position;
+		this.transform.position = owner.transform.position +new Vector3( Mathf.Sign (Dir.x)*owner.renderer.bounds.size.x/2f ,owner.renderer.bounds.size.y/2f,0);
 		this.vel =  Power;
 		this.rigidbody.velocity = (Dir*Power*myDt*done);
 		Debug.Log (Dir*Power*myDt*done);
