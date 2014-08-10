@@ -7,11 +7,9 @@ public class TheBulkRoll : MonoBehaviour {
 	public GameObject brock;
 	public float LastToss = -1;
 	public float throwGrav = 5f;
-	// Use this for initialization
-	void Start () {
+	public int health = 10;
 	
-	}
-	
+
 	// Update is called once per frame
 	void Update () {
 		if(Time.time - this.LastToss > 2f){
@@ -45,7 +43,14 @@ public class TheBulkRoll : MonoBehaviour {
 		float Delx = this.transform.position.x-target.transform.position.x;
 		GameObject rockInstance = (GameObject) Instantiate (brock,this.transform.position,Quaternion.Euler (new Vector3(0,0,0)));
 		this.transform.localScale = new Vector3(-1*Mathf.Sign(Delx),1,1);
-		rockInstance.GetComponent<Boulderhaviour>().setup (new Vector3(-1*Mathf.Sign(Delx),0,0),ThrowPower/2f,throwGrav,this.gameObject);
+		rockInstance.GetComponent<Boulderhaviour>().setup (new Vector3(-1*Mathf.Sign(Delx),-.2f,0),ThrowPower,throwGrav,this.gameObject);
 		Destroy(rockInstance,3f);
 	}
+
+	public void takeDamage(int damage){
+		this.health -= damage;
+
+	}
+
+
 }

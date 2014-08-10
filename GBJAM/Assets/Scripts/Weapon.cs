@@ -67,6 +67,10 @@ public class Weapon : MonoBehaviour {
 				createParticles();
                 collision.collider.gameObject.GetComponent<EnemyController>().takeDamage(damage);
             }
+			else if (collision.collider.gameObject.tag.Contains ("Bulk")){
+				createParticles();
+				collision.collider.gameObject.GetComponent<TheBulkRoll>().takeDamage(damage);
+			}
 //             enemyPos = new Vector3(collision.gameObject.transform.position.x, collision.gameObject.transform.position.y, 0f);
 //             GameObject.Find("TextBox").GetComponent<Textycles>().lilbruiser = collision.collider.gameObject;
 //             GameObject.Find("TextBox").GetComponent<Textycles>().dmg = damage;
