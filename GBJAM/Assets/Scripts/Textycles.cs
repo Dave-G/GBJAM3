@@ -13,7 +13,7 @@ public class Textycles : MonoBehaviour {
     public GameObject lilbruiser;
     [HideInInspector]
     public int dmg;
-
+	private bool played = false;
     GUIStyle dialogueStyle, dmgTextStyle;
     Animator anim;
     public AudioClip doot;
@@ -39,14 +39,17 @@ public class Textycles : MonoBehaviour {
         if (dispText) {
             anim.SetBool("dispText", dispText);
             if (Time.time > prev + .17f) {
-                this.audio.PlayOneShot(doot, 1);
+				if(!this.played){
+					this.played = true;
+                	this.audio.PlayOneShot(doot, 1);
+				}
                 prev = Time.time;
             }
             GUI.Label(new Rect(Screen.width / 11f, Screen.height / 1.3f, Screen.width / 1.2f, 
                 Screen.height * .15f), heybb, dialogueStyle);
 
             //If player closes text box
-            if (Input.GetKeyDown(KeyCode.E)) {
+			if (Input.GetKeyDown(KeyCode.Z)||Input.GetKeyDown(KeyCode.Space)) {
                 this.audio.Stop();
                 dispText = false;
                 anim.SetBool("dispText", dispText);
