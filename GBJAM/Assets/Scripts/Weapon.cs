@@ -60,7 +60,8 @@ public class Weapon : MonoBehaviour {
         /*Keep this for when you have multiple enemies firing to prevent friendly fire
          or if player somehow runs into own weapon
          */
-		if (collision.collider.gameObject && (owner.tag == collision.collider.gameObject.tag || collision.collider.gameObject.tag == this.tag)){
+		if (collision.collider && collision.collider.gameObject && 
+		    (owner.tag == collision.collider.gameObject.tag || collision.collider.gameObject.tag == this.tag)){
             Physics.IgnoreCollision(collider, collision.collider);
             return;
         }
