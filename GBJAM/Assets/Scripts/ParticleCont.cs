@@ -9,15 +9,8 @@ public class ParticleCont : MonoBehaviour {
 	public void setup (float Vel, Vector3 Dir) {
 		this.direction = Dir/Dir.magnitude;
 		this.veloc = Vel;
+		Vector3 force = this.veloc*this.direction;
+		Debug.Log("Force: " + force);
 		this.rigidbody.AddForce (this.veloc*this.direction);
 	}  
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
 }

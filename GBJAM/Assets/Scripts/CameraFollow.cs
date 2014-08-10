@@ -20,7 +20,7 @@ public class CameraFollow : MonoBehaviour {
 
     // Update is called once per frame
 	void Update () {
-        if (!this.audio.isPlaying && !hasPlayed) {
+        if (this.audioClip && !this.audio.isPlaying && !hasPlayed) {
             hasPlayed = true;
             this.audio.PlayOneShot(audioClip, 1);
         }

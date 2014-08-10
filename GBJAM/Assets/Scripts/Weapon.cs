@@ -46,18 +46,21 @@ public class Weapon : MonoBehaviour {
 
     void OnCollisionEnter(Collision collision){
 
-        if ((collision.collider.gameObject.layer == 9) || collision.collider.gameObject.layer == 13 || collision.collider.gameObject.layer == 11){
+		if (collision.collider.gameObject && ((collision.collider.gameObject.layer == 9) || 
+		                                      collision.collider.gameObject.layer == 13 || collision.collider.gameObject.layer == 11)){
 			grounded = true;
             this.audio.Stop();
-            this.audio.PlayOneShot(tossitdown, 1);
-            rekt();
+			if (tossitdown){
+            	this.audio.PlayOneShot(tossitdown, 1);
+			}
+			destroyWeapon();
             return;
         }
         
         /*Keep this for when you have multiple enemies firing to prevent friendly fire
          or if player somehow runs into own weapon
          */
-        if (owner.tag == collision.collider.gameObject.tag || collision.collider.gameObject.tag == this.tag){
+		if (collision.collider.gameObject && (owner.tag == collision.collider.gameObject.tag || collision.collider.gameObject.tag == this.tag)){
             Physics.IgnoreCollision(collider, collision.collider);
             return;
         }
@@ -80,11 +83,11 @@ public class Weapon : MonoBehaviour {
 //             GameObject.Find("TextBox").GetComponent<Textycles>().dmg = damage;
 //             GameObject.Find("TextBox").GetComponent<Textycles>().dmgText = true;
 //             GameObject.Find("TextBox").GetComponent<Textycles>().prev = Time.time;
-            rekt();
+			destroyWeapon();
         }
     }
 
-    void rekt() {
+    void destroyWeapon() {
         if (!grounded) {
             Destroy(this.gameObject);
         }
