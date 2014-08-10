@@ -14,7 +14,7 @@ public class PlayerCont : MonoBehaviour {
     public float charge = 10;
 
     public GameObject weapon, weapon2, slowBub, bubInstance;
-    public AudioClip diediedie;
+    public AudioClip diediedie, jump, bubble;
     public Vector3 moveDir = Vector3.zero;
     public Animator anim;
 
@@ -42,9 +42,6 @@ public class PlayerCont : MonoBehaviour {
         charge = 10;
         health = 6;
         right = 1;
-        Debug.Log(health);
-        Debug.Log(charge);
-        Debug.Log(right);
     }
 
     // Update is called once per frame
@@ -93,6 +90,7 @@ public class PlayerCont : MonoBehaviour {
                 moveDir.y += jumpVel;
                 anim.SetTrigger("Jump");
                 anim.SetBool("Grounded", false);
+                this.audio.PlayOneShot(jump, 1);
             }
         }
 
@@ -185,6 +183,7 @@ public class PlayerCont : MonoBehaviour {
             bubInstance.gameObject.GetComponent<SlowBubble>().setOwner(this.gameObject);
             charge -= 1;
             bubbling = true;
+            this.audio.PlayOneShot(bubble);
         }
         if (Input.GetKeyUp(KeyCode.C) || this.charge <= 0) {
             if (bubInstance) {
@@ -221,6 +220,7 @@ public class PlayerCont : MonoBehaviour {
         if (obj.name.Contains("slowBubble")) {
             obj.GetComponent<Animator>().SetBool("Byebyebye", true);
             yield return new WaitForSeconds(.05f);
+            this.audio.Stop();
             Destroy(obj);
         }
         else {
