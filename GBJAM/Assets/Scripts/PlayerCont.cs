@@ -6,6 +6,7 @@ public class PlayerCont : MonoBehaviour {
     private float timer = 0, chargeDecay = .5f, chargeGain = 1f;
     public float velocity, gravity, jumpVel, throwForce, myDt = 1.0f;
     private bool bubbling = false, stunned = false;
+    public bool dead;
 
     [HideInInspector]
     public int health = 100, right = 1;
@@ -13,6 +14,7 @@ public class PlayerCont : MonoBehaviour {
     public float charge = 10;
 
     public GameObject weapon, weapon2, slowBub, bubInstance;
+    public AudioClip diediedie;
     public Vector3 moveDir = Vector3.zero;
     public Animator anim;
 
@@ -28,6 +30,7 @@ public class PlayerCont : MonoBehaviour {
 		controller = GetComponent<CharacterController>();
 		int level = int.Parse (Application.loadedLevelName.Replace ("Level",""));
 		int lastLvl = PlayerPrefs.GetInt ("LastLevel");
+        dead = false;
 		if(level<lastLvl){
 			this.transform.position = GameObject.Find ("SpawnPoint2").transform.position;
 		}
@@ -37,7 +40,7 @@ public class PlayerCont : MonoBehaviour {
 		Camera.main.transform.position = this.transform.position;
         anim = this.GetComponent<Animator>();
         charge = 10;
-        health = 100;
+        health = 6;
         right = 1;
         Debug.Log(health);
         Debug.Log(charge);
@@ -194,10 +197,11 @@ public class PlayerCont : MonoBehaviour {
     }
 
     public void takeDamage(int damage) {
-        Debug.Log(health);
         if (!stunned) {
             stunned = true;
             if (health <= 1) {
+                dead = true;
+                GameObject.Find("Health Container").GetComponent<UI>().dying();
                 anim.SetBool("Dying", true);
 				this.TimeOfDeath = Time.time;
 				Time.timeScale = .1f;
@@ -246,7 +250,7 @@ public class PlayerCont : MonoBehaviour {
 
     void OnTriggerEnter(Collider collision) {
         if (collision.name.Contains("Heart")) {
-            health += 17;
+            health += 2;
             Destroy(collision.gameObject);
         }
     }

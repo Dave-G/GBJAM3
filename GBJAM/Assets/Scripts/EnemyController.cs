@@ -23,7 +23,7 @@ public class EnemyController : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        health = 100;
+        health = 6;
         moveDir = new Vector3(1f, 0, 0);
         enemyControl = GetComponent<CharacterController>();
         anim = this.GetComponent<Animator>();
