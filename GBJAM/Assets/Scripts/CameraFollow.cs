@@ -5,6 +5,8 @@ public class CameraFollow : MonoBehaviour {
 
 	public GameObject player, Background;
     private Vector3 camPos, playPos;
+    public AudioClip fagt;
+    private bool hasPlayed;
 
 	// Use this for initialization
 	void Start () {
@@ -13,10 +15,15 @@ public class CameraFollow : MonoBehaviour {
 		if (player){
 			this.transform.position = player.transform.position;
 		}
+        hasPlayed = false;
 	}
 
     // Update is called once per frame
 	void Update () {
+        if (!this.audio.isPlaying && !hasPlayed) {
+            hasPlayed = true;
+            this.audio.PlayOneShot(fagt, 1);
+        }
 		if (player){
 			float playlead = player.GetComponent<PlayerCont>().velocity * player.GetComponent<PlayerCont>().moveDir.x*.6f + .1f*player.GetComponent<PlayerCont>().right;
 	        //Creates a vector for player position
