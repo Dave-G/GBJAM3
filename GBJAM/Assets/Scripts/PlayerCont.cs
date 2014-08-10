@@ -142,18 +142,18 @@ public class PlayerCont : MonoBehaviour {
     }
 
     public void fire() {
-		if (Input.GetKeyDown(KeyCode.Z) && (Time.time - this.lastAtk)>.3f ) {
+		if (Input.GetKeyDown(KeyCode.X) && (Time.time - this.lastAtk)>.3f ) {
 			this.lastAtk = Time.time;
 			this.Xcnt = 0f;
 			this.lastX = -1f;
 			GameObject throwInstance = (GameObject)Instantiate(weapon, transform.position, Quaternion.Euler(new Vector3(0, 0, 0)));
-			throwInstance.gameObject.GetComponent<Weapon>().setup(throwForce + velocity, new Vector3(right, 1, 0), 10, this.gameObject);
+			throwInstance.gameObject.GetComponent<Weapon>().setup(throwForce*1.1f+ velocity, new Vector3(right, 1.5f, 0), 10, this.gameObject);
 			Destroy(throwInstance, 3f);
 			
 			anim.SetTrigger("Attack");
 			anim.SetBool("isAxe", true);
 		}
-		if (Input.GetKeyDown(KeyCode.X)&&(Time.time - this.lastAtk)>.3f) {
+		if (Input.GetKeyDown(KeyCode.Z)&&(Time.time - this.lastAtk)>.3f) {
 			this.lastAtk = Time.time;
 			if((Time.time-this.lastX)<.6f){
 				this.Xcnt += 1;

@@ -2,7 +2,7 @@
 using System.Collections;
 
 public class EnemyController : MonoBehaviour {
-	public GameObject platform, target,weapon;
+	public GameObject platform, target,weapon,heart;
 	public CharacterController enemyControl;
     public Vector3 moveDir;
     public AudioClip ow;
@@ -24,7 +24,7 @@ public class EnemyController : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        health = 6;
+        health = 4;
         moveDir = new Vector3(1f, 0, 0);
         enemyControl = GetComponent<CharacterController>();
         anim = this.GetComponent<Animator>();
@@ -83,7 +83,11 @@ public class EnemyController : MonoBehaviour {
 	
 
     public void takeDamage(int damage){
-        if (health <= 1) {
+        if (health < 1) {
+			if(Random.Range (1,5)==3){
+				GameObject HEART = (GameObject) Instantiate(heart,this.transform.position,Quaternion.Euler (Vector3.zero));
+			}
+
             anim.SetBool("Dying", true);
             dead = true;
             StartCoroutine(deathTimer());

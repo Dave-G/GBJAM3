@@ -31,7 +31,9 @@ public class Weapon : MonoBehaviour {
 	// Update is called once per frame
 	void Update (){
 		this.myDt = this.GetComponent<BubActivator> ().getDT ();
-
+		if(this.owner && this.owner.name.Contains ("Player")){
+			this.myDt = 1;
+		}
         if (done != 0) {
 			this.rigidbody.velocity = new Vector3 (this.direction.x * this.veloc * this.myDt * Time.fixedDeltaTime * done,this.myDt*this.rigidbody.velocity.y,0);
             move();
