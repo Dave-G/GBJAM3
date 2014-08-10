@@ -5,6 +5,7 @@ public class EnemyController : MonoBehaviour {
 	public GameObject platform, target,weapon;
 	public CharacterController enemyControl;
     public Vector3 moveDir;
+    public AudioClip ow;
 
 	public float velocity = 1, baseVel = 1, throwForce = 1500f, closeDist;
     private float canTurn, turnTime = 1f;
@@ -30,6 +31,7 @@ public class EnemyController : MonoBehaviour {
         dead = false;
         closeDist = .5f;
         anim.SetBool("Moving", true);
+        this.audio.pitch += .5f;
 	}
 	
 	// Update is called once per frame
@@ -87,6 +89,7 @@ public class EnemyController : MonoBehaviour {
             StartCoroutine(deathTimer());
         }
         else {
+            this.audio.PlayOneShot(ow, 1);
             health -= damage;
             anim.SetBool("Hurting", true);
             timer2 = Time.time;
@@ -137,6 +140,8 @@ public class EnemyController : MonoBehaviour {
 
     //Stops update() from functioning for set time when called
     IEnumerator deathTimer(){
+        this.audio.pitch -= 1;
+        this.audio.PlayOneShot(ow, 1);
         yield return new WaitForSeconds(.75f);
         Destroy(this.gameObject);
     }
