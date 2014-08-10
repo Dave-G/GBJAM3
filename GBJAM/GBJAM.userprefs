@@ -1,8 +1,9 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\SplashController.cs">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\TransitLoad.cs">
     <Files>
-      <File FileName="Assets\Scripts\SplashController.cs" Line="14" Column="23" />
+      <File FileName="Assets\Scripts\TransitLoad.cs" Line="33" Column="1" />
+      <File FileName="Assets\Scripts\SplashController.cs" Line="14" Column="3" />
       <File FileName="Assets\Scripts\PlayerCont.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts\Weapon.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts\Transit.cs" Line="1" Column="1" />
@@ -12,7 +13,7 @@
       <File FileName="Assets\Scripts\ParticleCont.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts\TheBulkRoll.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts\Boulderhaviour.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\PressZ.cs" Line="13" Column="2" />
+      <File FileName="Assets\Scripts\PressZ.cs" Line="1" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
