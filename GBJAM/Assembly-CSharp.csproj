@@ -69,6 +69,7 @@
      <Compile Include="Assets\GameJoltAPI\Helper\Windows\GJHScoresWindow.cs" />
      <Compile Include="Assets\GameJoltAPI\Helper\Windows\GJHTrophiesWindow.cs" />
      <Compile Include="Assets\GameJoltAPI\Libraries\MD5.cs" />
+     <Compile Include="Assets\Scripts\BGMusic.cs" />
      <Compile Include="Assets\Scripts\Boulderhaviour.cs" />
      <Compile Include="Assets\Scripts\BubActivator.cs" />
      <Compile Include="Assets\Scripts\CameraFollow.cs" />

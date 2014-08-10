@@ -25,6 +25,7 @@ public class PlayerCont : MonoBehaviour {
 	public float lastAtk = -1f;
     public float lastTime = -1f;
 	private CharacterController controller;
+
     // Use this for initialization
     void Start() {
 		controller = GetComponent<CharacterController>();
@@ -60,7 +61,7 @@ public class PlayerCont : MonoBehaviour {
             bubbleDecay();
 
 		if(stunned && anim.GetBool ("Dying") && this.TimeOfDeath >= 0f){
-			if(Time.time -this.TimeOfDeath >= .5f){
+			if(Time.time - this.TimeOfDeath >= .25f){
 				PlayerPrefs.SetInt ("NextLevel",int.Parse (Application.loadedLevelName.Replace ("Level","")));
 				Application.LoadLevel("Transition");
 			}
@@ -81,7 +82,6 @@ public class PlayerCont : MonoBehaviour {
     }
 
     void move() {
-
         if ((controller.collisionFlags & CollisionFlags.Below) != 0) {
             moveDir.y = 0f;
             //moveDir = velocity*transform.TransformDirection (moveDir);
