@@ -178,8 +178,7 @@ public class EnemyController : MonoBehaviour {
         else {
             anim.SetBool("Moving", true);
         }
-        anim.ResetTrigger("ThrowDagger");
-        anim.ResetTrigger("ThrowAxe");
+        anim.ResetTrigger("Throw");
         if (Time.time > timer2 + .5f) {
             anim.SetBool("Hurting", false);
         }
