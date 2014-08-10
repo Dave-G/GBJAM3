@@ -13,6 +13,9 @@ public class GameJoltAPIManager : MonoBehaviour {
 	private uint trophy1 = 10250;
 	private uint trophy2 = 10251;
 	private uint trophy3 = 10252;
+	private int ach1 = 0;
+	private int ach2 = 0;
+	private int ach3 = 0;
 
 	void Awake () {
 		DontDestroyOnLoad(gameObject);
@@ -22,6 +25,28 @@ public class GameJoltAPIManager : MonoBehaviour {
 		this.autoLogin();
 		// this.manualLogin();
 		// this.editorLogin();
+		this.ach1 = PlayerPrefs.GetInt("ach1");
+		this.ach2 = PlayerPrefs.GetInt("ach2");
+		this.ach3 = PlayerPrefs.GetInt("ach3");
+	}
+
+	void Update(){
+		if (Application.loadedLevelName.Contains ("2")&& (ach1 == 0)){
+			this.ach1 = 1;
+			PlayerPrefs.SetInt ("ach1",1);
+			this.unlockTrophy ("Escapist");
+		}
+		if (Application.loadedLevelName.Contains ("4") && (ach2 == 0)){
+			this.ach2 = 1;
+			PlayerPrefs.SetInt ("ach2",1);
+			this.unlockTrophy ("Survivor");
+		}
+		if (Application.loadedLevelName.Contains ("5") && (ach3 == 0) && 
+		    !GameObject.Find ("bulk")){
+			this.ach3 = 1;
+			PlayerPrefs.SetInt ("ach3",1);
+			this.unlockTrophy ("Brawler");
+		}
 	}
 
 	// Get user from GJ site
