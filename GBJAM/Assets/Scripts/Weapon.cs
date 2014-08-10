@@ -5,6 +5,7 @@ public class Weapon : MonoBehaviour {
 	public GameObject owner;
 	public GameObject particleBig;
 	public GameObject particleSmall;
+    public AudioClip tossitup;
     public int damage;
     private bool grounded;
 	public float myDt, done, veloc;
@@ -24,6 +25,7 @@ public class Weapon : MonoBehaviour {
 	}   
 
 	void Start (){
+            this.audio.PlayOneShot(tossitup, 1);
 		}
 	
 	// Update is called once per frame
