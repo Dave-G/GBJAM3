@@ -49,7 +49,7 @@ public class Textycles : MonoBehaviour {
                 Screen.height * .17f), heybb, dialogueStyle);
 
             //If player closes text box
-			if (Input.GetKeyDown(KeyCode.Z)||Input.GetKeyDown(KeyCode.Space)) {
+			if (Input.GetKeyDown(KeyCode.Space)||Input.GetKeyDown (KeyCode.Return)) {
                 this.audio.Stop();
                 dispText = false;
                 anim.SetBool("dispText", dispText);

@@ -73,6 +73,7 @@
      <Compile Include="Assets\Scripts\Boulderhaviour.cs" />
      <Compile Include="Assets\Scripts\BubActivator.cs" />
      <Compile Include="Assets\Scripts\CameraFollow.cs" />
+     <Compile Include="Assets\Scripts\Donezo.cs" />
      <Compile Include="Assets\Scripts\EnemyController.cs" />
      <Compile Include="Assets\Scripts\GameJoltAPIManager.cs" />
      <Compile Include="Assets\Scripts\ParticleCont.cs" />
