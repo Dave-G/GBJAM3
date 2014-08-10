@@ -46,8 +46,8 @@ public class PlayerCont : MonoBehaviour {
 
     // Update is called once per frame
     void Update() {
-        //this.myDt = this.gameObject.GetComponent<BubActivator> ().getDT ();
         animationUpdate();
+        //this.myDt = this.gameObject.GetComponent<BubActivator> ().getDT (
 		if (stunned && !anim.GetBool ("Dying")){
 			moveDir.y -= gravity * myDt * Time.deltaTime;
 			controller.Move (new Vector3(0,moveDir.y,0)*myDt*Time.deltaTime);
@@ -161,21 +161,23 @@ public class PlayerCont : MonoBehaviour {
 			else{
 				this.Xcnt = 1;
 			}
+            anim.SetTrigger("Attack");
+            anim.SetBool("isDagger", true);
 			this.lastX = Time.time;
 			GameObject throwInstance = (GameObject)Instantiate(weapon2, transform.position, Quaternion.Euler(new Vector3(0, 0, 0)));
 			throwInstance.gameObject.GetComponent<Weapon>().setup(throwForce*1.5f + velocity, new Vector3(right, .2f, 0), 5, this.gameObject);
 			Destroy(throwInstance, 3f);
-			if(this.Xcnt >= 3){
-				this.Xcnt = 0;
-				GameObject throwInstance2 = (GameObject)Instantiate(weapon2,transform.position+(new Vector3(0,.05f,0)),Quaternion.Euler(Vector3.zero));
-				GameObject throwInstance3 = (GameObject)Instantiate(weapon2,transform.position+(new Vector3(0,-.05f,0)),Quaternion.Euler(Vector3.zero));
-				throwInstance2.gameObject.GetComponent<Weapon>().setup (throwForce*1.5f + velocity, new Vector3(right,.1f,0),8,this.gameObject);
-				Destroy(throwInstance2,3f);
-				throwInstance3.gameObject.GetComponent<Weapon>().setup (throwForce*1.5f + velocity, new Vector3(right,.1f,0),8,this.gameObject);
-				Destroy(throwInstance3,3f);
-			}
-			anim.SetTrigger("Attack");
-			anim.SetBool("isDagger", true);
+            if (this.Xcnt >= 3) {
+                this.Xcnt = 0;
+                GameObject throwInstance2 = (GameObject)Instantiate(weapon2, transform.position + (new Vector3(0, .05f, 0)), Quaternion.Euler(Vector3.zero));
+                GameObject throwInstance3 = (GameObject)Instantiate(weapon2, transform.position + (new Vector3(0, -.05f, 0)), Quaternion.Euler(Vector3.zero));
+                throwInstance2.gameObject.GetComponent<Weapon>().setup(throwForce * 1.5f + velocity, new Vector3(right, .1f, 0), 8, this.gameObject);
+                Destroy(throwInstance2, 3f);
+                throwInstance3.gameObject.GetComponent<Weapon>().setup(throwForce * 1.5f + velocity, new Vector3(right, .1f, 0), 8, this.gameObject);
+                Destroy(throwInstance3, 3f);
+                anim.SetTrigger("Attack");
+                anim.SetBool("isDagger", true);
+            }
 		}
         if (Input.GetKeyDown(KeyCode.C) && this.charge >= 5) {
             bubInstance = (GameObject)Instantiate(slowBub, transform.position, Quaternion.Euler(new Vector3(0, 0, 0)));
@@ -246,7 +248,9 @@ public class PlayerCont : MonoBehaviour {
             anim.SetBool("Grounded", false);
         }
         anim.SetBool("Stunned", stunned);
+        anim.ResetTrigger("Attack");
         anim.SetBool("isAxe", false);
+        anim.SetBool("isDagger", false);
         anim.SetFloat("XVelocity", Mathf.Abs(this.moveDir.x));
         anim.SetFloat("YVelocity", this.moveDir.y);
     }

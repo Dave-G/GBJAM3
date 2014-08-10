@@ -6,6 +6,7 @@ public class TheBulkRoll : MonoBehaviour {
 	public GameObject target;
 	public GameObject brock;
 	public GameObject rubs;
+    Animator anim;
 	public float LastToss = -1;
 	public float throwGrav = 5f;
 	public int health = 10;
@@ -15,9 +16,11 @@ public class TheBulkRoll : MonoBehaviour {
 	public bool dead = false;
 	void Start(){
 		this.posInit = this.gameObject.transform.position;
+        anim = this.GetComponent<Animator>();
 	}
 	// Update is called once per frame
 	void Update () {
+        anim.ResetTrigger("Throw");
 		if(health <= 4){
 			if(this.shakeStart == -1){
 				this.shakeStart = Time.time;
@@ -34,8 +37,8 @@ public class TheBulkRoll : MonoBehaviour {
 			}
 		}
 		if (health < 1){
+            dead = true;
 			StartCoroutine(deathTimer());
-			this.dead = true;
 		}
 	}
 
@@ -48,6 +51,7 @@ public class TheBulkRoll : MonoBehaviour {
 		if(Mathf.Abs(Theta) <= .2){
 			Theta = Mathf.PI/2 - Theta;
 		}
+        anim.SetTrigger("Throw");
 		this.transform.localScale = new Vector3(-1*Mathf.Sign(Delx),1,1);
 		rockInstance.GetComponent<Boulderhaviour>().setup(new Vector3(-1*Mathf.Cos (Theta),Mathf.Sin (Theta),0),ThrowPower,throwGrav,this.gameObject);
 		Destroy(rockInstance,3f);
@@ -65,6 +69,8 @@ public class TheBulkRoll : MonoBehaviour {
 
 	public void takeDamage(int damage){
 		this.health -= damage;
+        anim.SetBool("Hurt", true);
+        StartCoroutine(deathTimer());
 
 	}
 
@@ -97,7 +103,13 @@ public class TheBulkRoll : MonoBehaviour {
 	}
 
 	IEnumerator deathTimer(){
-		yield return new WaitForSeconds(.75f);
-		Destroy(this.gameObject);
+        if (dead) {
+            yield return new WaitForSeconds(.75f);
+            Destroy(this.gameObject);
+        }
+        else {
+            yield return new WaitForSeconds(1f);
+            anim.SetBool("Hurt", false);
+        }
 	}
 }

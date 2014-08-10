@@ -3,6 +3,11 @@ guid: 9b302eb48db26554b8629248a48a142d
 TextureImporter:
   fileIDToRecycleName:
     21300000: bulkSheet
+    21300002: bulkSheet_0
+    21300004: bulkSheet_1
+    21300006: bulkSheet_2
+    21300008: bulkSheet_3
+    21300010: bulkSheet_4
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -25,14 +30,14 @@ TextureImporter:
   textureFormat: -1
   maxTextureSize: 1024
   textureSettings:
-    filterMode: -1
-    aniso: -1
+    filterMode: 0
+    aniso: 1
     mipBias: -1
-    wrapMode: -1
+    wrapMode: 1
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -43,6 +48,56 @@ TextureImporter:
   textureType: 8
   buildTargetSettings: []
   spriteSheet:
-    sprites: []
+    sprites:
+    - name: bulkSheet_0
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 75
+        width: 28
+        height: 35
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: bulkSheet_1
+      rect:
+        serializedVersion: 2
+        x: 4
+        y: 38
+        width: 24
+        height: 35
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: bulkSheet_2
+      rect:
+        serializedVersion: 2
+        x: 34
+        y: 38
+        width: 24
+        height: 35
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: bulkSheet_3
+      rect:
+        serializedVersion: 2
+        x: 63
+        y: 38
+        width: 26
+        height: 35
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: bulkSheet_4
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 1
+        width: 28
+        height: 35
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
   spritePackingTag: 
   userData: 
