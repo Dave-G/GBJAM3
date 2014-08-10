@@ -10,7 +10,8 @@ public class ParticleCont : MonoBehaviour {
 		this.direction = Dir/Dir.magnitude;
 		this.veloc = Vel;
 		Vector3 force = this.veloc*this.direction;
-		Debug.Log("Force: " + force);
-		this.rigidbody.AddForce (this.veloc*this.direction);
+		if(force != Vector3.zero){
+			this.rigidbody.AddForce (this.veloc*this.direction);
+		}
 	}  
 }

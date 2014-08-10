@@ -5,7 +5,9 @@ public class SplashController : MonoBehaviour {
 
 	private float timer;
 	private bool goingUp;
+	public AudioClip pow;
 	public GameObject axe;
+	private bool playedPow = false;
 	
 	// Use this for initialization
 	void Start () {
@@ -16,6 +18,12 @@ public class SplashController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+		if (Time.time > timer + .5f && !playedPow){
+			if(pow){
+				playedPow = true;
+				this.audio.PlayOneShot (pow,1);
+			}
+		}
 		if (Time.time > timer + 3f) {	
 			Application.LoadLevel("Title");
 		}
