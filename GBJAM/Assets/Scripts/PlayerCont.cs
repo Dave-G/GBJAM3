@@ -53,13 +53,12 @@ public class PlayerCont : MonoBehaviour {
 			controller.Move (new Vector3(0,moveDir.y,0)*myDt*Time.deltaTime);
 			        
 		}
-        if (!stunned) {
             move();
             layerswap();
             this.transform.localPosition = new Vector3(this.transform.localPosition.x, this.transform.localPosition.y, 0f);
             fire();
             bubbleDecay();
-        }
+
 		if(stunned && anim.GetBool ("Dying") && this.TimeOfDeath >= 0f){
 			if(Time.time -this.TimeOfDeath >= .5f){
 				PlayerPrefs.SetInt ("NextLevel",int.Parse (Application.loadedLevelName.Replace ("Level","")));
@@ -208,7 +207,7 @@ public class PlayerCont : MonoBehaviour {
             else {
                 StartCoroutine(deathTimer(this.gameObject));
                 health -= damage;
-                anim.SetTrigger("Hurt");
+                anim.SetBool("Hurt", true);
             }
         }
         else
@@ -226,7 +225,7 @@ public class PlayerCont : MonoBehaviour {
         else {
             yield return new WaitForSeconds(.5f);
             stunned = false;
-            anim.ResetTrigger("Hurt");
+            anim.SetBool("Hurt", false);
         }
     }
 
