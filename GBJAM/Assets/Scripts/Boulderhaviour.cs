@@ -2,6 +2,10 @@
 using System.Collections;
 
 public class Boulderhaviour : MonoBehaviour {
+	public GameObject particleBig;
+	public GameObject particleSmall;
+	public GameObject pebbles;
+	public int damage;
 	private float gravity;
 	private float myDt=1;
 	public int done = 1;
@@ -33,8 +37,46 @@ public class Boulderhaviour : MonoBehaviour {
 
 	void OnCollisionEnter(Collision collision){
 		if(collision.collider.gameObject.layer == 11 || collision.collider.gameObject.layer == 9){
-
 			this.done = 0;
+			createPebbles();
+			Destroy(this.gameObject.collider);
 		}
+		if (collision.collider.gameObject.tag.Contains("Player")){
+			createParticles();
+			collision.collider.gameObject.GetComponent<PlayerCont>().takeDamage(damage);
+			Destroy(this.gameObject.collider);
+		}
+		Destroy(this.gameObject);
 	}
+	void createParticles(){
+		Vector3 dir1 = -1*this.rigidbody.velocity;
+		Vector3 dir2 = Quaternion.Euler (0,0,30)*dir1;
+		Vector3 dir3 = Quaternion.Euler (0,0,-30)*dir1;
+		GameObject Particle1 = (GameObject) Instantiate(this.particleBig, transform.position, Quaternion.Euler(new Vector3(0, 0, 0)));
+		GameObject Particle2 = (GameObject) Instantiate(this.particleSmall, transform.position, Quaternion.Euler(new Vector3(0, 0, 0)));
+		GameObject Particle3 = (GameObject) Instantiate(this.particleSmall, transform.position, Quaternion.Euler(new Vector3(0, 0, 0)));
+		Particle1.GetComponent<ParticleCont>().setup(100,dir1);
+		Particle2.GetComponent<ParticleCont>().setup(100,dir2);
+		Particle3.GetComponent<ParticleCont>().setup(100,dir3);
+		Destroy(Particle1,2f);
+		Destroy(Particle2,2f);
+		Destroy(Particle3,2f);
+		
+	}
+
+	void createPebbles(){
+		Vector3 dir1 = -1*this.rigidbody.velocity;
+		Vector3 dir2 = Quaternion.Euler (0,0,30)*dir1;
+		Vector3 dir3 = Quaternion.Euler (0,0,-30)*dir1;
+		GameObject Particle1 = (GameObject) Instantiate(this.pebbles, transform.position, Quaternion.Euler(new Vector3(0, 0, 0)));
+		GameObject Particle2 = (GameObject) Instantiate(this.pebbles, transform.position, Quaternion.Euler(new Vector3(0, 0, 0)));
+		GameObject Particle3 = (GameObject) Instantiate(this.pebbles, transform.position, Quaternion.Euler(new Vector3(0, 0, 0)));
+		Particle1.GetComponent<ParticleCont>().setup(100,dir1);
+		Particle2.GetComponent<ParticleCont>().setup(100,dir2);
+		Particle3.GetComponent<ParticleCont>().setup(100,dir3);
+		Destroy(Particle1,2f);
+		Destroy(Particle2,2f);
+		Destroy(Particle3,2f);
+	}
+
 }
