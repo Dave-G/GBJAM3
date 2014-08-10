@@ -153,10 +153,20 @@ public class EnemyController : MonoBehaviour {
 		this.timer += 1f*Time.deltaTime;
 		if (Vector3.Distance (target.transform.position,this.transform.position) <= closeDist && Mathf.Sign ((target.transform.position.x-this.transform.position.x))*this.right > 0 ) {
 			if(this.timer>=this.throwTime){
+				Vector3 tossDir = Vector3.zero;
+				float throwMult = 1f;
                 throwing = true;
 				this.timer = 0f;
 				GameObject throwInstance = (GameObject) Instantiate(weapon, transform.position, Quaternion.Euler(new Vector3(0, 0, 0)));
-				throwInstance.gameObject.GetComponent<Weapon>().setup (Random.Range (100,200),new Vector3(this.right*1f,1f,0f),10f, this.gameObject);
+				if(weapon.name.Contains ("Dagger")){
+					tossDir = new Vector3(right,.2f,0f);
+					throwMult = 1.5f;
+				}
+				else{
+					tossDir = new Vector3(right,1f,0f);
+					throwMult = 1f;
+				}
+				throwInstance.gameObject.GetComponent<Weapon>().setup (Random.Range (100,200)*throwMult,tossDir,10f, this.gameObject);
 				Destroy (throwInstance,3f);
                 anim.SetTrigger("Throw");
 			}
