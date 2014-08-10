@@ -5,6 +5,7 @@ public class TheBulkRoll : MonoBehaviour {
 	public float ThrowPower;
 	public GameObject target;
 	public GameObject brock;
+	public GameObject rubs;
 	public float LastToss = -1;
 	public float throwGrav = 5f;
 	public int health = 10;
@@ -71,6 +72,11 @@ public class TheBulkRoll : MonoBehaviour {
 	public void shakeItUP(int count){
 		if ( count % 3 == 0){
 			this.transform.position = this.posInit + new Vector3(Random.Range (-.02f,.02f),Random.Range (-.02f,.02f),0);
+			int RubNumb = Random.Range (1,5);
+			for(int i = 1;i<RubNumb;i++){
+				GameObject rubble = (GameObject) Instantiate(rubs,new Vector3(this.transform.position.x + Random.Range(-1.2f,1.2f),1.5f + Random.Range(-1f,.2f),0),Quaternion.Euler(new Vector3(0, 0, 0)));
+				Destroy(rubble,2f);
+			}
 		}
 		if(Time.time - this.shakeStart >= 4f){
 			GameObject rockInstance1 = (GameObject) Instantiate(brock,this.transform.position,Quaternion.Euler(new Vector3(0, 0, 0)));
