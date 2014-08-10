@@ -5,7 +5,7 @@ public class Weapon : MonoBehaviour {
 	public GameObject owner;
 	public GameObject particleBig;
 	public GameObject particleSmall;
-    public AudioClip tossitup;
+    public AudioClip tossitup, tossitdown;
     public int damage;
     private bool grounded;
 	public float myDt, done, veloc;
@@ -44,8 +44,10 @@ public class Weapon : MonoBehaviour {
 
     void OnCollisionEnter(Collision collision){
 
-        if ((collision.collider.gameObject.layer == 9) || collision.collider.gameObject.layer == 13){
+        if ((collision.collider.gameObject.layer == 9) || collision.collider.gameObject.layer == 13 || collision.collider.gameObject.layer == 11){
 			grounded = true;
+            this.audio.Stop();
+            this.audio.PlayOneShot(tossitdown, 1);
             rekt();
             return;
         }
