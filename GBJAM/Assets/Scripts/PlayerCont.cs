@@ -249,6 +249,7 @@ public class PlayerCont : MonoBehaviour {
 
     void OnTriggerEnter(Collider collision) {
         if (collision.name.Contains("Heart")) {
+            collision.gameObject.audio.Play();
             health += 2;
             Destroy(collision.gameObject);
         }
