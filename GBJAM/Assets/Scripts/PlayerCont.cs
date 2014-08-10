@@ -222,6 +222,10 @@ public class PlayerCont : MonoBehaviour {
             this.audio.Stop();
             Destroy(obj);
         }
+        else if(obj.name.Contains("Heart")){
+            yield return new WaitForSeconds(.19f);
+            Destroy(obj);
+        }
         else {
             yield return new WaitForSeconds(.5f);
             stunned = false;
@@ -248,10 +252,10 @@ public class PlayerCont : MonoBehaviour {
     }
 
     void OnTriggerEnter(Collider collision) {
-        if (collision.name.Contains("Heart")) {
+        if (collision.collider.name.Contains("Heart")) {
             collision.gameObject.audio.Play();
             health += 2;
-            Destroy(collision.gameObject);
+            StartCoroutine(deathTimer(collision.gameObject));
         }
     }
 }

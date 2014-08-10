@@ -16,6 +16,8 @@ public class Textycles : MonoBehaviour {
 
     GUIStyle dialogueStyle, dmgTextStyle;
     Animator anim;
+    public AudioClip doot;
+
     public Font font;
     public string heybb;
 
@@ -36,11 +38,16 @@ public class Textycles : MonoBehaviour {
         //If the player has trigger a text event
         if (dispText) {
             anim.SetBool("dispText", dispText);
+            if (Time.time > prev + .17f) {
+                this.audio.PlayOneShot(doot, 1);
+                prev = Time.time;
+            }
             GUI.Label(new Rect(Screen.width / 11f, Screen.height / 1.3f, Screen.width / 1.2f, 
                 Screen.height * .15f), heybb, dialogueStyle);
 
             //If player closes text box
             if (Input.GetKeyDown(KeyCode.E)) {
+                this.audio.Stop();
                 dispText = false;
                 anim.SetBool("dispText", dispText);
             }
