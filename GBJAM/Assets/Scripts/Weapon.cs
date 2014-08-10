@@ -21,7 +21,9 @@ public class Weapon : MonoBehaviour {
 		this.veloc = Vel;
 		this.rigidbody.transform.localScale = new Vector3 (Mathf.Sign (Dir.x),1,1);
 		this.rigidbody.velocity = direction * Vel * this.myDt * Time.fixedDeltaTime*done;
-
+		if (this.owner.name.Contains ("Enemy")){
+			this.damage = 1;
+		}
 	}   
 
 	void Start (){
