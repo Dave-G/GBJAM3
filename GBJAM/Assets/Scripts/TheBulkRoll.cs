@@ -8,10 +8,22 @@ public class TheBulkRoll : MonoBehaviour {
 	public float LastToss = -1;
 	public float throwGrav = 5f;
 	public int health = 10;
-	
-
+	public Vector3 posInit;
+	public int counter = 0;
+	public float shakeStart;
+	public bool dead = false;
+	void Start(){
+		this.posInit = this.gameObject.transform.position;
+	}
 	// Update is called once per frame
 	void Update () {
+		if(health <= 4){
+			if(this.shakeStart == -1){
+				this.shakeStart = Time.time;
+			}
+			shakeItUP(counter);
+			counter+=1;
+		}
 		if(Time.time - this.LastToss > 2f){
 			if(Mathf.Abs(this.transform.position.y - target.transform.position.y)<.1 && Mathf.Abs (this.transform.position.x - target.transform.position.x)<1f){
 				Debug.Log ("rollin");
@@ -20,6 +32,10 @@ public class TheBulkRoll : MonoBehaviour {
 			else{
 				rockToss();
 			}
+		}
+		if (health < 1){
+			StartCoroutine(deathTimer());
+			this.dead = true;
 		}
 	}
 
@@ -52,5 +68,31 @@ public class TheBulkRoll : MonoBehaviour {
 
 	}
 
+	public void shakeItUP(int count){
+		if ( count % 3 == 0){
+			this.transform.position = this.posInit + new Vector3(Random.Range (-.02f,.02f),Random.Range (-.02f,.02f),0);
+		}
+		if(Time.time - this.shakeStart >= 4f){
+			GameObject rockInstance1 = (GameObject) Instantiate(brock,this.transform.position,Quaternion.Euler(new Vector3(0, 0, 0)));
+			GameObject rockInstance2 = (GameObject) Instantiate(brock,this.transform.position,Quaternion.Euler(new Vector3(0, 0, 0)));
+			GameObject rockInstance3 = (GameObject) Instantiate(brock,this.transform.position,Quaternion.Euler(new Vector3(0, 0, 0)));
+			GameObject rockInstance4 = (GameObject) Instantiate(brock,this.transform.position,Quaternion.Euler(new Vector3(0, 0, 0)));
+			rockInstance1.GetComponent<Boulderhaviour>().setup (new Vector3(-1f,1f,0f),ThrowPower/4,throwGrav,this.gameObject);
+			rockInstance2.GetComponent<Boulderhaviour>().setup (new Vector3(1f,-.2f,0f),ThrowPower/4,throwGrav,this.gameObject);
+			rockInstance3.GetComponent<Boulderhaviour>().setup (new Vector3(-1f,-.2f,0f),ThrowPower/4,throwGrav,this.gameObject);
+			rockInstance4.GetComponent<Boulderhaviour>().setup (new Vector3(1f,1f,0f),ThrowPower/4,throwGrav,this.gameObject);
+			Destroy(rockInstance1,3f);
+			Destroy(rockInstance2,3f);
+			Destroy(rockInstance3,3f);
+			Destroy(rockInstance4,3f);
+			this.shakeStart = Time.time;
+			// if you want baby mode...
+			//this.LastToss = Time.time;
+		}
+	}
 
+	IEnumerator deathTimer(){
+		yield return new WaitForSeconds(.75f);
+		Destroy(this.gameObject);
+	}
 }
