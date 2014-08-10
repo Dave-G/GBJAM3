@@ -40,13 +40,15 @@ public class Boulderhaviour : MonoBehaviour {
 			this.done = 0;
 			createPebbles();
 			Destroy(this.gameObject.collider);
+			Destroy(this.gameObject);
 		}
 		if (collision.collider.gameObject.tag.Contains("Player")){
 			createParticles();
 			collision.collider.gameObject.GetComponent<PlayerCont>().takeDamage(damage);
 			Destroy(this.gameObject.collider);
+			Destroy(this.gameObject);
 		}
-		Destroy(this.gameObject);
+
 	}
 	void createParticles(){
 		Vector3 dir1 = -1*this.rigidbody.velocity;
@@ -68,15 +70,15 @@ public class Boulderhaviour : MonoBehaviour {
 		Vector3 dir1 = -1*this.rigidbody.velocity;
 		Vector3 dir2 = Quaternion.Euler (0,0,30)*dir1;
 		Vector3 dir3 = Quaternion.Euler (0,0,-30)*dir1;
-		GameObject Particle1 = (GameObject) Instantiate(this.pebbles, transform.position, Quaternion.Euler(new Vector3(0, 0, 0)));
-		GameObject Particle2 = (GameObject) Instantiate(this.pebbles, transform.position, Quaternion.Euler(new Vector3(0, 0, 0)));
-		GameObject Particle3 = (GameObject) Instantiate(this.pebbles, transform.position, Quaternion.Euler(new Vector3(0, 0, 0)));
-		Particle1.GetComponent<ParticleCont>().setup(100,dir1);
-		Particle2.GetComponent<ParticleCont>().setup(100,dir2);
-		Particle3.GetComponent<ParticleCont>().setup(100,dir3);
-		Destroy(Particle1,2f);
-		Destroy(Particle2,2f);
-		Destroy(Particle3,2f);
+		GameObject rock1 = (GameObject) Instantiate(this.pebbles, transform.position, Quaternion.Euler(new Vector3(0, 0, 0)));
+		GameObject rock2 = (GameObject) Instantiate(this.pebbles, transform.position, Quaternion.Euler(new Vector3(0, 0, 0)));
+		GameObject rock3 = (GameObject) Instantiate(this.pebbles, transform.position, Quaternion.Euler(new Vector3(0, 0, 0)));
+		rock1.GetComponent<ParticleCont>().setup(100,dir1);
+		rock2.GetComponent<ParticleCont>().setup(100,dir2);
+		rock3.GetComponent<ParticleCont>().setup(100,dir3);
+		Destroy(rock1,2f);
+		Destroy(rock2,2f);
+		Destroy(rock3,2f);
 	}
 
 }

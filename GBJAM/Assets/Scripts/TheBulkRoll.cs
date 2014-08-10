@@ -34,6 +34,7 @@ public class TheBulkRoll : MonoBehaviour {
 		if(Mathf.Abs(Theta) <= .2){
 			Theta = Mathf.PI/2 - Theta;
 		}
+		this.transform.localScale = new Vector3(-1*Mathf.Sign(Delx),1,1);
 		rockInstance.GetComponent<Boulderhaviour>().setup(new Vector3(-1*Mathf.Cos (Theta),Mathf.Sin (Theta),0),ThrowPower,throwGrav,this.gameObject);
 		Destroy(rockInstance,3f);
 		//rockInstance.GetComponent<Boulderhaviour>().setup(new Vector3(-1,1,0),ThrowPower,this.gameObject);
@@ -43,6 +44,7 @@ public class TheBulkRoll : MonoBehaviour {
 		this.LastToss = Time.time;
 		float Delx = this.transform.position.x-target.transform.position.x;
 		GameObject rockInstance = (GameObject) Instantiate (brock,this.transform.position,Quaternion.Euler (new Vector3(0,0,0)));
+		this.transform.localScale = new Vector3(-1*Mathf.Sign(Delx),1,1);
 		rockInstance.GetComponent<Boulderhaviour>().setup (new Vector3(-1*Mathf.Sign(Delx),0,0),ThrowPower/2f,throwGrav,this.gameObject);
 		Destroy(rockInstance,3f);
 	}
