@@ -9,7 +9,7 @@ public class PlayerCont : MonoBehaviour {
     public bool dead;
 
     [HideInInspector]
-    public int health = 100, right = 1;
+    public int health = 6, right = 1;
     [HideInInspector]
     public float charge = 10;
 
@@ -47,6 +47,9 @@ public class PlayerCont : MonoBehaviour {
 
     // Update is called once per frame
     void Update() {
+		if (this.health > 6){
+			this.health = 6;
+		}
         animationUpdate();
         //this.myDt = this.gameObject.GetComponent<BubActivator> ().getDT (
 		if (stunned && !anim.GetBool ("Dying")){

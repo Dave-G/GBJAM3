@@ -67,6 +67,7 @@ public class GameJoltAPIManager : MonoBehaviour {
 	// Callback
 	void OnGetFromWeb (string name, string token){
 		Debug.Log("User: " + name + "@" + token);
+		GJAPI.Users.Verify(name, token);
 	}
 
 	void OnEnable() {
