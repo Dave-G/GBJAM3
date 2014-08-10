@@ -64,6 +64,7 @@ public class TheBulkRoll : MonoBehaviour {
 		GameObject rockInstance = (GameObject) Instantiate (brock,this.transform.position,Quaternion.Euler (new Vector3(0,0,0)));
 		this.transform.localScale = new Vector3(-1*Mathf.Sign(Delx),1,1);
 		rockInstance.GetComponent<Boulderhaviour>().setup (new Vector3(-1*Mathf.Sign(Delx),-.2f,0),ThrowPower,throwGrav,this.gameObject);
+        anim.SetTrigger("Throw");
 		Destroy(rockInstance,3f);
 	}
 

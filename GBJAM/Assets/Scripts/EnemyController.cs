@@ -158,7 +158,7 @@ public class EnemyController : MonoBehaviour {
 				GameObject throwInstance = (GameObject) Instantiate(weapon, transform.position, Quaternion.Euler(new Vector3(0, 0, 0)));
 				throwInstance.gameObject.GetComponent<Weapon>().setup (Random.Range (100,200),new Vector3(this.right*1f,1f,0f),10f, this.gameObject);
 				Destroy (throwInstance,3f);
-                anim.SetTrigger("ThrowAxe");
+                anim.SetTrigger("Throw");
 			}
 			this.right = Mathf.RoundToInt(Mathf.Sign(target.transform.position.x-this.transform.position.x));
 		}

@@ -1,0 +1,224 @@
+fileFormatVersion: 2
+guid: f65a97d032e02b14fb82bfbac66ed84b
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: enemy2Sheet
+    21300002: enemy2Sheet_0
+    21300004: enemy2Sheet_1
+    21300006: enemy2Sheet_2
+    21300008: enemy2Sheet_3
+    21300010: enemy2Sheet_4
+    21300012: enemy2Sheet_5
+    21300014: enemy2Sheet_6
+    21300016: enemy2Sheet_7
+    21300018: enemy2Sheet_8
+    21300020: enemy2Sheet_9
+    21300022: enemy2Sheet_10
+    21300024: enemy2Sheet_11
+    21300026: enemy2Sheet_12
+    21300028: enemy2Sheet_13
+    21300030: enemy2Sheet_14
+    21300032: enemy2Sheet_15
+  serializedVersion: 2
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    linearTexture: 0
+    correctGamma: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: .25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 0
+  seamlessCubemap: 0
+  textureFormat: -1
+  maxTextureSize: 1024
+  textureSettings:
+    filterMode: 0
+    aniso: 1
+    mipBias: -1
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: .5, y: .5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 100
+  alphaIsTransparency: 1
+  textureType: 8
+  buildTargetSettings: []
+  spriteSheet:
+    sprites:
+    - name: enemy2Sheet_0
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 151
+        width: 13
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: enemy2Sheet_1
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 123
+        width: 16
+        height: 26
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: enemy2Sheet_2
+      rect:
+        serializedVersion: 2
+        x: 18
+        y: 121
+        width: 12
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: enemy2Sheet_3
+      rect:
+        serializedVersion: 2
+        x: 35
+        y: 121
+        width: 14
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: enemy2Sheet_4
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 92
+        width: 14
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: enemy2Sheet_5
+      rect:
+        serializedVersion: 2
+        x: 17
+        y: 92
+        width: 16
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: enemy2Sheet_6
+      rect:
+        serializedVersion: 2
+        x: 34
+        y: 91
+        width: 16
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: enemy2Sheet_7
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 61
+        width: 14
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: enemy2Sheet_8
+      rect:
+        serializedVersion: 2
+        x: 18
+        y: 61
+        width: 13
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: enemy2Sheet_9
+      rect:
+        serializedVersion: 2
+        x: 35
+        y: 61
+        width: 13
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: enemy2Sheet_10
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 31
+        width: 14
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: enemy2Sheet_11
+      rect:
+        serializedVersion: 2
+        x: 18
+        y: 31
+        width: 15
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: enemy2Sheet_12
+      rect:
+        serializedVersion: 2
+        x: 34
+        y: 31
+        width: 15
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: enemy2Sheet_13
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1
+        width: 15
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: enemy2Sheet_14
+      rect:
+        serializedVersion: 2
+        x: 17
+        y: 1
+        width: 15
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: enemy2Sheet_15
+      rect:
+        serializedVersion: 2
+        x: 34
+        y: 1
+        width: 15
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+  spritePackingTag: 
+  userData: 
