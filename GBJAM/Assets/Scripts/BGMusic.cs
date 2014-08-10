@@ -3,7 +3,7 @@ using System.Collections;
 
 public class BGMusic : MonoBehaviour {
 
-	public AudioClip song1,song2;//,song3;
+	public AudioClip song1,song2,song3;
 	int currentSong = 1;
 
 	// Use this for initialization
@@ -19,6 +19,9 @@ public class BGMusic : MonoBehaviour {
 			this.transform.position = Camera.main.transform.position;
 		}
 		songChanger();
+		if(!this.audio.isPlaying){
+			this.audio.Play ();
+		}
 	}
 
 	void Awake(){
@@ -36,12 +39,11 @@ public class BGMusic : MonoBehaviour {
 			this.audio.Play ();
 			this.currentSong =2;
 		}
-		/*
-		else if(this.currentSong == 3 && !this.audio.isPlaying){
-			this.audio.PlayOneShot(song1,.5);
-			this.currentSong =1;
+		else if((Application.loadedLevelName.Contains ("3")||Application.loadedLevelName.Contains ("5")) && currentSong != 3){
+			audio.clip = song3;
+			this.audio.Play ();
+			this.currentSong =3;
 		}
-		*/
 	}
 
 }
